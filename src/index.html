@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NUGABOX — 웹 퍼블리싱 템플릿</title>
+  <title>개혁신학연구회 — The Modern Archivist</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -15,134 +15,187 @@
 </head>
 <body>
 
-  <!-- 헤더 (로컬 개발용 include) -->
+  <!-- 헤더 -->
   <div data-include="include/header.html"></div>
 
   <main id="main-content">
 
-    <!-- ── 히어로 ──────────────────────────────────────────── -->
-    <section class="section section-dark">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-7">
-            <p class="text-primary fw-semibold mb-2">NUGABOX Web Publishing</p>
-            <h1 class="display-4 fw-bold mb-3" style="letter-spacing: -0.03em;">
-              빠르게 시작하는<br>웹 퍼블리싱 템플릿
+    <!-- ── 히어로 ──────────────────────────────────────────────── -->
+    <section class="main-hero">
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKD1zWLX5ppB2wI2ZfZjV-okuB94Jfv003aONaA39FoQDUuf4d2YNyAANQ2v701wWkgjPNn48NzF1gCJUDZRZhpvGM2yg-jxfMe815MkVRi4ppkGHkOt3-PYT2D0OvORu4Gulr9sfsPvD0qENVViTvVZ4Djdd04gMCwySiOWFhPP3_Jc-2E4f__FVr9Z5I-GbBU76Tmfc1t3tPWwUW6cRaerHHQvhRMpOd04Xcn88s8-HjujGjkeBTLrRBqU8_UWVeuxN5nGfVDPE"
+        alt="도서관 배경"
+        class="hero-bg-img">
+      <div class="texture-overlay"></div>
+      <div class="container hero-content">
+        <div class="row">
+          <div class="col-lg-8">
+            <span class="hero-tag">The Modern Archivist</span>
+            <h1 class="main-hero-title mb-4">
+              정통 개혁신학의<br>전승과 현대적 아카이브
             </h1>
-            <p class="fs-5 mb-4" style="color: rgba(255,255,255,0.7);">
-              Bootstrap 5 · Pretendard · Font Awesome Pro · Bootstrap Icons<br>
-              로컬 파일 기반, CDN 없이 동작합니다.
+            <p class="hero-description mb-5">
+              개혁신학연구회는 서철원 박사의 신학적 유산을 계승하며,<br class="d-none d-md-block">
+              하나님 중심의 신앙을 다음 세대에 온전히 전달합니다.
             </p>
-            <div class="d-flex gap-2 flex-wrap">
-              <a href="#features" class="btn btn-primary btn-lg px-4">시작하기</a>
-              <a href="sub.html" class="btn btn-outline-light btn-lg px-4">서브 페이지</a>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="sub.html" class="btn btn-gold px-4 py-3">연구회 소개 보기</a>
+              <a href="#" class="btn btn-outline-white px-4 py-3">최신 논문 열람</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── 아이콘 라이브러리 확인 ──────────────────────────── -->
-    <section class="section-sm section-soft" id="features">
-      <div class="container">
-        <div class="text-center mb-4">
-          <h2 class="section-title">아이콘 라이브러리 확인</h2>
-          <p class="section-subtitle">아이콘이 정상 로드되면 셋업이 완료된 것입니다.</p>
+    <!-- ── 퀵 카드 ──────────────────────────────────────────────── -->
+    <section class="container quick-cards-wrapper">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <a class="quick-card" href="#">
+            <div class="icon-box icon-gold">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <h3 class="h5 fw-bold mb-1">세미나 안내</h3>
+              <p class="small text-muted mb-0">최신 학술 연구 결과와 세미나 일정을 확인하세요.</p>
+            </div>
+            <i class="fa-solid fa-arrow-right ms-auto text-muted"></i>
+          </a>
         </div>
-        <div class="row g-3 justify-content-center text-center">
-          <div class="col-6 col-md-3">
-            <div class="bg-white rounded-3 p-4 shadow-sm h-100">
-              <div class="fs-1 mb-2 text-primary">
-                <i class="bi bi-bootstrap-fill"></i>
-              </div>
-              <p class="fw-semibold mb-1">Bootstrap Icons</p>
-              <code class="small text-muted">bi bi-bootstrap-fill</code>
+        <div class="col-md-6">
+          <a class="quick-card navy" href="#">
+            <div class="icon-box icon-navy">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div>
+              <h3 class="h5 fw-bold mb-1">교육 자료실</h3>
+              <p class="small text-muted mb-0">깊이 있는 신학 강좌 및 교육 텍스트를 제공합니다.</p>
+            </div>
+            <i class="fa-solid fa-arrow-right ms-auto text-muted"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 최신 소식 ─────────────────────────────────────────────── -->
+    <section class="py-5 mt-5">
+      <div class="container py-lg-5">
+        <div class="row g-5">
+          <!-- 좌측: 레이블 + 이미지 -->
+          <div class="col-lg-4">
+            <span class="section-tag d-block mb-2">Recent Updates</span>
+            <h2 class="display-6 fw-bold mb-4">연구회 소식</h2>
+            <div class="mb-4" style="width: 48px; height: 4px; background: var(--secondary-gold);"></div>
+            <p class="text-on-surface-variant mb-5">
+              개혁신학의 가치를 실현하는 현장의 목소리와 최신 연구 성과, 연구회의 다양한 활동 소식을 전해드립니다.
+            </p>
+            <div class="rounded-3 overflow-hidden shadow-sm" style="aspect-ratio: 4/3;">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5SSGUQQnQWgVvm9inu79M05IOdSDzEI1Ud26pg2MDQA-j9wRNMHYPyn9abdieLN36op_oUagyl1ki8a--5uXuaKOzoU3XZONJ3BZjI1tJJVab0uGEjf6Ex1q3dMF5uqaBgs9EyVCzkxE5o_eZnjXNrowHLlMZZ8eY-wk7Q-xpB-U0U8udwh7EOnuvd2F_tZuaFxOvc7fMjp1K8w8gOYmi_t3LAUrRD_uYLeENkYCuA2dNCX-sA5-TTMvif68lYyDhEprOA4NMK78"
+                alt="학술 현장"
+                class="w-100 h-100 object-fit-cover"
+                style="filter: grayscale(1);">
             </div>
           </div>
-          <div class="col-6 col-md-3">
-            <div class="bg-white rounded-3 p-4 shadow-sm h-100">
-              <div class="fs-1 mb-2 text-warning">
-                <i class="fa-solid fa-star"></i>
+          <!-- 우측: 뉴스 목록 -->
+          <div class="col-lg-8">
+            <div class="bg-white rounded-4 p-2 shadow-sm">
+              <div class="news-item">
+                <div class="d-flex align-items-center gap-4">
+                  <span class="badge badge-navy rounded-1">공지사항</span>
+                  <div>
+                    <h4 class="h6 fw-bold mb-1">제24회 정기 학술 세미나 개최 안내 (주제: 기독교 강요의 현대적 조명)</h4>
+                    <small class="text-muted">2023.11.25 | 학술팀</small>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
               </div>
-              <p class="fw-semibold mb-1">FA Solid</p>
-              <code class="small text-muted">fa-solid fa-star</code>
+              <div class="news-item">
+                <div class="d-flex align-items-center gap-4">
+                  <span class="badge badge-gold rounded-1">언론보도</span>
+                  <div>
+                    <h4 class="h6 fw-bold mb-1">[언론] 개혁신학연구회, 서철원 박사 교의신학 전집 아카이빙 완료</h4>
+                    <small class="text-muted">2023.11.20 | 홍보팀</small>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
+              </div>
+              <div class="news-item">
+                <div class="d-flex align-items-center gap-4">
+                  <span class="badge badge-navy rounded-1">공지사항</span>
+                  <div>
+                    <h4 class="h6 fw-bold mb-1">신임 이사진 선출 및 회칙 개정 공지</h4>
+                    <small class="text-muted">2023.11.15 | 사무국</small>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
+              </div>
+              <div class="news-item">
+                <div class="d-flex align-items-center gap-4">
+                  <span class="badge badge-gold rounded-1">언론보도</span>
+                  <div>
+                    <h4 class="h6 fw-bold mb-1">현대 신학의 위기 앞에 선 개혁주의의 역할 - 연합인터뷰</h4>
+                    <small class="text-muted">2023.11.08 | 대외협력팀</small>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
+              </div>
+              <div class="news-item">
+                <div class="d-flex align-items-center gap-4">
+                  <span class="badge badge-navy rounded-1">공지사항</span>
+                  <div>
+                    <h4 class="h6 fw-bold mb-1">연말 후원 및 연구 장학생 모집 안내</h4>
+                    <small class="text-muted">2023.11.01 | 장학위원회</small>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
+              </div>
             </div>
-          </div>
-          <div class="col-6 col-md-3">
-            <div class="bg-white rounded-3 p-4 shadow-sm h-100">
-              <div class="fs-1 mb-2 text-info">
-                <i class="fa-regular fa-star"></i>
-              </div>
-              <p class="fw-semibold mb-1">FA Regular</p>
-              <code class="small text-muted">fa-regular fa-star</code>
-            </div>
-          </div>
-          <div class="col-6 col-md-3">
-            <div class="bg-white rounded-3 p-4 shadow-sm h-100">
-              <div class="fs-1 mb-2 text-secondary">
-                <i class="fa-light fa-star"></i>
-              </div>
-              <p class="fw-semibold mb-1">FA Light</p>
-              <code class="small text-muted">fa-light fa-star</code>
+            <div class="text-end mt-4 px-4">
+              <a class="text-decoration-none fw-bold text-dark small" href="sub2.html">
+                전체보기 <i class="fa-solid fa-arrow-right-long ms-1"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── 섹션 유틸리티 확인 ──────────────────────────────── -->
-    <section class="section">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="section-title">섹션 구조 패턴</h2>
-          <p class="section-subtitle"><code>.section</code> · <code>.section-title</code> · <code>.section-subtitle</code></p>
-        </div>
+    <!-- ── 학술 하이라이트 ────────────────────────────────────────── -->
+    <section class="py-5" style="background-color: var(--surface-container-low);">
+      <div class="container py-lg-5">
         <div class="row g-4">
           <div class="col-md-4">
-            <div class="p-4 rounded-3 border h-100">
-              <div class="text-primary mb-3">
-                <i class="fa-solid fa-palette fs-2"></i>
-              </div>
-              <h3 class="h5 fw-bold">Bootstrap 5 기반</h3>
-              <p class="text-muted mb-0">모든 컴포넌트와 유틸리티 클래스를 로컬 파일로 제공합니다. CDN 의존 없이 동작합니다.</p>
+            <div class="academic-card">
+              <i class="fa-solid fa-pen-nib text-secondary-gold"></i>
+              <h3 class="h4 fw-bold mb-3">서철원 박사 아카이브</h3>
+              <p class="text-on-surface-variant mb-4">한국 정통 개혁신학의 거목 서철원 박사의 생애와 전 집필 자료를 체계적으로 분류하여 제공합니다.</p>
+              <a href="#" class="text-secondary-gold">아카이브 탐색</a>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="p-4 rounded-3 border h-100">
-              <div class="text-success mb-3">
-                <i class="fa-solid fa-font fs-2"></i>
-              </div>
-              <h3 class="h5 fw-bold">Pretendard 웹폰트</h3>
-              <p class="text-muted mb-0">한국어 최적화 subset 웹폰트로 빠른 로딩과 깔끔한 타이포그래피를 제공합니다.</p>
+            <div class="academic-card navy">
+              <i class="fa-solid fa-book text-primary-navy"></i>
+              <h3 class="h4 fw-bold mb-3">학술 논문 검색</h3>
+              <p class="text-on-surface-variant mb-4">교의신학, 주석학, 역사신학 등 분과별 전문 논문과 발제문을 키워드별로 간편하게 검색하십시오.</p>
+              <a href="#" class="text-primary-navy">논문 자료실</a>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="p-4 rounded-3 border h-100">
-              <div class="text-warning mb-3">
-                <i class="fa-solid fa-wand-magic-sparkles fs-2"></i>
-              </div>
-              <h3 class="h5 fw-bold">Font Awesome Pro</h3>
-              <p class="text-muted mb-0">Solid · Regular · Light · Thin · Brands · Sharp · Duotone 모든 스타일을 사용할 수 있습니다.</p>
+            <div class="academic-card muted">
+              <i class="fa-solid fa-users text-muted"></i>
+              <h3 class="h4 fw-bold mb-3">회원 참여</h3>
+              <p class="text-on-surface-variant mb-4">연구회 회원으로서 세미나 참석 및 학술 활동에 참여하며 신앙의 지평을 넓혀가시길 초대합니다.</p>
+              <a href="#" class="text-muted">회원 가입 안내</a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ── CTA ────────────────────────────────────────────── -->
-    <section class="section section-dark text-center">
-      <div class="container">
-        <h2 class="section-title mb-3">지금 바로 시작하세요</h2>
-        <p class="section-subtitle mb-4">이 파일을 복사하여 새 프로젝트를 만들어보세요.</p>
-        <a href="sub.html" class="btn btn-primary btn-lg px-5">
-          <i class="fa-solid fa-arrow-right me-2"></i>서브 페이지 보기
-        </a>
       </div>
     </section>
 
   </main>
 
-  <!-- 푸터 (로컬 개발용 include) -->
+  <!-- 푸터 -->
   <div data-include="include/footer.html"></div>
 
   <!-- JS -->

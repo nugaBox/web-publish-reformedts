@@ -1,21 +1,46 @@
 <header id="site-header">
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg fixed-top py-3">
     <div class="container">
-      <a class="navbar-brand" href="index.html">NUGABOX</a>
+      <a class="navbar-brand fw-bolder fs-4" href="index.html" style="letter-spacing: -0.05em;">
+        개혁신학연구회
+      </a>
       <button class="navbar-toggler" type="button"
-        data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="메뉴 열기">
-        <span class="navbar-toggler-icon"></span>
+        data-bs-toggle="collapse" data-bs-target="#navbarMain"
+        aria-controls="navbarMain" aria-expanded="false" aria-label="메뉴 열기">
+        <i class="fa-solid fa-bars"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto gap-1">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">홈</a>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMain">
+        <ul class="navbar-nav gap-lg-3">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="sub.html" data-bs-toggle="dropdown">연구회 소개</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="sub.html">연구회 소개</a></li>
+              <li><a class="dropdown-item" href="#">서철원 박사 소개</a></li>
+              <li><a class="dropdown-item" href="#">연혁</a></li>
+              <li><a class="dropdown-item" href="#">섬기는 분들</a></li>
+              <li><a class="dropdown-item" href="#">회칙 및 규정</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sub.html">서브 페이지</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">교육 및 세미나</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">세미나 안내</a></li>
+              <li><a class="dropdown-item" href="#">논문 및 발제문</a></li>
+              <li><a class="dropdown-item" href="#">교육 자료실</a></li>
+            </ul>
           </li>
+          <li class="nav-item"><a class="nav-link" href="sub2.html">연구회 소식</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">학술자료</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
         </ul>
+      </div>
+      <div class="d-none d-lg-flex align-items-center gap-3">
+        <button class="btn btn-link text-dark p-0" aria-label="검색">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn btn-link text-dark p-0" aria-label="전체 메뉴">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
       </div>
     </div>
   </nav>

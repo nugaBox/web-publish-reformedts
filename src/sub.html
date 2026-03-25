@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>서브 페이지 — NUGABOX</title>
+  <title>연구회 소개 — 개혁신학연구회</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -15,128 +15,170 @@
 </head>
 <body>
 
-  <!-- 헤더 (로컬 개발용 include) -->
+  <!-- 헤더 -->
   <div data-include="include/header.html"></div>
 
   <main id="main-content">
 
-    <!-- ── 페이지 헤더 ──────────────────────────────────────── -->
-    <section class="section-sm section-soft">
-      <div class="container">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-2">
-            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-            <li class="breadcrumb-item active" aria-current="page">서브 페이지</li>
-          </ol>
-        </nav>
-        <h1 class="section-title mb-1">서브 페이지</h1>
-        <p class="section-subtitle">sub.html · sub.css · sub.js 로 구성된 페이지입니다.</p>
+    <!-- ── 페이지 히어로 ──────────────────────────────────────── -->
+    <header class="page-hero">
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt39Yn4rUPPdt2QYKpC3RdaJui35gV1aUE9OEwRwdgpzyjRHUfezQx1MdIx5Z0r5oDPaNZqrbl4IA_xhTKExIgtmjy0f5LvYmkTxey8RHzS8SGyLIddn6jeLME83t6yycrzKlV5X_8SLFdWtYWFWW8icPt6R-AC1bO6ZhCtDyl_wLnvBcN4p2wpvmcLNY6psGKCirYxWpEKDSysdcOcjxAYj35FTXhFP_X9DmkEWnQPe4bX_645ZHGu2_qYB_WUlKOloRAvcCEpEg"
+        alt="도서관 배경"
+        class="hero-bg-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">연구회 소개</h1>
+        <div class="breadcrumb-custom">
+          <span>Home</span>
+          <i class="fa-solid fa-chevron-right" style="font-size: 0.6rem;"></i>
+          <span class="active-item">연구회 소개</span>
+          <i class="fa-solid fa-chevron-right" style="font-size: 0.6rem;"></i>
+          <span>연구회 소개</span>
+        </div>
       </div>
-    </section>
+    </header>
 
-    <!-- ── 본문 콘텐츠 ─────────────────────────────────────── -->
-    <section class="section">
-      <div class="container">
-        <div class="row g-4">
+    <!-- ── 본문 레이아웃 ──────────────────────────────────────── -->
+    <div class="container py-5 my-lg-4">
+      <div class="row g-5">
 
-          <!-- 메인 콘텐츠 -->
-          <div class="col-lg-8">
-            <div class="mb-5">
-              <h2 class="h4 fw-bold mb-3">
-                <i class="fa-solid fa-circle-info text-primary me-2"></i>페이지 구성 안내
-              </h2>
-              <p class="text-muted">
-                이 페이지는 <code>sub.html</code>을 기반으로 합니다.
-                페이지 전용 스타일은 <code>assets/css/sub.css</code>에,
-                스크립트는 <code>assets/js/sub.js</code>에 작성하세요.
-              </p>
-              <ul class="list-group list-group-flush border rounded-3 mt-3">
-                <li class="list-group-item d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-check text-success"></i>
-                  <span>전역 스타일: <code>style.css</code></span>
-                </li>
-                <li class="list-group-item d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-check text-success"></i>
-                  <span>페이지 전용 스타일: <code>sub.css</code></span>
-                </li>
-                <li class="list-group-item d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-check text-success"></i>
-                  <span>전역 스크립트: <code>script.js</code> (include 로더 포함)</span>
-                </li>
-                <li class="list-group-item d-flex align-items-center gap-2">
-                  <i class="fa-solid fa-check text-success"></i>
-                  <span>페이지 전용 스크립트: <code>sub.js</code></span>
-                </li>
-              </ul>
+        <!-- 사이드바 -->
+        <aside class="col-lg-3">
+          <div class="sticky-top" style="top: 100px; z-index: 10;">
+            <div class="sidebar-heading">
+              <h2>Introduction</h2>
+              <small class="text-muted">연구회 안내</small>
             </div>
+            <div class="list-group sidebar-nav mb-4">
+              <a class="list-group-item active" href="sub.html">
+                <span>연구회 소개</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="#">
+                <span>서철원 박사 소개</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="#">
+                <span>연혁</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="#">
+                <span>섬기는 분들</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="#">
+                <span>회칙 및 규정</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+            <div class="cta-card">
+              <p class="cta-label">Member Service</p>
+              <p class="small fw-medium mb-3">개혁신학의 정수를 함께 연구하고 계승할 동역자를 기다립니다.</p>
+              <button class="btn btn-gold w-100 py-2">학회 가입 안내</button>
+            </div>
+          </div>
+        </aside>
 
-            <div>
-              <h2 class="h4 fw-bold mb-3">
-                <i class="fa-solid fa-icons text-warning me-2"></i>아이콘 샘플
-              </h2>
-              <div class="d-flex flex-wrap gap-3">
-                <span class="badge bg-primary fs-6 py-2 px-3">
-                  <i class="bi bi-house-fill me-1"></i>Bootstrap Icons
-                </span>
-                <span class="badge bg-warning text-dark fs-6 py-2 px-3">
-                  <i class="fa-solid fa-house me-1"></i>FA Solid
-                </span>
-                <span class="badge bg-info text-dark fs-6 py-2 px-3">
-                  <i class="fa-regular fa-house me-1"></i>FA Regular
-                </span>
-                <span class="badge bg-secondary fs-6 py-2 px-3">
-                  <i class="fa-light fa-house me-1"></i>FA Light
-                </span>
-                <span class="badge bg-dark fs-6 py-2 px-3">
-                  <i class="fa-thin fa-house me-1"></i>FA Thin
-                </span>
+        <!-- 페이지 콘텐츠 -->
+        <section class="col-lg-9">
+
+          <!-- Mission -->
+          <div class="mb-5 pb-lg-4">
+            <div class="d-flex align-items-center mb-4">
+              <span class="section-label">Our Mission</span>
+              <div class="section-divider"></div>
+            </div>
+            <h3 class="fw-bold mb-4 fs-2">정통 개혁신학의 파수와 계승</h3>
+            <div class="text-muted fs-5 lh-lg">
+              <p>개혁신학연구회는 성경의 절대적 권위와 하나님의 주권을 핵심 가치로 삼으며, 역사적 개혁주의 신앙 고백을 현대적으로 재조명하고 확산하는 것을 목적으로 합니다.</p>
+              <p>우리는 단순히 지식의 전달에 그치지 않고, 교회의 거룩함과 성도의 경건한 삶을 위한 신학적 토대를 구축하며, 급변하는 시대적 도전 앞에서 변하지 않는 진리의 체계를 수호합니다.</p>
+            </div>
+          </div>
+
+          <!-- Vision -->
+          <div class="mb-5 pb-lg-4">
+            <div class="d-flex align-items-center mb-4">
+              <span class="section-label">Our Vision</span>
+              <div class="section-divider"></div>
+            </div>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="vision-card vision-card-gold">
+                  <i class="fa-solid fa-book-open fs-3 mb-3" style="color: var(--secondary-gold);"></i>
+                  <h4 class="fw-bold fs-5 mb-2">학술적 권위</h4>
+                  <p class="small text-muted mb-0">철저한 문헌 연구와 성경 해석을 바탕으로 학술적 완성도를 갖춘 연구 성과를 도출합니다.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="vision-card vision-card-gray">
+                  <i class="fa-solid fa-graduation-cap fs-3 mb-3 text-dark"></i>
+                  <h4 class="fw-bold fs-5 mb-2">다음 세대 양성</h4>
+                  <p class="small text-muted mb-0">미래의 신학자와 목회자들이 올바른 개혁주의 노선 위에 서도록 교육하고 지원합니다.</p>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="vision-card vision-card-gray d-flex flex-column flex-md-row align-items-center gap-4">
+                  <div class="p-3 bg-white rounded-circle flex-shrink-0">
+                    <i class="fa-solid fa-users fs-1 text-dark"></i>
+                  </div>
+                  <div>
+                    <h4 class="fw-bold fs-5 mb-2">교회와의 소통</h4>
+                    <p class="small text-muted mb-0">상아탑에 갇힌 신학이 아닌, 지역 교회 현장의 고민에 답하고 실천적 방향을 제시하는 살아있는 신학을 지향합니다.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- 사이드바 -->
-          <div class="col-lg-4">
-            <div class="p-4 bg-light rounded-3">
-              <h3 class="h6 fw-bold text-muted text-uppercase mb-3">
-                <i class="fa-solid fa-layer-group me-1"></i>관련 파일
-              </h3>
-              <ul class="list-unstyled mb-0 small">
-                <li class="mb-2">
-                  <i class="bi bi-file-earmark-code text-primary me-1"></i>
-                  <code>src/sub.html</code>
-                </li>
-                <li class="mb-2">
-                  <i class="bi bi-file-earmark-code text-success me-1"></i>
-                  <code>src/assets/css/sub.css</code>
-                </li>
-                <li class="mb-2">
-                  <i class="bi bi-file-earmark-code text-warning me-1"></i>
-                  <code>src/assets/js/sub.js</code>
-                </li>
-                <li class="mb-2">
-                  <i class="bi bi-file-earmark-text text-muted me-1"></i>
-                  <code>src/include/header.html</code>
-                </li>
-                <li>
-                  <i class="bi bi-file-earmark-text text-muted me-1"></i>
-                  <code>src/include/footer.html</code>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-3">
-              <a href="index.html" class="btn btn-outline-secondary w-100">
-                <i class="fa-solid fa-arrow-left me-1"></i>홈으로 돌아가기
-              </a>
+          <!-- Quote -->
+          <div class="mb-5 pb-lg-4">
+            <div class="quote-section">
+              <span class="quote-icon">"</span>
+              <blockquote class="fs-4 fw-medium mb-4 fst-italic lh-base">
+                "정통 개혁신학은 인간의 사변이 아닌,<br class="d-none d-md-block"> 오직 계시된 하나님의 말씀 위에 세워지는 집입니다."
+              </blockquote>
+              <cite class="fw-bold" style="color: var(--accent-gold); font-style: normal;">— 서철원 박사</cite>
             </div>
           </div>
 
-        </div>
+          <!-- Timeline -->
+          <div>
+            <div class="d-flex align-items-center mb-4">
+              <span class="section-label">Major Milestones</span>
+              <div class="section-divider"></div>
+            </div>
+            <div class="ps-2">
+              <div class="timeline-item">
+                <div class="timeline-dot" style="background-color: var(--secondary-gold);"></div>
+                <div class="row">
+                  <div class="col-md-2 fw-bold text-dark fs-5">2020 - 현재</div>
+                  <div class="col-md-10">
+                    <h5 class="fw-bold mb-2">디지털 아카이브 구축 및 글로벌 네트워크 확장</h5>
+                    <p class="small text-muted">비대면 세미나 시스템 도입 및 연구 논문 데이터베이스 디지털화 완료.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" style="background-color: var(--primary-container);"></div>
+                <div class="row">
+                  <div class="col-md-2 fw-bold text-dark fs-5">2010 - 2019</div>
+                  <div class="col-md-10">
+                    <h5 class="fw-bold mb-2">개혁주의 신학 시리즈 발간 및 정기 학술제 정착</h5>
+                    <p class="small text-muted">매년 2회 정기 세미나 개최 및 서철원 박사 전집 보정판 간행.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
       </div>
-    </section>
+    </div>
 
   </main>
 
-  <!-- 푸터 (로컬 개발용 include) -->
+  <!-- 푸터 -->
   <div data-include="include/footer.html"></div>
 
   <!-- JS -->

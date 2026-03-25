@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>연구회 소개 - 개혁신학연구회</title>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<!-- Pretendard Font -->
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet"/>
+<style>
+        :root {
+            --primary-navy: #000613;
+            --primary-container: #001f3f;
+            --secondary-gold: #775a19;
+            --accent-gold: #e9c176;
+            --surface-bg: #f8f9fa;
+            --text-main: #191c1d;
+            --text-muted: #43474e;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--surface-bg);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navbar Customization */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: none;
+            transition: box-shadow 0.3s ease;
+        }
+        .navbar:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: 700;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.2s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--secondary-gold) !important;
+        }
+        .nav-link.active {
+            border-bottom: 2px solid var(--secondary-gold);
+        }
+
+        /* Hero Section (Matching SCREEN_8 Style) */
+        .hero-section {
+            position: relative;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--primary-container);
+            color: white;
+            margin-top: 72px; /* Navbar height approximate */
+        }
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-cover: cover;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 31, 63, 0.6), rgba(0, 6, 19, 0.8));
+            backdrop-filter: blur(2px);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .breadcrumb-custom {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .breadcrumb-custom .active-item {
+            color: var(--accent-gold);
+        }
+
+        /* Sidebar Styling */
+        .sidebar-heading {
+            border-left: 4px solid var(--secondary-gold);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .sidebar-heading h2 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0;
+        }
+        .list-group-item {
+            border: none;
+            background: transparent;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0.5rem !important;
+            margin-bottom: 0.25rem;
+            transition: all 0.2s;
+        }
+        .list-group-item:hover {
+            background-color: #edeeef;
+            color: var(--primary-navy);
+        }
+        .list-group-item.active {
+            background-color: #f3f4f5 !important;
+            color: var(--secondary-gold) !important;
+            font-weight: 700;
+        }
+        .list-group-item i {
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .list-group-item:hover i, .list-group-item.active i {
+            opacity: 1;
+        }
+
+        .cta-card {
+            background-color: var(--primary-navy);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 6, 19, 0.1);
+        }
+        .btn-gold {
+            background-color: var(--secondary-gold);
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+            border: none;
+        }
+        .btn-gold:hover {
+            background-color: #5d4201;
+            color: white;
+        }
+
+        /* Content Sections */
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--secondary-gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-right: 1rem;
+        }
+        .section-divider {
+            flex-grow: 1;
+            height: 1px;
+            background-color: rgba(116, 119, 127, 0.2);
+        }
+        .vision-card {
+            padding: 2rem;
+            border-radius: 0.75rem;
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        .vision-card-gold {
+            background-color: #f3f4f5;
+            border-left: 4px solid var(--secondary-gold);
+        }
+        .vision-card-gray {
+            background-color: #e1e3e4;
+        }
+        .quote-section {
+            background-color: var(--primary-navy);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .quote-icon {
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-size: 6rem;
+            color: rgba(255, 255, 255, 0.1);
+            font-family: serif;
+        }
+        
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 1px solid rgba(116, 119, 127, 0.3);
+            padding-bottom: 2rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- TopNavBar -->
+<nav class="navbar navbar-expand-md fixed-top py-3">
+<div class="container max-w-7xl">
+<a class="navbar-brand fw-bold text-dark tracking-tighter fs-4" href="#">개혁신학연구회</a>
+<button class="navbar-toggler border-0" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<i class="fa-solid fa-bars text-dark"></i>
+</button>
+<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+<ul class="navbar-nav gap-lg-4">
+<li class="nav-item"><a class="nav-link active" href="#">연구회 소개</a></li>
+<li class="nav-item"><a class="nav-link" href="#">교육 및 세미나</a></li>
+<li class="nav-item"><a class="nav-link" href="#">연구회 소식</a></li>
+<li class="nav-item"><a class="nav-link" href="#">학술자료</a></li>
+<li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
+</ul>
+</div>
+<div class="d-none d-md-block">
+<i class="fa-solid fa-magnifying-glass text-dark cursor-pointer"></i>
+</div>
+</div>
+</nav>
+<!-- Sub-header (Matching SCREEN_8 style) -->
+<header class="hero-section">
+<img alt="Library" class="hero-bg-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt39Yn4rUPPdt2QYKpC3RdaJui35gV1aUE9OEwRwdgpzyjRHUfezQx1MdIx5Z0r5oDPaNZqrbl4IA_xhTKExIgtmjy0f5LvYmkTxey8RHzS8SGyLIddn6jeLME83t6yycrzKlV5X_8SLFdWtYWFWW8icPt6R-AC1bO6ZhCtDyl_wLnvBcN4p2wpvmcLNY6psGKCirYxWpEKDSysdcOcjxAYj35FTXhFP_X9DmkEWnQPe4bX_645ZHGu2_qYB_WUlKOloRAvcCEpEg"/>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1 class="hero-title">연구회 소개</h1>
+<div class="breadcrumb-custom">
+<span>Home</span>
+<i class="fa-solid fa-chevron-right align-middle mt-1" style="font-size: 0.6rem;"></i>
+<span class="active-item">연구회 소개</span>
+<i class="fa-solid fa-chevron-right align-middle mt-1" style="font-size: 0.6rem;"></i>
+<span>연구회 소개</span>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="container py-5 my-lg-5">
+<div class="row g-5">
+<!-- Sidebar Menu -->
+<aside class="col-lg-3">
+<div class="sticky-top" style="top: 100px; z-index: 10;">
+<div class="sidebar-heading">
+<h2>Introduction</h2>
+<small class="text-muted">연구회 안내</small>
+</div>
+<div class="list-group mb-4">
+<a class="list-group-item active" href="#">
+<span>연구회 소개</span>
+<i class="fa-solid fa-chevron-right"></i>
+</a>
+<a class="list-group-item" href="#">
+<span>서철원 박사 소개</span>
+<i class="fa-solid fa-chevron-right"></i>
+</a>
+<a class="list-group-item" href="#">
+<span>연혁</span>
+<i class="fa-solid fa-chevron-right"></i>
+</a>
+<a class="list-group-item" href="#">
+<span>섬기는 분들</span>
+<i class="fa-solid fa-chevron-right"></i>
+</a>
+<a class="list-group-item" href="#">
+<span>회칙 및 규정</span>
+<i class="fa-solid fa-chevron-right"></i>
+</a>
+</div>
+<div class="cta-card">
+<p class="text-uppercase fw-bold text-accent mb-2" style="font-size: 0.65rem; color: var(--accent-gold); letter-spacing: 0.1em;">Member Service</p>
+<p class="small fw-medium mb-3">개혁신학의 정수를 함께 연구하고 계승할 동역자를 기다립니다.</p>
+<button class="btn btn-gold w-100 py-2">학회 가입 안내</button>
+</div>
+</div>
+</aside>
+<!-- Page Content -->
+<section class="col-lg-9">
+<!-- Mission Section -->
+<div class="mb-5 pb-lg-4">
+<div class="d-flex align-items-center mb-4">
+<span class="section-label">Our Mission</span>
+<div class="section-divider"></div>
+</div>
+<h3 class="fw-bold mb-4 fs-2">정통 개혁신학의 파수와 계승</h3>
+<div class="text-muted fs-5 lh-lg">
+<p>개혁신학연구회는 성경의 절대적 권위와 하나님의 주권을 핵심 가치로 삼으며, 역사적 개혁주의 신앙 고백을 현대적으로 재조명하고 확산하는 것을 목적으로 합니다.</p>
+<p>우리는 단순히 지식의 전달에 그치지 않고, 교회의 거룩함과 성도의 경건한 삶을 위한 신학적 토대를 구축하며, 급변하는 시대적 도전 앞에서 변하지 않는 진리의 체계를 수호합니다.</p>
+</div>
+</div>
+<!-- Vision Bento Grid -->
+<div class="mb-5 pb-lg-4">
+<div class="d-flex align-items-center mb-4">
+<span class="section-label">Our Vision</span>
+<div class="section-divider"></div>
+</div>
+<div class="row g-4">
+<div class="col-md-6">
+<div class="vision-card vision-card-gold">
+<i class="fa-solid fa-book-open text-gold fs-3 mb-3" style="color: var(--secondary-gold);"></i>
+<h4 class="fw-bold fs-5 mb-2">학술적 권위</h4>
+<p class="small text-muted mb-0">철저한 문헌 연구와 성경 해석을 바탕으로 학술적 완성도를 갖춘 연구 성과를 도출합니다.</p>
+</div>
+</div>
+<div class="col-md-6">
+<div class="vision-card vision-card-gray">
+<i class="fa-solid fa-graduation-cap fs-3 mb-3 text-dark"></i>
+<h4 class="fw-bold fs-5 mb-2">다음 세대 양성</h4>
+<p class="small text-muted mb-0">미래의 신학자와 목회자들이 올바른 개혁주의 노선 위에 서도록 교육하고 지원합니다.</p>
+</div>
+</div>
+<div class="col-12">
+<div class="vision-card vision-card-gray d-flex flex-column flex-md-row align-items-center gap-4">
+<div class="p-3 bg-white rounded-circle">
+<i class="fa-solid fa-users fs-1 text-dark"></i>
+</div>
+<div>
+<h4 class="fw-bold fs-5 mb-2">교회와의 소통</h4>
+<p class="small text-muted mb-0">상아탑에 갇힌 신학이 아닌, 지역 교회 현장의 고민에 답하고 실천적 방향을 제시하는 살아있는 신학을 지향합니다.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quote Section -->
+<div class="mb-5 pb-lg-4">
+<div class="quote-section">
+<span class="quote-icon">"</span>
+<blockquote class="fs-4 fw-medium mb-4 fst-italic lh-base">
+                            "정통 개혁신학은 인간의 사변이 아닌,<br class="d-none d-md-block"/> 오직 계시된 하나님의 말씀 위에 세워지는 집입니다."
+                        </blockquote>
+<cite class="fw-bold text-accent" style="color: var(--accent-gold); font-style: normal;">— 서철원 박사</cite>
+</div>
+</div>
+<!-- History Preview -->
+<div>
+<div class="d-flex align-items-center mb-4">
+<span class="section-label">Major Milestones</span>
+<div class="section-divider"></div>
+</div>
+<div class="ps-2">
+<div class="timeline-item">
+<div class="timeline-dot bg-gold" style="background-color: var(--secondary-gold);"></div>
+<div class="row">
+<div class="col-md-2 fw-bold text-dark fs-5">2020 - 현재</div>
+<div class="col-md-10">
+<h5 class="fw-bold mb-2">디지털 아카이브 구축 및 글로벌 네트워크 확장</h5>
+<p class="small text-muted">비대면 세미나 시스템 도입 및 연구 논문 데이터베이스 디지털화 완료.</p>
+</div>
+</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot bg-navy" style="background-color: var(--primary-container);"></div>
+<div class="row">
+<div class="col-md-2 fw-bold text-dark fs-5">2010 - 2019</div>
+<div class="col-md-10">
+<h5 class="fw-bold mb-2">개혁주의 신학 시리즈 발간 및 정기 학술제 정착</h5>
+<p class="small text-muted">매년 2회 정기 세미나 개최 및 서철원 박사 전집 보정판 간행.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="py-5 px-4 mt-5">
+<div class="container max-w-7xl">
+<div class="row g-5">
+<div class="col-lg-3">
+<div class="fw-bold text-dark mb-4 fs-5 tracking-tighter">개혁신학연구회</div>
+<p class="text-muted small lh-lg mb-4">오직 성경, 오직 은혜, 오직 믿음의 원리 아래 개혁주의 신앙의 유산을 지켜나갑니다.</p>
+<div class="d-flex gap-3 text-secondary">
+<i class="fa-solid fa-globe cursor-pointer"></i>
+<i class="fa-solid fa-envelope cursor-pointer"></i>
+<i class="fa-solid fa-share-nodes cursor-pointer"></i>
+</div>
+</div>
+<div class="col-md-4 col-lg-3">
+<h6 class="fw-bold text-dark text-uppercase small tracking-widest mb-4">연구소 주소</h6>
+<p class="text-muted small lh-lg">서울특별시 서초구 반포대로<br/>개혁신학연구회 본부 아카이브 센터</p>
+</div>
+<div class="col-md-4 col-lg-3">
+<h6 class="fw-bold text-dark text-uppercase small tracking-widest mb-4">연락처</h6>
+<ul class="list-unstyled small text-muted">
+<li class="mb-2"><i class="fa-solid fa-phone me-2" style="font-size: 0.75rem;"></i> 02-123-4567</li>
+<li><i class="fa-solid fa-envelope me-2" style="font-size: 0.75rem;"></i> contact@reformedtheology.kr</li>
+</ul>
+</div>
+<div class="col-md-4 col-lg-3">
+<h6 class="fw-bold text-dark text-uppercase small tracking-widest mb-4">정책 및 약관</h6>
+<ul class="list-unstyled small">
+<li class="mb-2"><a class="text-muted text-decoration-none" href="#">개인정보처리방침</a></li>
+<li class="mb-2"><a class="text-muted text-decoration-none" href="#">이용약관</a></li>
+<li><a class="text-muted text-decoration-none" href="#">회칙 다운로드</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-5 pt-4 border-top text-center">
+<p class="text-muted" style="font-size: 0.7rem;">© 개혁신학연구회. All Rights Reserved. Designed for Academic Editorial Excellence.</p>
+</div>
+</div>
+</footer>
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

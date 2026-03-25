@@ -1,0 +1,358 @@
+/* ============================================================
+   sub.css — sub 페이지 공통 전용 스타일
+   sub.html / sub2.html 모두에서 사용
+   ============================================================ */
+
+/* ── Page Hero ──────────────────────────────────────────────── */
+.page-hero {
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--primary-container);
+  color: white;
+  margin-top: 72px; /* fixed-top navbar 높이 보정 */
+}
+
+/* .hero-bg-img 기본 스타일은 style.css (공통) — 여기선 불투명도만 조정 */
+.page-hero .hero-bg-img {
+  opacity: 0.4;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 31, 63, 0.6), rgba(0, 6, 19, 0.8));
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.breadcrumb-custom .active-item {
+  color: var(--accent-gold);
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.sidebar-heading {
+  border-left: 4px solid var(--secondary-gold);
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-heading h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: var(--primary-navy);
+}
+
+.sidebar-heading small {
+  font-size: 0.8rem;
+}
+
+/* Sidebar List Group */
+.sidebar-nav .list-group-item {
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5rem !important;
+  margin-bottom: 0.25rem;
+  transition: all var(--transition-base);
+}
+
+.sidebar-nav .list-group-item:hover {
+  background-color: var(--surface-container);
+  color: var(--primary-navy);
+}
+
+.sidebar-nav .list-group-item.active {
+  background-color: var(--surface-container-low) !important;
+  color: var(--secondary-gold) !important;
+  font-weight: 700;
+}
+
+.sidebar-nav .list-group-item i {
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.sidebar-nav .list-group-item:hover i,
+.sidebar-nav .list-group-item.active i {
+  opacity: 1;
+}
+
+/* CTA Card (sub.html 소개 페이지용) */
+.cta-card {
+  background-color: var(--primary-navy);
+  color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 6, 19, 0.15);
+}
+
+.cta-card .cta-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+/* .btn-gold / .btn-gold:hover 는 style.css (공통) */
+
+/* Info Box (sub2.html 소식 페이지 사이드바용) */
+.info-box {
+  background-color: var(--surface-container);
+  border-left: 4px solid var(--secondary-gold);
+  padding: 1.5rem;
+  border-radius: 0 12px 12px 0;
+  margin-top: 2rem;
+}
+
+.info-box h6 {
+  font-weight: 700;
+  color: var(--primary-navy);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.info-box p {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Section Divider Label ──────────────────────────────────── */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--secondary-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-right: 1rem;
+}
+
+.section-divider {
+  flex-grow: 1;
+  height: 1px;
+  background-color: rgba(116, 119, 127, 0.2);
+}
+
+/* ── Vision Cards (sub.html 소개 페이지용) ──────────────────── */
+.vision-card {
+  padding: 2rem;
+  border-radius: 0.75rem;
+  height: 100%;
+  transition: transform var(--transition-base);
+}
+
+.vision-card-gold {
+  background-color: var(--surface-container-low);
+  border-left: 4px solid var(--secondary-gold);
+}
+
+.vision-card-gray {
+  background-color: var(--surface-container);
+}
+
+/* ── Quote Section ──────────────────────────────────────────── */
+.quote-section {
+  background-color: var(--primary-navy);
+  color: white;
+  border-radius: 1rem;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.quote-icon {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  font-size: 6rem;
+  color: rgba(255, 255, 255, 0.1);
+  font-family: serif;
+  line-height: 1;
+}
+
+/* ── Timeline ───────────────────────────────────────────────── */
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1px solid rgba(116, 119, 127, 0.3);
+  padding-bottom: 2rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -6px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* ── Notice Board (sub2.html 소식 페이지용) ─────────────────── */
+.content-title-area {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.content-title-area h3 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--primary-navy);
+}
+
+.search-container {
+  position: relative;
+  max-width: 280px;
+}
+
+.search-container input {
+  padding-right: 2.5rem;
+  background-color: var(--surface-container-low);
+  border: none;
+  font-size: 0.9rem;
+  border-radius: var(--radius-md);
+}
+
+.search-container input:focus {
+  box-shadow: none;
+  background-color: var(--surface-container);
+}
+
+.search-container i {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adb5bd;
+  pointer-events: none;
+}
+
+.notice-header {
+  background-color: var(--surface-container-low);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}
+
+.notice-item {
+  padding: 1.25rem 1.5rem;
+  background-color: white;
+  border-bottom: 1px solid #f0f1f2;
+  transition: background-color var(--transition-base);
+  cursor: pointer;
+}
+
+.notice-item:hover {
+  background-color: var(--surface-container-low);
+}
+
+.notice-item.sticky {
+  background-color: rgba(255, 222, 165, 0.1);
+}
+
+.notice-item.sticky:hover {
+  background-color: rgba(255, 222, 165, 0.2);
+}
+
+.notice-badge {
+  background-color: var(--secondary-gold);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+}
+
+.notice-title {
+  font-weight: 600;
+  color: #2e3132;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notice-item.sticky .notice-title {
+  font-weight: 700;
+}
+
+.notice-info {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+/* ── Pagination ─────────────────────────────────────────────── */
+.pagination .page-link {
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+  border-radius: var(--radius-md) !important;
+  font-weight: 500;
+  transition: background-color var(--transition-base);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-navy);
+  border-color: var(--primary-navy);
+  color: white;
+}
+
+.pagination .page-link:hover {
+  background-color: var(--surface-container);
+  color: var(--primary-navy);
+}

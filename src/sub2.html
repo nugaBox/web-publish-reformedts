@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연구회 소식 — 개혁신학연구회</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/pretendard.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/sub.css">
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <div data-include="include/header.html"></div>
+
+  <main id="main-content">
+
+    <!-- ── 페이지 히어로 ──────────────────────────────────────── -->
+    <header class="page-hero">
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxR8iBfoL5TSE8NVpevM6OZoRHNTuOb4JT_Vpj7Yb7XAUZCqu-1_HPiW5emmrLB5yriS9hhJfd4zzbNDQuLnIXPU27EpUxxSAS45eMqDDdKHCCSg5RDceZzPbLrhn-_OcPcBv_XuoHGdO9nJjRfmqa2O5b9XKwX1_40A1uVpi_6NT8X1FSD5wk69YLNY_HYqcnnBHeBlRcggLyPmGbgu5gkZkHXgOa5fRGbW5wRzFqbC7vP_SZiMr6m6eHPtjsCJeXtoBKZBA3Gyg"
+        alt="연구회 소식 배경"
+        class="hero-bg-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">연구회 소식</h1>
+        <div class="breadcrumb-custom">
+          <span>Home</span>
+          <i class="fa-solid fa-chevron-right" style="font-size: 0.6rem;"></i>
+          <span>연구회 소식</span>
+          <i class="fa-solid fa-chevron-right" style="font-size: 0.6rem;"></i>
+          <span class="active-item">공지사항</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── 본문 레이아웃 ──────────────────────────────────────── -->
+    <div class="container py-5 my-lg-4">
+      <div class="row g-5">
+
+        <!-- 사이드바 -->
+        <aside class="col-lg-3 d-none d-lg-block">
+          <div class="sticky-top" style="top: 100px; z-index: 10;">
+            <div class="sidebar-heading">
+              <h2>News</h2>
+              <small class="text-muted">연구회 소식</small>
+            </div>
+            <div class="list-group sidebar-nav">
+              <a class="list-group-item active" href="#">
+                <span>공지사항</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="#">
+                <span>언론보도</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="#">
+                <span>회원동정</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="#">
+                <span>사진 게시판</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+            <div class="info-box">
+              <h6>학술 문의</h6>
+              <p>개혁신학연구회 공지 및 학술 활동에 대한 궁금한 점은 사무국으로 연락 바랍니다.</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- 콘텐츠 영역 (bootstrap_5_1 notice board) -->
+        <section class="col-lg-9">
+
+          <!-- 콘텐츠 헤더 -->
+          <div class="content-title-area d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <h3>공지사항 <small class="text-muted fw-normal ms-2 fs-6">Total 124</small></h3>
+            <div class="search-container">
+              <input class="form-control" type="text" placeholder="검색어 입력">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+
+          <!-- 목록 헤더 (데스크탑) -->
+          <div class="notice-header d-none d-md-grid"
+            style="grid-template-columns: 80px 1fr 120px 100px;">
+            <div class="text-center">번호</div>
+            <div>제목</div>
+            <div class="text-center">작성일</div>
+            <div class="text-center">조회수</div>
+          </div>
+
+          <!-- 공지 목록 -->
+          <div class="notice-list">
+
+            <!-- 고정 공지 -->
+            <div class="notice-item sticky d-grid align-items-center"
+              style="grid-template-columns: 80px 1fr 120px 100px;">
+              <div class="text-center d-none d-md-block">
+                <span class="notice-badge">NOTICE</span>
+              </div>
+              <div class="pe-3">
+                <p class="notice-title">2024년 정기 학술 세미나 개최 안내 (개혁신학의 미래)</p>
+                <div class="d-md-none notice-info mt-1">
+                  <span>관리자</span> <span class="mx-1">|</span> <span>2024.05.20</span>
+                </div>
+              </div>
+              <div class="text-center notice-info d-none d-md-block">2024.05.20</div>
+              <div class="text-center notice-info d-none d-md-block">1,245</div>
+            </div>
+
+            <!-- 일반 공지 -->
+            <div class="notice-item d-grid align-items-center"
+              style="grid-template-columns: 80px 1fr 120px 100px;">
+              <div class="text-center notice-info d-none d-md-block">124</div>
+              <div class="pe-3">
+                <p class="notice-title">신학 연구 윤리 강령 개정안 공고 및 의견 수렴</p>
+                <div class="d-md-none notice-info mt-1">2024.05.18</div>
+              </div>
+              <div class="text-center notice-info d-none d-md-block">2024.05.18</div>
+              <div class="text-center notice-info d-none d-md-block">432</div>
+            </div>
+
+            <div class="notice-item d-grid align-items-center"
+              style="grid-template-columns: 80px 1fr 120px 100px;">
+              <div class="text-center notice-info d-none d-md-block">123</div>
+              <div class="pe-3 d-flex align-items-center gap-2">
+                <p class="notice-title mb-0">연구회 사무국 하계 휴무 일정 안내</p>
+                <i class="fas fa-lock text-muted small"></i>
+              </div>
+              <div class="text-center notice-info d-none d-md-block">2024.05.15</div>
+              <div class="text-center notice-info d-none d-md-block">289</div>
+            </div>
+
+            <div class="notice-item d-grid align-items-center"
+              style="grid-template-columns: 80px 1fr 120px 100px;">
+              <div class="text-center notice-info d-none d-md-block">122</div>
+              <div class="pe-3 d-flex align-items-center gap-2">
+                <p class="notice-title mb-0">제15회 개혁신학 학술상 수상자 명단 발표</p>
+                <i class="far fa-image text-warning small"></i>
+              </div>
+              <div class="text-center notice-info d-none d-md-block">2024.05.10</div>
+              <div class="text-center notice-info d-none d-md-block">856</div>
+            </div>
+
+            <div class="notice-item d-grid align-items-center"
+              style="grid-template-columns: 80px 1fr 120px 100px;">
+              <div class="text-center notice-info d-none d-md-block">121</div>
+              <div class="pe-3">
+                <p class="notice-title">5월 월례 기도회 및 조찬 모임 시간 변경 안내</p>
+                <div class="d-md-none notice-info mt-1">2024.05.05</div>
+              </div>
+              <div class="text-center notice-info d-none d-md-block">2024.05.05</div>
+              <div class="text-center notice-info d-none d-md-block">154</div>
+            </div>
+
+          </div><!-- /.notice-list -->
+
+          <!-- 페이지네이션 -->
+          <nav class="mt-5" aria-label="페이지 이동">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" href="#"><i class="fas fa-angles-left small"></i></a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#"><i class="fas fa-angle-left small"></i></a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#"><i class="fas fa-angle-right small"></i></a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#"><i class="fas fa-angles-right small"></i></a>
+              </li>
+            </ul>
+          </nav>
+
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 푸터 -->
+  <div data-include="include/footer.html"></div>
+
+  <!-- JS -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/sub.js"></script>
+</body>
+</html>
