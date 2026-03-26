@@ -199,6 +199,12 @@ body {
   color: var(--secondary-gold);
 }
 
+#site-footer ul a:hover {
+  color: var(--secondary-gold) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
 /* ── 섹션 유틸리티 ────────────────────────────────────────── */
 .section    { padding: var(--spacing-section) 0; }
 .section-sm { padding: calc(var(--spacing-section) / 2) 0; }

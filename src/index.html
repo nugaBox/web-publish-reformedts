@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>개혁신학연구회 — The Modern Archivist</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
 
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
   <link rel="stylesheet" href="assets/css/pretendard.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -23,24 +25,24 @@
     <!-- ── 히어로 ──────────────────────────────────────────────── -->
     <section class="main-hero">
       <img
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKD1zWLX5ppB2wI2ZfZjV-okuB94Jfv003aONaA39FoQDUuf4d2YNyAANQ2v701wWkgjPNn48NzF1gCJUDZRZhpvGM2yg-jxfMe815MkVRi4ppkGHkOt3-PYT2D0OvORu4Gulr9sfsPvD0qENVViTvVZ4Djdd04gMCwySiOWFhPP3_Jc-2E4f__FVr9Z5I-GbBU76Tmfc1t3tPWwUW6cRaerHHQvhRMpOd04Xcn88s8-HjujGjkeBTLrRBqU8_UWVeuxN5nGfVDPE"
+        src="assets/images/main_reformedts.jpg"
         alt="도서관 배경"
         class="hero-bg-img">
       <div class="texture-overlay"></div>
       <div class="container hero-content">
         <div class="row">
           <div class="col-lg-8">
-            <span class="hero-tag">The Modern Archivist</span>
+            <!--<span class="hero-tag">Reformed Theology</span>-->
             <h1 class="main-hero-title mb-4">
-              정통 개혁신학의<br>전승과 현대적 아카이브
+              바른 개혁신학의 길,<br>오직 하나님 중심의 신앙
             </h1>
             <p class="hero-description mb-5">
               개혁신학연구회는 서철원 박사의 신학적 유산을 계승하며,<br class="d-none d-md-block">
               하나님 중심의 신앙을 다음 세대에 온전히 전달합니다.
             </p>
             <div class="d-flex flex-wrap gap-3">
-              <a href="sub.html" class="btn btn-gold px-4 py-3">연구회 소개 보기</a>
-              <a href="#" class="btn btn-outline-white px-4 py-3">최신 논문 열람</a>
+              <a href="sub.html" class="btn btn-gold px-4 py-3">연구회 소개</a>
+              <a href="#" class="btn btn-outline-white px-4 py-3">서철원 박사 아카이브</a>
             </div>
           </div>
         </div>
@@ -80,81 +82,124 @@
     <!-- ── 최신 소식 ─────────────────────────────────────────────── -->
     <section class="py-5 mt-5">
       <div class="container py-lg-5">
-        <div class="row g-5">
-          <!-- 좌측: 레이블 + 이미지 -->
+
+        <!-- 섹션 헤더: 한 줄 -->
+        <div class="d-flex align-items-center gap-4 mb-2 flex-wrap">
+          <div class="flex-shrink-0">
+            <span class="section-tag d-block mb-1">Recent Updates</span>
+            <h2 class="display-6 fw-bold mb-0">연구회 소식</h2>
+          </div>
+          <div class="vr d-none d-lg-block" style="height: 3.5rem; opacity: 0.2;"></div>
+          <p class="text-on-surface-variant mb-0 flex-fill" style="min-width: 0;">
+            개혁신학의 가치를 실현하는 현장의 목소리와 최신 연구 성과, 연구회의 다양한 활동 소식을 전해드립니다.
+          </p>
+        </div>
+        <div class="mb-5" style="width: 48px; height: 4px; background: var(--secondary-gold);"></div>
+
+        <!-- 앨범 + 뉴스보드: 같은 높이 -->
+        <div class="row g-5 align-items-stretch">
+          <!-- 앨범 슬라이드 -->
           <div class="col-lg-4">
-            <span class="section-tag d-block mb-2">Recent Updates</span>
-            <h2 class="display-6 fw-bold mb-4">연구회 소식</h2>
-            <div class="mb-4" style="width: 48px; height: 4px; background: var(--secondary-gold);"></div>
-            <p class="text-on-surface-variant mb-5">
-              개혁신학의 가치를 실현하는 현장의 목소리와 최신 연구 성과, 연구회의 다양한 활동 소식을 전해드립니다.
-            </p>
-            <div class="rounded-3 overflow-hidden shadow-sm" style="aspect-ratio: 4/3;">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5SSGUQQnQWgVvm9inu79M05IOdSDzEI1Ud26pg2MDQA-j9wRNMHYPyn9abdieLN36op_oUagyl1ki8a--5uXuaKOzoU3XZONJ3BZjI1tJJVab0uGEjf6Ex1q3dMF5uqaBgs9EyVCzkxE5o_eZnjXNrowHLlMZZ8eY-wk7Q-xpB-U0U8udwh7EOnuvd2F_tZuaFxOvc7fMjp1K8w8gOYmi_t3LAUrRD_uYLeENkYCuA2dNCX-sA5-TTMvif68lYyDhEprOA4NMK78"
-                alt="학술 현장"
-                class="w-100 h-100 object-fit-cover"
-                style="filter: grayscale(1);">
+            <div class="album-swiper swiper rounded-3 shadow-sm">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="album-thumb">
+                    <img src="assets/images/main_reformedts.jpg" alt="2024 정기 학술 세미나" class="album-thumb-img">
+                    <div class="album-thumb-info">
+                      <p class="album-thumb-title">2024 정기 학술 세미나</p>
+                      <span class="album-thumb-date">2024.11.25</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="album-thumb">
+                    <img src="assets/images/main_reformedts.jpg" alt="서철원 박사 특별 강좌" class="album-thumb-img">
+                    <div class="album-thumb-info">
+                      <p class="album-thumb-title">서철원 박사 특별 강좌</p>
+                      <span class="album-thumb-date">2024.09.14</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="album-thumb">
+                    <img src="assets/images/main_reformedts.jpg" alt="교의신학 집중 세미나" class="album-thumb-img">
+                    <div class="album-thumb-info">
+                      <p class="album-thumb-title">교의신학 집중 세미나</p>
+                      <span class="album-thumb-date">2024.06.22</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="album-thumb">
+                    <img src="assets/images/main_reformedts.jpg" alt="창립 기념 학술 대회" class="album-thumb-img">
+                    <div class="album-thumb-info">
+                      <p class="album-thumb-title">창립 기념 학술 대회</p>
+                      <span class="album-thumb-date">2024.03.08</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="album-thumb">
+                    <img src="assets/images/main_reformedts.jpg" alt="회원 연수 및 수양회" class="album-thumb-img">
+                    <div class="album-thumb-info">
+                      <p class="album-thumb-title">회원 연수 및 수양회</p>
+                      <span class="album-thumb-date">2023.12.02</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="swiper-button-prev" aria-label="이전"></button>
+              <button class="swiper-button-next" aria-label="다음"></button>
             </div>
           </div>
-          <!-- 우측: 뉴스 목록 -->
+          <!-- 뉴스 보드 -->
           <div class="col-lg-8">
-            <div class="bg-white rounded-4 p-2 shadow-sm">
-              <div class="news-item">
-                <div class="d-flex align-items-center gap-4">
-                  <span class="badge badge-navy rounded-1">공지사항</span>
-                  <div>
-                    <h4 class="h6 fw-bold mb-1">제24회 정기 학술 세미나 개최 안내 (주제: 기독교 강요의 현대적 조명)</h4>
-                    <small class="text-muted">2023.11.25 | 학술팀</small>
-                  </div>
+            <div class="news-board-card h-100">
+
+              <!-- 공지사항 섹션 -->
+              <div class="news-board-section">
+                <a class="news-board-label navy" href="#">
+                  <i class="fa-solid fa-bell"></i>
+                  공지사항
+                </a>
+                <div class="news-board-list">
+                  <a class="news-board-item" href="#">
+                    <span class="news-board-title">제24회 정기 학술 세미나 개최 안내 (주제: 기독교 강요의 현대적 조명) <span class="news-badge-new">N</span></span>
+                    <span class="news-board-date">2023.11.25</span>
+                  </a>
+                  <a class="news-board-item" href="#">
+                    <span class="news-board-title">신임 이사진 선출 및 회칙 개정 공지</span>
+                    <span class="news-board-date">2023.11.15</span>
+                  </a>
+                  <a class="news-board-item" href="#">
+                    <span class="news-board-title">연말 후원 및 연구 장학생 모집 안내</span>
+                    <span class="news-board-date">2023.11.01</span>
+                  </a>
                 </div>
-                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
               </div>
-              <div class="news-item">
-                <div class="d-flex align-items-center gap-4">
-                  <span class="badge badge-gold rounded-1">언론보도</span>
-                  <div>
-                    <h4 class="h6 fw-bold mb-1">[언론] 개혁신학연구회, 서철원 박사 교의신학 전집 아카이빙 완료</h4>
-                    <small class="text-muted">2023.11.20 | 홍보팀</small>
-                  </div>
+
+              <!-- 언론보도 섹션 -->
+              <div class="news-board-section">
+                <a class="news-board-label gold" href="#">
+                  <i class="fa-solid fa-newspaper"></i>
+                  언론보도
+                </a>
+                <div class="news-board-list">
+                  <a class="news-board-item" href="#">
+                    <span class="news-board-title">개혁신학연구회, 서철원 박사 교의신학 전집 아카이빙 완료</span>
+                    <span class="news-board-date">2023.11.20</span>
+                  </a>
+                  <a class="news-board-item" href="#">
+                    <span class="news-board-title">현대 신학의 위기 앞에 선 개혁주의의 역할 - 연합인터뷰</span>
+                    <span class="news-board-date">2023.11.08</span>
+                  </a>
+                  <a class="news-board-item" href="#">
+                    <span class="news-board-title">개혁주의 신앙교육, 차세대 목회자 양성의 새 방향 - 기독신문</span>
+                    <span class="news-board-date">2023.09.30</span>
+                  </a>
                 </div>
-                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
               </div>
-              <div class="news-item">
-                <div class="d-flex align-items-center gap-4">
-                  <span class="badge badge-navy rounded-1">공지사항</span>
-                  <div>
-                    <h4 class="h6 fw-bold mb-1">신임 이사진 선출 및 회칙 개정 공지</h4>
-                    <small class="text-muted">2023.11.15 | 사무국</small>
-                  </div>
-                </div>
-                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
-              </div>
-              <div class="news-item">
-                <div class="d-flex align-items-center gap-4">
-                  <span class="badge badge-gold rounded-1">언론보도</span>
-                  <div>
-                    <h4 class="h6 fw-bold mb-1">현대 신학의 위기 앞에 선 개혁주의의 역할 - 연합인터뷰</h4>
-                    <small class="text-muted">2023.11.08 | 대외협력팀</small>
-                  </div>
-                </div>
-                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
-              </div>
-              <div class="news-item">
-                <div class="d-flex align-items-center gap-4">
-                  <span class="badge badge-navy rounded-1">공지사항</span>
-                  <div>
-                    <h4 class="h6 fw-bold mb-1">연말 후원 및 연구 장학생 모집 안내</h4>
-                    <small class="text-muted">2023.11.01 | 장학위원회</small>
-                  </div>
-                </div>
-                <i class="fa-solid fa-chevron-right text-muted news-chevron"></i>
-              </div>
-            </div>
-            <div class="text-end mt-4 px-4">
-              <a class="text-decoration-none fw-bold text-dark small" href="sub2.html">
-                전체보기 <i class="fa-solid fa-arrow-right-long ms-1"></i>
-              </a>
+
             </div>
           </div>
         </div>
@@ -184,7 +229,7 @@
           <div class="col-md-4">
             <div class="academic-card muted">
               <i class="fa-solid fa-users text-muted"></i>
-              <h3 class="h4 fw-bold mb-3">회원 참여</h3>
+              <h3 class="h4 fw-bold mb-3">후원 안내</h3>
               <p class="text-on-surface-variant mb-4">연구회 회원으로서 세미나 참석 및 학술 활동에 참여하며 신앙의 지평을 넓혀가시길 초대합니다.</p>
               <a href="#" class="text-muted">회원 가입 안내</a>
             </div>
@@ -200,6 +245,7 @@
 
   <!-- JS -->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/swiper-bundle.min.js"></script>
   <script src="assets/js/script.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

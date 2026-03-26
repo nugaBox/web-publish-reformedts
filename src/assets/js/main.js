@@ -2,6 +2,18 @@
  * main.js — index.html 전용 스크립트
  */
 
+/* ── Album Swiper ──────────────────────────────────────────────── */
+if (document.querySelector(".album-swiper")) {
+  new Swiper(".album-swiper", {
+    slidesPerView: 1,
+    loop: true,
+    navigation: {
+      nextEl: ".album-swiper .swiper-button-next",
+      prevEl: ".album-swiper .swiper-button-prev",
+    },
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ── Navbar 스크롤 shadow ──────────────────────────────────── */

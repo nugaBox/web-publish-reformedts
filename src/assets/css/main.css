@@ -10,7 +10,8 @@
   align-items: center;
   background: linear-gradient(to bottom, #001f3f, #000613);
   overflow: hidden;
-  padding-top: 72px; /* fixed-top navbar 높이 보정 */
+  padding-top: 72px;
+  /* fixed-top navbar 높이 보정 */
 }
 
 /* .hero-bg-img 기본은 style.css — 여기선 필터만 */
@@ -81,11 +82,6 @@
   display: flex;
   align-items: center;
   color: inherit;
-  border-left: 4px solid var(--secondary-gold);
-}
-
-.quick-card.navy {
-  border-left-color: var(--primary-navy);
 }
 
 .quick-card:hover {
@@ -164,22 +160,210 @@
   opacity: 1;
 }
 
+/* ── Album Swiper ─────────────────────────────────────────────── */
+.album-swiper {
+  overflow: hidden;
+}
+
+.album-thumb {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+
+.album-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.swiper-slide:hover .album-thumb-img {
+  transform: scale(1.05);
+}
+
+.album-thumb-info {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.5rem 1rem 0.875rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
+  color: #fff;
+}
+
+.album-thumb-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.375rem;
+}
+
+.album-thumb-date {
+  font-size: 0.9375rem;
+  opacity: 0.8;
+}
+
+/* 내비게이션: 기본 숨김, 슬라이더 hover 시 표시 */
+.album-swiper .swiper-button-prev,
+.album-swiper .swiper-button-next {
+  width: 2.25rem;
+  height: 2.25rem;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+
+.album-swiper .swiper-button-prev::after,
+.album-swiper .swiper-button-next::after {
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.album-swiper:hover .swiper-button-prev,
+.album-swiper:hover .swiper-button-next {
+  opacity: 1;
+}
+
+.album-swiper .swiper-button-prev:hover,
+.album-swiper .swiper-button-next:hover {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* ── News Board ───────────────────────────────────────────────── */
+.news-board-card {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.news-board-section {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.news-board-section:last-child {
+  border-bottom: none;
+}
+
+.news-board-label {
+  flex-shrink: 0;
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: opacity 0.2s;
+}
+
+.news-board-label:hover {
+  opacity: 0.85;
+}
+
+.news-board-label i {
+  font-size: 1.125rem;
+}
+
+.news-board-label.navy {
+  background-color: var(--primary-container);
+  color: #d4e3ff;
+}
+
+.news-board-label.gold {
+  background-color: var(--accent-gold);
+  color: #5a3e00;
+}
+
+.news-board-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-board-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--surface-container);
+  transition: background-color 0.2s;
+  min-width: 0;
+}
+
+.news-board-item:last-child {
+  border-bottom: none;
+}
+
+.news-board-item:hover {
+  background-color: var(--surface-container-low);
+}
+
+.news-board-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.news-board-item:hover .news-board-title {
+  color: var(--secondary-gold);
+}
+
+.news-board-date {
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.news-badge-new {
+  display: inline-block;
+  background-color: #e07b3a;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.1em 0.4em;
+  border-radius: 0.25rem;
+  vertical-align: middle;
+  margin-left: 0.3rem;
+  line-height: 1.6;
+}
+
+.news-board-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding: 1.5rem;
+}
+
 /* ── Academic Highlight Cards ────────────────────────────────── */
 .academic-card {
   background: #fff;
   padding: 2.5rem;
   border-radius: 0.75rem;
   height: 100%;
-  border-top: 4px solid var(--secondary-gold);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.academic-card.navy {
-  border-top-color: var(--primary-navy);
-}
-
-.academic-card.muted {
-  border-top-color: #74777f;
 }
 
 .academic-card i {
