@@ -6,34 +6,34 @@
 /* ── CSS 변수 ─────────────────────────────────────────────── */
 :root {
   /* Brand Colors */
-  --primary-navy:       #000613;
-  --primary-container:  #001f3f;
-  --secondary-gold:     #775a19;
-  --accent-gold:        #e9c176;
-  --gold-light:         #fed488;
-  --soft-gold:          #ffdea5;
+  --primary-navy: #000613;
+  --primary-container: #001f3f;
+  --secondary-gold: #775a19;
+  --accent-gold: #e9c176;
+  --gold-light: #fed488;
+  --soft-gold: #ffdea5;
 
   /* Surface Hierarchy */
-  --surface-bg:               #f8f9fa;
-  --surface-container:        #edeeef;
-  --surface-container-low:    #f3f4f5;
+  --surface-bg: #f8f9fa;
+  --surface-container: #edeeef;
+  --surface-container-low: #f3f4f5;
 
   /* Text */
-  --text-main:    #191c1d;
-  --text-muted:   #43474e;
+  --text-main: #191c1d;
+  --text-muted: #43474e;
   --border-color: #e1e3e4;
 
   /* Legacy aliases (호환용) */
-  --color-primary:   var(--secondary-gold);
-  --color-text:      var(--text-main);
-  --color-bg:        #ffffff;
-  --color-bg-soft:   var(--surface-bg);
-  --color-bg-dark:   var(--primary-navy);
+  --color-primary: var(--secondary-gold);
+  --color-text: var(--text-main);
+  --color-bg: #ffffff;
+  --color-bg-soft: var(--surface-bg);
+  --color-bg-dark: var(--primary-navy);
 
   /* Misc */
   --spacing-section: 80px;
-  --font-base:       "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  --radius-md:       8px;
+  --font-base: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --radius-md: 8px;
   --transition-base: 0.2s ease;
 }
 
@@ -49,6 +49,35 @@ body {
 /* ── 헤더 (Navbar) ─────────────────────────────────────────── */
 #site-header {
   /* fixed-top Bootstrap 클래스가 포지션을 처리 */
+}
+
+/* 드롭다운 화살표(세모) 제거 */
+#site-header .nav-link.dropdown-toggle::after {
+  display: none;
+}
+
+/* lg+ 에서 메뉴를 진짜 가운데로 배치 */
+@media (min-width: 992px) {
+  #site-header .navbar .container {
+    position: relative;
+  }
+
+  #site-header #navbarMain {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    flex-grow: 0;
+  }
+
+  #site-header #navbarMain .navbar-nav {
+    pointer-events: auto;
+  }
 }
 
 #site-header .navbar {
@@ -71,6 +100,7 @@ body {
 #site-header .nav-link {
   color: var(--text-muted) !important;
   font-weight: 700;
+  font-size: 1.2rem;
   padding: 0.5rem 1rem !important;
   transition: color var(--transition-base);
 }
@@ -98,7 +128,7 @@ body {
 }
 
 #site-header .dropdown-item {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--text-muted);
   border-radius: 0.375rem;
@@ -169,11 +199,23 @@ body {
 }
 
 /* ── 텍스트 유틸리티 ─────────────────────────────────────── */
-.text-primary-navy       { color: var(--primary-navy) !important; }
-.text-secondary-gold     { color: var(--secondary-gold) !important; }
-.text-on-surface-variant { color: var(--text-muted) !important; }
+.text-primary-navy {
+  color: var(--primary-navy) !important;
+}
+
+.text-secondary-gold {
+  color: var(--secondary-gold) !important;
+}
+
+.text-on-surface-variant {
+  color: var(--text-muted) !important;
+}
 
 /* ── 푸터 ─────────────────────────────────────────────────── */
+.footer-logo {
+  filter: grayscale(1) opacity(0.5);
+}
+
 #site-footer {
   background-color: var(--surface-bg);
   border-top: 1px solid var(--border-color);
@@ -206,10 +248,17 @@ body {
 }
 
 /* ── 섹션 유틸리티 ────────────────────────────────────────── */
-.section    { padding: var(--spacing-section) 0; }
-.section-sm { padding: calc(var(--spacing-section) / 2) 0; }
+.section {
+  padding: var(--spacing-section) 0;
+}
 
-.section-soft { background-color: var(--surface-bg); }
+.section-sm {
+  padding: calc(var(--spacing-section) / 2) 0;
+}
+
+.section-soft {
+  background-color: var(--surface-bg);
+}
 
 .section-dark {
   background-color: var(--primary-navy);

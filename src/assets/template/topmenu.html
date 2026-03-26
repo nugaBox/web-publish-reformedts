@@ -1,0 +1,20 @@
+<div>
+	<c:if test="${not empty menuAllInfo and fn:length(menuAllInfo) > 0}">
+	<ul>
+		<c:forEach var="menu1" items="${menuAllInfo}">
+		<li<c:if test="${menu1.upperAt eq 'Y'}"> class="active"</c:if>>
+			<a href="${menu1.menuUrl}" ${menu1.onClick} ${menu1.target}><c:out value="${menu1.menuNm}" /></a>
+			<c:if test="${menu1.subCnt > 0}">
+			<ul>
+				<c:forEach var="menu2" items="${menu1.subMenu}">
+				<li<c:if test="${menu2.upperAt eq 'Y'}"> class="active"</c:if>>
+					<a href="${menu2.menuUrl}" ${menu2.onClick} ${menu2.target}><c:out value="${menu2.menuNm}" /></a>
+				</li>
+				</c:forEach>
+			</ul>
+			</c:if>
+		</li>
+		</c:forEach>
+	</ul>
+	</c:if>
+</div>
