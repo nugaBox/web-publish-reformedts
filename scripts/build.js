@@ -22,9 +22,9 @@ const DIST = path.join(ROOT, "dist");
 // CMS가 런타임에 치환하는 변수명입니다. 필요에 따라 수정하세요.
 const CMS = {
   root:     "${rootDirectory}",
-  img:      "${imgDirectory}",
-  font:     "${fontDirectory}",
-  webfont:  "${webfontDirectory}",
+  img:      "${imgDirectory}",      // CSS 파일용 이미지 경로 변수
+  imgHtml:  "${path.images}",       // HTML 파일용 이미지 경로 변수
+  font:     "${fontDirectory}",     // 웹폰트 포함 모든 폰트 경로 변수
 };
 // ─────────────────────────────────────────────────────────────
 
@@ -41,17 +41,20 @@ function copyRecursive(src, dest) {
 
 /** url() 안의 로컬 웹폰트 경로를 CMS 변수로 치환 */
 function replaceWebfontPaths(css) {
-  // ../fonts/폴더명/파일명.ext → ${webfontDirectory}파일명.ext
-  return css.replace(
-    /url\((['"]?)\.\.\/fonts\/[^/'"()]+\/([^'"()]+)\1\)/g,
-    (_, q, filename) => `url(${q}${CMS.webfont}${filename}${q})`
-  );
+  // ../fonts/ → ${fontDirectory} (나머지 경로 보존)
+  return css.replace(/url\((['"]?)\.\.\/fonts\//g, `url($1${CMS.font}`);
 }
 
-/** HTML/CSS 내 이미지 경로를 CMS 변수로 치환 */
+/** CSS 내 이미지 경로를 CMS 변수로 치환 */
 function replaceImgPaths(content) {
   // assets/images/ → ${imgDirectory}
   return content.replace(/assets\/images\//g, CMS.img);
+}
+
+/** HTML 내 이미지 경로를 CMS 변수로 치환 */
+function replaceImgPathsHtml(content) {
+  // assets/images/ → ${path.images}
+  return content.replace(/assets\/images\//g, CMS.imgHtml);
 }
 
 /** HTML 파일의 data-include 태그를 실제 파일 내용으로 인라인 */
@@ -88,10 +91,10 @@ for (const file of htmlFiles) {
   let html = fs.readFileSync(filePath, "utf-8");
 
   html = inlineIncludes(html);
-  html = replaceImgPaths(html);
+  html = replaceImgPathsHtml(html);
 
   fs.writeFileSync(filePath, html, "utf-8");
-  console.log(`✅  ${file} — include 인라인, 이미지 경로 치환`);
+  console.log(`✅  ${file} — include 인라인, 이미지 경로 치환 (→ ${CMS.imgHtml})`);
 }
 
 // 3. CSS 처리: 웹폰트 경로 + 이미지 경로 치환

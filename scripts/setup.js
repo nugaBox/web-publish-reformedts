@@ -34,6 +34,16 @@ const copies = [
     src: "node_modules/pretendard/dist/web/static/pretendard.css",
     dest: "src/assets/css/pretendard.css",
   },
+  // Swiper CSS
+  {
+    src: "node_modules/swiper/swiper-bundle.min.css",
+    dest: "src/assets/css/swiper-bundle.min.css",
+  },
+  // Swiper JS
+  {
+    src: "node_modules/swiper/swiper-bundle.min.js",
+    dest: "src/assets/js/swiper-bundle.min.js",
+  },
 ];
 
 function copyFile(src, dest) {
@@ -93,26 +103,39 @@ if (fs.existsSync(iconCssPath)) {
 
 // ── Pretendard ───────────────────────────────────────────────────────────────
 
-// Pretendard woff2 파일만 fonts 폴더로 복사
+// Pretendard woff2, woff 파일을 fonts/pretendard/ 폴더로 flat하게 복사
+// node_modules/pretendard/dist/web/static/ 하위의 woff2/, woff/ 서브폴더에서 읽음
 const pretendardSrc = path.join(ROOT, "node_modules/pretendard/dist/web/static");
 const pretendardDest = path.join(ROOT, "src/assets/fonts/pretendard");
 
 if (fs.existsSync(pretendardSrc)) {
   fs.mkdirSync(pretendardDest, { recursive: true });
-  const woff2Files = fs.readdirSync(pretendardSrc).filter((f) => f.endsWith(".woff2"));
-  woff2Files.forEach((file) => {
-    fs.copyFileSync(path.join(pretendardSrc, file), path.join(pretendardDest, file));
-  });
-  console.log(`✅  복사 완료: src/assets/fonts/pretendard/ (${woff2Files.length}개 파일)`);
+  let copiedCount = 0;
+
+  for (const subDir of ["woff2", "woff"]) {
+    const subSrc = path.join(pretendardSrc, subDir);
+    if (fs.existsSync(subSrc)) {
+      for (const file of fs.readdirSync(subSrc)) {
+        fs.copyFileSync(path.join(subSrc, file), path.join(pretendardDest, file));
+        copiedCount++;
+      }
+    }
+  }
+
+  console.log(`✅  복사 완료: src/assets/fonts/pretendard/ (${copiedCount}개 파일)`);
 } else {
   console.warn(`⚠️  Pretendard 폴더 없음 (npm install 확인 필요)`);
 }
 
 // pretendard.css 폰트 경로 패치
+// ./woff2/파일명, ./woff/파일명 → ../fonts/pretendard/파일명 (flat 구조에 맞게)
 const pretendardCssPath = path.join(ROOT, "src/assets/css/pretendard.css");
 if (fs.existsSync(pretendardCssPath)) {
   let css = fs.readFileSync(pretendardCssPath, "utf-8");
-  css = css.replace(/url\(['"]\.?\//g, (match) => match.replace(/\.?\//, "../fonts/pretendard/"));
+  css = css.replace(
+    /url\((['"]?)\.\/(?:woff2|woff)\/([^'"()]+)\1\)/g,
+    (_, q, filename) => `url(${q}../fonts/pretendard/${filename}${q})`
+  );
   fs.writeFileSync(pretendardCssPath, css, "utf-8");
   console.log(`✅  pretendard.css 경로 패치 완료`);
 }
