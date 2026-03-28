@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm --version)",
       "Bash(brew install:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
     ]
   }
 }
