@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="../">
+  <title>앨범 보기 — 개혁신학연구회</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/pretendard.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/sub.css">
+</head>
+<body>
+
+  <div data-include="include/header.html"></div>
+
+  <main id="main-content">
+
+    <header class="page-hero">
+      <img src="assets/images/main_reformedts.jpg" alt="개혁신학연구회" class="hero-bg-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <!-- CMS: 게시판명 출력 (언론보도 / 앨범) -->
+        <h1 class="hero-title">앨범</h1>
+        <div class="breadcrumb-custom">
+          <span>Home</span>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span class="active-item">연구회 소식</span>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>앨범</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container py-5 my-lg-4">
+      <div class="row g-5">
+
+        <aside class="col-lg-3 d-none d-lg-block">
+          <div class="sticky-top" style="top:100px; z-index:10;">
+            <div class="sidebar-heading">
+              <h2>News</h2>
+              <small class="text-muted">연구회 소식</small>
+            </div>
+            <div class="list-group sidebar-nav">
+              <a class="list-group-item" href="board/notice-list.html">
+                <span>공지사항</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="board/press-list.html">
+                <span>언론보도</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="board/member-news-list.html">
+                <span>회원동정</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item active" href="board/album-list.html">
+                <span>앨범</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <section class="col-lg-9">
+
+          <!-- ── 게시글 헤더 ── -->
+          <div class="post-header">
+            <h2 class="post-title">2025 상반기 정기 세미나</h2>
+            <div class="post-meta">
+              <span><i class="fa-solid fa-user"></i> 관리자</span>
+              <span><i class="fa-solid fa-calendar"></i> 2025.03.12</span>
+              <span><i class="fa-solid fa-eye"></i> 조회 542</span>
+              <span><i class="fa-solid fa-images"></i> 사진 18장</span>
+            </div>
+          </div>
+
+          <!-- ── 대표 이미지 (언론보도 등 단일 이미지 게시판) / 앨범 설명 ── -->
+          <div class="mb-4">
+            <!-- 대표 썸네일 or 앨범 설명 이미지 -->
+            <div class="media-card-thumb rounded mb-3" style="max-height:420px;">
+              <!-- CMS: <img src="..." alt="대표 이미지"> -->
+              <div class="media-card-thumb-placeholder" style="height:320px; font-size:4rem;">
+                <i class="fa-regular fa-images"></i>
+              </div>
+            </div>
+
+            <!-- 본문 설명 -->
+            <div class="post-content" style="min-height:auto; padding:1rem 0;">
+              <p>2025년 3월 12일(토) 총신대학교 신학대학원 강당에서 개최된 2025 상반기 정기 세미나 현장 사진입니다.</p>
+              <p>이번 세미나는 "칼빈 신학의 현대적 의의"를 주제로 약 120여 명의 목회자·신학생이 참석하였으며, 오전·오후 발제와 종합 토론 순서로 진행되었습니다.</p>
+            </div>
+          </div>
+
+          <!-- ── 사진 갤러리 그리드 ── -->
+          <div class="mb-4">
+            <div class="d-flex align-items-center mb-3">
+              <span class="section-label">Gallery</span>
+              <div class="section-divider"></div>
+              <span class="small text-muted ms-3">18장</span>
+            </div>
+
+            <div class="gallery-grid">
+              <!-- CMS: 업로드된 사진 반복 출력 -->
+              <!-- 플레이스홀더 9장 (실제 사진 교체) -->
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+              <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+            </div>
+
+            <!-- 사진 더보기 (18장 중 9장 표시 후) -->
+            <div class="text-center mt-3">
+              <button class="btn btn-outline-secondary btn-sm px-4">
+                <i class="fa-solid fa-plus me-1"></i>사진 더보기 (9 / 18)
+              </button>
+            </div>
+          </div>
+
+          <!-- 목록·수정·삭제 -->
+          <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+            <a href="board/album-list.html" class="btn btn-outline-secondary btn-sm px-3">
+              <i class="fa-solid fa-list me-1"></i>목록
+            </a>
+            <div class="d-flex gap-2">
+              <a href="board/media-write.html" class="btn btn-gold btn-sm px-3">
+                <i class="fa-solid fa-pen me-1"></i>수정
+              </a>
+              <button class="btn btn-outline-danger btn-sm px-3" onclick="return confirm('삭제하시겠습니까?')">
+                <i class="fa-solid fa-trash me-1"></i>삭제
+              </button>
+            </div>
+          </div>
+
+          <!-- 이전/다음 -->
+          <div class="post-nav">
+            <a class="post-nav-item" href="board/media-view.html">
+              <span class="nav-dir"><i class="fa-solid fa-chevron-up me-1"></i>이전글</span>
+              <span class="post-nav-title">서철원 박사 전집 개정판 출판 기념회</span>
+            </a>
+            <a class="post-nav-item text-end" href="board/media-view.html">
+              <span class="nav-dir"><i class="fa-solid fa-chevron-down me-1"></i>다음글</span>
+              <span class="post-nav-title">2024 하반기 정기 세미나 — 종말론</span>
+            </a>
+          </div>
+
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <div data-include="include/footer.html"></div>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/sub.js"></script>
+</body>
+</html>

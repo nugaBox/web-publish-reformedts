@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="../">
+  <title>글쓰기 — 개혁신학연구회</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/pretendard.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/sub.css">
+</head>
+<body>
+
+  <div data-include="include/header.html"></div>
+
+  <main id="main-content">
+
+    <header class="page-hero">
+      <img src="assets/images/main_reformedts.jpg" alt="개혁신학연구회" class="hero-bg-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <!-- CMS: 게시판명 출력 -->
+        <h1 class="hero-title">글쓰기</h1>
+        <div class="breadcrumb-custom">
+          <span>Home</span>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span class="active-item">연구회 소식</span>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>공지사항</span>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>글쓰기</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container py-5 my-lg-4">
+      <div class="row g-5">
+
+        <aside class="col-lg-3 d-none d-lg-block">
+          <div class="sticky-top" style="top:100px; z-index:10;">
+            <div class="sidebar-heading">
+              <h2>News</h2>
+              <small class="text-muted">연구회 소식</small>
+            </div>
+            <div class="list-group sidebar-nav">
+              <a class="list-group-item active" href="board/notice-list.html">
+                <span>공지사항</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="board/press-list.html">
+                <span>언론보도</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="board/member-news-list.html">
+                <span>회원동정</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="board/album-list.html">
+                <span>앨범</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <section class="col-lg-9">
+
+          <div class="content-title-area">
+            <h3>글쓰기</h3>
+          </div>
+
+          <form action="#" method="post" enctype="multipart/form-data">
+
+            <table class="write-form-table mb-4">
+              <tbody>
+
+                <!-- 분류 (CMS: 게시판 설정에 따라 노출/숨김) -->
+                <tr>
+                  <th>분류</th>
+                  <td>
+                    <select class="form-select" style="max-width:200px;">
+                      <option value="">분류 선택</option>
+                      <option>공지</option>
+                      <option>일반</option>
+                      <option>안내</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <!-- 제목 -->
+                <tr>
+                  <th>제목 <span class="text-danger">*</span></th>
+                  <td>
+                    <input type="text" class="form-control" placeholder="제목을 입력해 주세요." required>
+                  </td>
+                </tr>
+
+                <!-- 작성자 (CMS: 로그인 사용자 자동 입력) -->
+                <tr>
+                  <th>작성자</th>
+                  <td>
+                    <input type="text" class="form-control" value="관리자" style="max-width:200px;" readonly>
+                  </td>
+                </tr>
+
+                <!-- 공개 설정 -->
+                <tr>
+                  <th>공개 설정</th>
+                  <td>
+                    <div class="d-flex gap-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="visibility" id="vis-public" value="public" checked>
+                        <label class="form-check-label" for="vis-public">전체 공개</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="visibility" id="vis-member" value="member">
+                        <label class="form-check-label" for="vis-member">회원 공개</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="visibility" id="vis-private" value="private">
+                        <label class="form-check-label" for="vis-private"><i class="fa-solid fa-lock me-1 small"></i>비밀글</label>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- 내용 -->
+                <tr>
+                  <th style="vertical-align:top; padding-top:1rem;">내용 <span class="text-danger">*</span></th>
+                  <td>
+                    <!-- CMS: 리치 에디터(Quill, TinyMCE 등) 교체 영역 -->
+                    <div class="mb-2 d-flex gap-1 flex-wrap">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="굵게"><b>B</b></button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="기울임"><i>I</i></button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="밑줄"><u>U</u></button>
+                      <span class="border-start mx-1"></span>
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="좌측 정렬"><i class="fa-solid fa-align-left"></i></button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="가운데"><i class="fa-solid fa-align-center"></i></button>
+                      <span class="border-start mx-1"></span>
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="이미지 삽입"><i class="fa-regular fa-image"></i></button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="링크 삽입"><i class="fa-solid fa-link"></i></button>
+                    </div>
+                    <textarea class="content-editor-area" name="content" placeholder="내용을 입력해 주세요."></textarea>
+                  </td>
+                </tr>
+
+                <!-- 첨부파일 -->
+                <tr>
+                  <th style="vertical-align:top; padding-top:1rem;">첨부파일</th>
+                  <td>
+                    <div class="file-upload-area mb-2" onclick="document.getElementById('file-input').click()">
+                      <i class="fa-solid fa-cloud-arrow-up"></i>
+                      <p class="mt-2 mb-1">클릭하거나 파일을 드래그하여 업로드</p>
+                      <p class="small text-muted">PDF, Word, PPT, 이미지 (최대 20MB / 파일당)</p>
+                    </div>
+                    <input type="file" id="file-input" name="files" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.gif" class="d-none">
+                    <div id="file-list" class="small text-muted"></div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+            <!-- 버튼 -->
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="board/notice-list.html" class="btn btn-outline-secondary px-4">
+                <i class="fa-solid fa-list me-1"></i>목록
+              </a>
+              <div class="d-flex gap-2">
+                <button type="reset" class="btn btn-outline-secondary px-4">
+                  <i class="fa-solid fa-rotate-left me-1"></i>초기화
+                </button>
+                <button type="submit" class="btn btn-gold px-5">
+                  <i class="fa-solid fa-check me-1"></i>등록
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <div data-include="include/footer.html"></div>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/sub.js"></script>
+  <script>
+    // 파일 선택 시 파일명 표시 (데모용)
+    document.getElementById('file-input')?.addEventListener('change', function () {
+      const list = document.getElementById('file-list');
+      list.innerHTML = [...this.files].map(f =>
+        `<div><i class="fa-solid fa-paperclip me-1"></i>${f.name} (${(f.size/1024).toFixed(1)} KB)</div>`
+      ).join('');
+    });
+  </script>
+</body>
+</html>

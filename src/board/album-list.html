@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="../">
+  <title>앨범 — 개혁신학연구회</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/pretendard.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/sub.css">
+</head>
+<body>
+
+  <div data-include="include/header.html"></div>
+
+  <main id="main-content">
+
+    <header class="page-hero">
+      <img src="assets/images/main_reformedts.jpg" alt="개혁신학연구회" class="hero-bg-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">앨범</h1>
+        <div class="breadcrumb-custom">
+          <span>Home</span>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span class="active-item">연구회 소식</span>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>앨범</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container py-5 my-lg-4">
+      <div class="row g-5">
+
+        <aside class="col-lg-3 d-none d-lg-block">
+          <div class="sticky-top" style="top:100px; z-index:10;">
+            <div class="sidebar-heading">
+              <h2>News</h2>
+              <small class="text-muted">연구회 소식</small>
+            </div>
+            <div class="list-group sidebar-nav">
+              <a class="list-group-item" href="board/notice-list.html">
+                <span>공지사항</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="board/press-list.html">
+                <span>언론보도</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item" href="board/member-news-list.html">
+                <span>회원동정</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+              <a class="list-group-item active" href="board/album-list.html">
+                <span>앨범</span><i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+            <div class="info-box">
+              <h6>사진 제공 안내</h6>
+              <p>행사 사진 업로드를 원하시면 사무국으로 원본 파일을 보내 주세요.</p>
+            </div>
+          </div>
+        </aside>
+
+        <section class="col-lg-9">
+
+          <div class="content-title-area d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <h3>앨범 <small class="text-muted fw-normal ms-2 fs-6">Total 24</small></h3>
+            <div class="d-flex gap-2 align-items-center flex-wrap">
+              <div class="search-container">
+                <input class="form-control" type="text" placeholder="검색어 입력">
+                <i class="fas fa-search"></i>
+              </div>
+              <a href="board/media-write.html" class="btn btn-gold btn-sm px-3 py-2">
+                <i class="fa-solid fa-pen me-1"></i>글쓰기
+              </a>
+            </div>
+          </div>
+
+          <!-- ── 앨범 멀티미디어 그리드 ──
+               CMS 설정:
+               · data-per-page="6"  — 한 페이지 노출 개수 (기본 6 = 3열×2행)
+               · style="--media-cols:3" — 열 수 (기본 3)
+          -->
+          <div class="media-grid" data-per-page="6" style="--media-cols:3;">
+
+            <a href="board/media-view.html" class="media-card">
+              <div class="media-card-thumb">
+                <!-- 썸네일: <img src="assets/images/album/2025-seminar.jpg" alt=""> -->
+                <div class="media-card-thumb-placeholder">
+                  <i class="fa-regular fa-images"></i>
+                </div>
+                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>18</span>
+              </div>
+              <div class="media-card-body">
+                <p class="media-card-title">2025 상반기 정기 세미나</p>
+                <p class="media-card-meta">2025.03.12</p>
+              </div>
+            </a>
+
+            <a href="board/media-view.html" class="media-card">
+              <div class="media-card-thumb">
+                <div class="media-card-thumb-placeholder">
+                  <i class="fa-regular fa-images"></i>
+                </div>
+                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>32</span>
+              </div>
+              <div class="media-card-body">
+                <p class="media-card-title">서철원 박사 전집 개정판 출판 기념회</p>
+                <p class="media-card-meta">2025.02.18</p>
+              </div>
+            </a>
+
+            <a href="board/media-view.html" class="media-card">
+              <div class="media-card-thumb">
+                <div class="media-card-thumb-placeholder">
+                  <i class="fa-regular fa-images"></i>
+                </div>
+                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>25</span>
+              </div>
+              <div class="media-card-body">
+                <p class="media-card-title">2024 하반기 정기 세미나 — 종말론</p>
+                <p class="media-card-meta">2024.10.26</p>
+              </div>
+            </a>
+
+            <a href="board/media-view.html" class="media-card">
+              <div class="media-card-thumb">
+                <div class="media-card-thumb-placeholder">
+                  <i class="fa-regular fa-images"></i>
+                </div>
+                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>45</span>
+              </div>
+              <div class="media-card-body">
+                <p class="media-card-title">제4회 개혁신학 학술대회</p>
+                <p class="media-card-meta">2024.09.07</p>
+              </div>
+            </a>
+
+            <a href="board/media-view.html" class="media-card">
+              <div class="media-card-thumb">
+                <div class="media-card-thumb-placeholder">
+                  <i class="fa-regular fa-images"></i>
+                </div>
+                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>14</span>
+              </div>
+              <div class="media-card-body">
+                <p class="media-card-title">2024 상반기 정기 세미나 — 성경 무오성</p>
+                <p class="media-card-meta">2024.05.18</p>
+              </div>
+            </a>
+
+            <a href="board/media-view.html" class="media-card">
+              <div class="media-card-thumb">
+                <div class="media-card-thumb-placeholder">
+                  <i class="fa-regular fa-images"></i>
+                </div>
+                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>22</span>
+              </div>
+              <div class="media-card-body">
+                <p class="media-card-title">목회자 특강 — 개혁주의 설교의 원리</p>
+                <p class="media-card-meta">2024.03.09</p>
+              </div>
+            </a>
+
+          </div><!-- /.media-grid -->
+
+          <nav class="mt-5" aria-label="페이지 이동">
+            <ul class="pagination justify-content-center">
+              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angles-left small"></i></a></li>
+              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left small"></i></a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right small"></i></a></li>
+              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angles-right small"></i></a></li>
+            </ul>
+          </nav>
+
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <div data-include="include/footer.html"></div>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/sub.js"></script>
+</body>
+</html>

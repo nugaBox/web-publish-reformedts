@@ -356,3 +356,551 @@
   background-color: var(--surface-container);
   color: var(--primary-navy);
 }
+
+/* ── Member Photo Card (섬기는 분들 페이지) ──────────────────── */
+.member-card {
+  text-align: center;
+}
+
+.member-photo-wrap {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--surface-container);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.member-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.member-photo-placeholder {
+  color: var(--border-color);
+  font-size: 3.5rem;
+}
+
+.member-card .member-name {
+  font-weight: 700;
+  color: var(--primary-navy);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.member-card .member-role {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.member-card .member-title {
+  font-size: 0.75rem;
+  color: var(--secondary-gold);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ── Profile Section (서철원 박사 소개 페이지) ───────────────── */
+.profile-photo-wrap {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--surface-container);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.profile-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.profile-photo-placeholder {
+  color: var(--border-color);
+  font-size: 5rem;
+}
+
+.profile-info-table td {
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.profile-info-table td:first-child {
+  color: var(--secondary-gold);
+  font-weight: 700;
+  white-space: nowrap;
+  padding-right: 1.5rem;
+  width: 7rem;
+}
+
+/* ── Policy Content (개인정보처리방침·이용약관 페이지) ──────── */
+.policy-content h4 {
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--surface-container);
+  font-size: 1.1rem;
+}
+
+.policy-content h4:first-child {
+  margin-top: 0;
+}
+
+.policy-content p,
+.policy-content ol,
+.policy-content ul {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+
+.policy-content ol li,
+.policy-content ul li {
+  margin-bottom: 0.4rem;
+}
+
+.policy-effective {
+  background-color: var(--surface-container-low);
+  border-left: 4px solid var(--secondary-gold);
+  padding: 1rem 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+/* ── Sitemap Page ────────────────────────────────────────────── */
+.sitemap-group {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+  height: 100%;
+}
+
+.sitemap-group-title {
+  font-weight: 700;
+  color: var(--primary-navy);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--secondary-gold);
+  margin-bottom: 1rem;
+}
+
+.sitemap-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sitemap-group ul li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--surface-container);
+}
+
+.sitemap-group ul li:last-child {
+  border-bottom: none;
+}
+
+.sitemap-group ul li a {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--transition-base);
+}
+
+.sitemap-group ul li a:hover {
+  color: var(--secondary-gold);
+}
+
+.sitemap-group ul li a i {
+  font-size: 0.65rem;
+  color: var(--secondary-gold);
+}
+
+/* ============================================================
+   Board — 멀티미디어 게시판 그리드
+   CMS 설정: .media-grid의 style="--media-cols:N" 또는
+   data-per-page="N" 으로 노출 개수·열 수 제어
+   ============================================================ */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--media-cols, 3), 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 991px) {
+  .media-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 479px) {
+  .media-grid { grid-template-columns: 1fr; }
+}
+
+.media-card {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.media-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -4px rgba(0, 6, 19, 0.12);
+  color: inherit;
+}
+
+.media-card-thumb {
+  aspect-ratio: 16 / 9;
+  background-color: var(--surface-container);
+  overflow: hidden;
+  position: relative;
+}
+
+.media-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.media-card:hover .media-card-thumb img {
+  transform: scale(1.04);
+}
+
+.media-card-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--border-color);
+  font-size: 2.5rem;
+}
+
+.media-card-thumb .media-count-badge {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 6, 19, 0.65);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(4px);
+}
+
+.media-card-body {
+  padding: 1rem;
+}
+
+.media-card-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.45;
+}
+
+.media-card-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ── Board 게시판 목록 공통 ──────────────────────────────────── */
+.board-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.board-count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.notice-item .attach-icon {
+  color: var(--secondary-gold);
+  font-size: 0.78rem;
+}
+
+/* ── Board 뷰 페이지 ─────────────────────────────────────────── */
+.post-header {
+  border-bottom: 2px solid var(--primary-navy);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-header .post-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+}
+
+.post-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.post-meta i {
+  color: var(--secondary-gold);
+}
+
+.post-content {
+  min-height: 300px;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--text-muted);
+}
+
+.post-attachments {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.post-attachments h6 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.attach-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.attach-list li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--primary-navy);
+  text-decoration: none;
+  padding: 0.35rem 0;
+}
+
+.attach-list li a:hover {
+  color: var(--secondary-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.post-nav-item {
+  background-color: var(--surface-container-low);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  transition: background-color var(--transition-base);
+}
+
+.post-nav-item:hover {
+  background-color: var(--surface-container);
+  color: var(--primary-navy);
+}
+
+.post-nav-item .nav-dir {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--secondary-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.post-nav-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* ── 미디어 뷰 갤러리 그리드 ────────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.gallery-grid img,
+.gallery-grid .gallery-item {
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  width: 100%;
+  background-color: var(--surface-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--border-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: opacity var(--transition-base);
+}
+
+.gallery-grid img:hover,
+.gallery-grid .gallery-item:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 575px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── 게시판 쓰기/수정 폼 ─────────────────────────────────────── */
+.write-form-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.write-form-table th,
+.write-form-table td {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+}
+
+.write-form-table th {
+  background-color: var(--surface-container-low);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  white-space: nowrap;
+  width: 9rem;
+}
+
+.write-form-table .form-control,
+.write-form-table .form-select {
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  background-color: #fff;
+}
+
+.write-form-table .form-control:focus,
+.write-form-table .form-select:focus {
+  border-color: var(--secondary-gold);
+  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
+}
+
+.content-editor-area {
+  width: 100%;
+  min-height: 360px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  font-family: var(--font-base);
+  font-size: 0.9rem;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.content-editor-area:focus {
+  outline: none;
+  border-color: var(--secondary-gold);
+  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
+}
+
+.file-upload-area {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--surface-container-low);
+  cursor: pointer;
+  transition: border-color var(--transition-base), background-color var(--transition-base);
+}
+
+.file-upload-area:hover {
+  border-color: var(--secondary-gold);
+  background-color: rgba(255, 222, 165, 0.08);
+}
+
+.file-upload-area i {
+  font-size: 2rem;
+  color: var(--secondary-gold);
+  margin-bottom: 0.5rem;
+}
+
+.file-upload-area p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.thumb-upload-preview {
+  aspect-ratio: 16 / 9;
+  background-color: var(--surface-container);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--border-color);
+  cursor: pointer;
+  transition: border-color var(--transition-base);
+  overflow: hidden;
+}
+
+.thumb-upload-preview:hover {
+  border-color: var(--secondary-gold);
+}
