@@ -635,6 +635,18 @@
   color: var(--text-muted);
 }
 
+/* ── CMS 게시판 스킨 래퍼 ───────────────────────────────────── */
+/* CMS가 출력하는 .siiru-boardWrap 내부 컨텐츠 공통 간격 */
+.siiru-boardWrap {
+  padding-top: 1rem;
+}
+
+.siiru-clr::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /* ── Board 게시판 목록 공통 ──────────────────────────────────── */
 .board-meta-bar {
   display: flex;
@@ -782,12 +794,11 @@
   gap: 0.5rem;
 }
 
-.gallery-grid img,
-.gallery-grid .gallery-item {
+/* gallery-item: CMS imageList <img> 를 감싸는 컨테이너 */
+.gallery-item {
   aspect-ratio: 1;
-  object-fit: cover;
+  overflow: hidden;
   border-radius: 0.375rem;
-  width: 100%;
   background-color: var(--surface-container);
   display: flex;
   align-items: center;
@@ -798,9 +809,21 @@
   transition: opacity var(--transition-base);
 }
 
-.gallery-grid img:hover,
-.gallery-grid .gallery-item:hover {
+.gallery-item:hover {
   opacity: 0.85;
+}
+
+/* CMS imageList에서 출력되는 실제 img 태그 */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
 }
 
 @media (max-width: 575px) {

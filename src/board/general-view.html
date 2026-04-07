@@ -1,167 +1,228 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="../">
-  <title>게시글 보기 — 개혁신학연구회</title>
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="assets/css/pretendard.css">
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/sub.css">
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/home/siiru/include/header.jsp" %>
+<%-- 레이아웃 상단 출력 --%>
+<c:if test="${headerUrl != null}"><jsp:include page="${headerUrl}" /></c:if>
+<div class="siiru-boardWrap">
+<%-- 게시판 상단 출력 --%>
+<c:if test="${not empty boardMaster.hderCn}">
+  <div class="siiru-clr"><jsp:include page="${hderCn}" /></div>
+</c:if>
 
-  <div data-include="include/header.html"></div>
+  <%-- 검색 정보 유지용 hidden form --%>
+  <form id="boardSearchForm" name="boardSearchForm" method="post" action="${path.sContext}boardList.do">
+    <input type="hidden" name="pageId" value="<c:out value="${param.pageId}" />">
+    <input type="hidden" id="movePage" name="movePage" value="<c:out value="${param.movePage}" />">
+    <input type="hidden" id="boardId" name="boardId" value="<c:out value="${param.boardId}" />">
+    <input type="hidden" id="searchCtgry" name="searchCtgry" value="<c:out value="${param.searchCtgry}" />">
+    <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="<c:out value="${param.searchCtgryNm}" />">
+    <c:if test="${not empty boardMaster.listDe}"><input type="hidden" id="searchBase" name="searchBase" value="<c:out value="${param.searchBase}" />"></c:if>
+    <input type="hidden" id="searchSDe" name="searchSDe" value="<c:out value="${param.searchSDe}" />">
+    <input type="hidden" id="searchEDe" name="searchEDe" value="<c:out value="${param.searchEDe}" />">
+    <input type="hidden" id="searchPrcs" name="searchPrcs" value="<c:out value="${param.searchPrcs}" />">
+    <input type="hidden" id="searchTy" name="searchTy" value="<c:out value="${param.searchTy}" />">
+    <input type="hidden" id="searchQuery" name="searchQuery" value="<c:out value="${param.searchQuery}" />">
+  </form>
 
-  <main id="main-content">
+  <form id="boardForm" name="boardForm" method="post">
+    <input type="hidden" id="seq" name="seq" value="<c:out value="${param.seq}" />">
 
-    <header class="page-hero">
-      <img src="assets/images/main_reformedts.jpg" alt="개혁신학연구회" class="hero-bg-img">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <!-- CMS: 게시판명 출력 -->
-        <h1 class="hero-title">공지사항</h1>
-        <div class="breadcrumb-custom">
-          <span>Home</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span class="active-item">연구회 소식</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span>공지사항</span>
-        </div>
+    <%-- 게시글 헤더: 제목 + 메타 --%>
+    <div class="post-header">
+      <h2 class="post-title<c:if test="${boardData.state eq 'D' || boardData.state eq 'A'}"> text-danger</c:if>">
+        <c:if test="${boardData.noticeAt eq 'Y'}"><span class="notice-badge me-2">NOTICE</span></c:if>
+        <c:if test="${boardData.secretAt eq 'Y'}"><i class="fas fa-lock small me-1 text-muted"></i></c:if>
+        <c:if test="${not empty boardData.ctgryNm && boardData.ctgryNm ne ''}">[<c:out value="${boardData.ctgryNm}" />]&nbsp;</c:if>
+        <c:if test="${not empty boardData.stateNm && boardData.stateNm ne ''}">[<c:out value="${boardData.stateNm}" />]&nbsp;</c:if>
+        <c:out value="${boardData.boardSj}" />
+      </h2>
+      <div class="post-meta">
+        <span><i class="fa-solid fa-user"></i> <c:out value="${boardData.userNm}" /></span>
+        <span><i class="fa-solid fa-calendar"></i> <c:out value="${boardData.regDt}" /></span>
+        <span><i class="fa-solid fa-eye"></i> <c:out value="${boardData.rdcnt}" /></span>
+        <c:if test="${not empty boardData.viewDate && boardData.viewDate ne ''}">
+          <span><i class="fa-solid fa-clock"></i> <c:out value="${boardData.viewDate}" /></span>
+        </c:if>
       </div>
-    </header>
+      <%-- 게시판 항목관리 추가 필드 --%>
+      <c:if test="${not empty boardItem && fn:length(boardItem) > 0}">
+      <div class="post-meta flex-wrap">
+        <c:forEach var="item" items="${boardItem}">
+          <span>
+            <strong><c:out value="${item.iemNm}" /> :</strong>
+            <c:out value="${item.val}" escapeXml="false" />
+          </span>
+        </c:forEach>
+      </div>
+      </c:if>
+    </div>
 
-    <div class="container py-5 my-lg-4">
-      <div class="row g-5">
+    <%-- 첨부파일 --%>
+    <c:if test="${boardMaster.fileAt eq 'Y' && (not empty boardFile && fn:length(boardFile) > 0)}">
+    <div class="post-attachments">
+      <h6><i class="fa-solid fa-paperclip me-1"></i> 첨부파일</h6>
+      <ul class="attach-list">
+        <c:forEach var="file" items="${boardFile}">
+        <li>
+          <a href="<c:out value="${file.fileUrl}" />">
+            <i class="fa-regular fa-file me-1"></i>
+            <c:out value="${file.fileNm}" />
+            <small class="text-muted ms-1">(<c:out value="${file.fileSizeStr}" default="0 bytes" /> / 다운로드 <c:out value="${file.dwldCnt}" />회)</small>
+          </a>
+          <c:if test="${boardMaster.prevewAt ne 'N' && file.filePreViewUrl ne ''}">
+            <a href="<c:out value="${file.filePreViewUrl}" />" class="btn btn-outline-secondary btn-sm ms-2 py-0" target="_blank">미리보기</a>
+          </c:if>
+        </li>
+        </c:forEach>
+      </ul>
+      <c:if test="${zipFile ne ''}">
+        <a href="<c:out value="${zipFile}" />" class="btn btn-outline-secondary btn-sm mt-2">
+          <i class="fa-solid fa-file-zipper me-1"></i>전체 다운로드
+        </a>
+      </c:if>
+    </div>
+    </c:if>
 
-        <!-- 사이드바 (CMS: 해당 섹션 메뉴 include) -->
-        <aside class="col-lg-3 d-none d-lg-block">
-          <div class="sticky-top" style="top:100px; z-index:10;">
-            <div class="sidebar-heading">
-              <h2>News</h2>
-              <small class="text-muted">연구회 소식</small>
-            </div>
-            <div class="list-group sidebar-nav">
-              <a class="list-group-item active" href="board/notice-list.html">
-                <span>공지사항</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/press-list.html">
-                <span>언론보도</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/member-news-list.html">
-                <span>회원동정</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/album-list.html">
-                <span>앨범</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-            </div>
-          </div>
-        </aside>
+    <%-- 본문 영역 --%>
+    <div class="post-content">
+      <%-- 문서 미리보기 --%>
+      <c:if test="${not empty previewList && fn:length(previewList) > 0 && boardMaster.prevewAt ne 'N'}">
+        <c:forEach var="preview" items="${previewList}">
+        <div class="mb-4">
+          <p class="text-muted small mb-1">
+            <c:choose>
+              <c:when test="${not empty preview.fileAlt && preview.fileAlt ne ''}"><c:out value="${preview.fileAlt}" escapeXml="false" /></c:when>
+              <c:otherwise><c:out value="${preview.fileNm}" /></c:otherwise>
+            </c:choose>
+          </p>
+          <iframe src="<c:out value="${preview.fileSrc}" escapeXml="false" />" class="w-100" style="min-height:500px; border:1px solid var(--border-color);"></iframe>
+        </div>
+        </c:forEach>
+      </c:if>
 
-        <section class="col-lg-9">
+      <%-- 이미지 첨부 --%>
+      <c:if test="${not empty imageList && fn:length(imageList) > 0}">
+      <div class="mb-4">
+        <c:forEach var="image" items="${imageList}">
+          <img src="<c:out value="${image.fileSrc}" />" alt="<c:out value="${image.fileImgAlt}" />" class="img-fluid mb-2">
+          <c:if test="${not empty image.fileAlt && image.fileAlt ne ''}">
+            <small class="d-block text-muted mb-3"><c:out value="${image.fileAlt}" escapeXml="false" /></small>
+          </c:if>
+        </c:forEach>
+      </div>
+      </c:if>
 
-          <!-- ── 게시글 헤더 ── -->
-          <div class="post-header">
-            <!-- CMS: 게시글 제목 -->
-            <h2 class="post-title">2025년 상반기 정기 학술 세미나 개최 안내</h2>
-            <div class="post-meta">
-              <span><i class="fa-solid fa-tag"></i> 공지</span>
-              <span><i class="fa-solid fa-user"></i> 관리자</span>
-              <span><i class="fa-solid fa-calendar"></i> 2025.03.10</span>
-              <span><i class="fa-solid fa-eye"></i> 조회 2,145</span>
-            </div>
-          </div>
+      <%-- 동영상 첨부 --%>
+      <c:if test="${not empty videoList && fn:length(videoList) > 0}">
+      <div class="mb-4">
+        <c:forEach var="video" items="${videoList}">
+          <video src="<c:out value="${video.fileSrc}" />" controls class="w-100 mb-2"></video>
+          <c:if test="${not empty video.fileAlt && video.fileAlt ne ''}">
+            <small class="d-block text-muted mb-3"><c:out value="${video.fileAlt}" escapeXml="false" /></small>
+          </c:if>
+        </c:forEach>
+      </div>
+      </c:if>
 
-          <!-- ── 본문 ── -->
-          <div class="post-content">
-            <p>개혁신학연구회 회원 여러분께 2025년 상반기 정기 학술 세미나 개최를 안내드립니다.</p>
+      <%-- 오디오 첨부 --%>
+      <c:if test="${not empty audioList && fn:length(audioList) > 0}">
+      <div class="mb-4">
+        <c:forEach var="audio" items="${audioList}">
+          <audio src="<c:out value="${audio.fileSrc}" />" controls class="w-100 mb-2"></audio>
+          <c:if test="${not empty audio.fileAlt && audio.fileAlt ne ''}">
+            <small class="d-block text-muted mb-3"><c:out value="${audio.fileAlt}" escapeXml="false" /></small>
+          </c:if>
+        </c:forEach>
+      </div>
+      </c:if>
 
-            <p><strong>주제:</strong> 칼빈 신학의 현대적 의의 — 개혁주의 신학의 과거와 현재</p>
+      <%-- 게시글 본문 --%>
+      <c:out value="${boardData.boardCn}" escapeXml="false" />
+    </div>
 
-            <ul>
-              <li><strong>일시:</strong> 2025년 5월 10일(토) 오전 10시 – 오후 5시</li>
-              <li><strong>장소:</strong> 총신대학교 신학대학원 강당</li>
-              <li><strong>대상:</strong> 회원 및 개혁주의 신학에 관심 있는 목회자·신학생</li>
-              <li><strong>등록비:</strong> 회원 무료 / 비회원 3만원 (중식 포함)</li>
-            </ul>
-
-            <p><strong>프로그램 일정</strong></p>
-            <ul>
-              <li>10:00 – 개회 예배 및 인사</li>
-              <li>10:30 – 기조 강연: 칼빈 신학의 성경적 기반 (윤재혁 교수)</li>
-              <li>11:30 – 발제 1: 칼빈의 교회론과 현대 교회 갱신 (임선호 교수)</li>
-              <li>13:00 – 중식 교제</li>
-              <li>14:00 – 발제 2: 칼빈 예정론의 목회적 의의 (강민준 목사)</li>
-              <li>15:00 – 발제 3: 칼빈 윤리학과 그리스도인의 삶 (오진석 목사)</li>
-              <li>16:00 – 종합 토론</li>
-              <li>17:00 – 폐회 기도</li>
-            </ul>
-
-            <p>참가 신청은 사무국 이메일(reformedts@gmail.com) 또는 전화(010-3604-8913)로 해 주시기 바랍니다.<br>
-            자리가 한정되어 있사오니 조속히 신청해 주시기 바랍니다.</p>
-
-            <p>개혁신학연구회 드림</p>
-          </div>
-
-          <!-- ── 첨부파일 ── -->
-          <div class="post-attachments">
-            <h6><i class="fa-solid fa-paperclip me-1"></i> 첨부파일</h6>
-            <ul class="attach-list">
-              <li>
-                <a href="#">
-                  <i class="fa-regular fa-file-pdf" style="color:#e74c3c;"></i>
-                  2025_상반기_세미나_안내문.pdf (1.2MB)
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa-regular fa-file-image" style="color:#3498db;"></i>
-                  세미나_포스터.jpg (450KB)
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- ── 목록·수정·삭제 버튼 ── -->
-          <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
-            <a href="board/notice-list.html" class="btn btn-outline-secondary btn-sm px-3">
-              <i class="fa-solid fa-list me-1"></i>목록
-            </a>
-            <div class="d-flex gap-2">
-              <a href="board/general-write.html" class="btn btn-gold btn-sm px-3">
-                <i class="fa-solid fa-pen me-1"></i>수정
-              </a>
-              <button class="btn btn-outline-danger btn-sm px-3" onclick="return confirm('삭제하시겠습니까?')">
-                <i class="fa-solid fa-trash me-1"></i>삭제
-              </button>
-            </div>
-          </div>
-
-          <!-- ── 이전/다음 글 ── -->
-          <div class="post-nav">
-            <a class="post-nav-item" href="board/general-view.html">
-              <span class="nav-dir"><i class="fa-solid fa-chevron-up me-1"></i>이전글</span>
-              <span class="post-nav-title">서철원 박사 전집 개정판 무료 배포 안내 (회원 대상)</span>
-            </a>
-            <a class="post-nav-item text-end" href="board/general-view.html">
-              <span class="nav-dir"><i class="fa-solid fa-chevron-down me-1"></i>다음글</span>
-              <span class="post-nav-title">신학 연구 윤리 강령 개정안 공고 및 의견 수렴</span>
-            </a>
-          </div>
-
-        </section>
+    <%-- 목록 / 수정 / 삭제 버튼 --%>
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+      <a href="<c:out value="${btn.listLink}" />" class="btn btn-outline-secondary btn-sm px-3">
+        <i class="fa-solid fa-list me-1"></i>목록
+      </a>
+      <div class="d-flex gap-2">
+        <c:if test="${btn.moveBtn eq 'Y'}">
+          <button class="moveBtn btn btn-outline-secondary btn-sm px-3" data-modal="#moveModal" type="button">이동</button>
+        </c:if>
+        <c:if test="${btn.replyBtn eq 'Y'}">
+          <a href="<c:out value="${btn.replyLink}" />" class="btn btn-outline-secondary btn-sm px-3">
+            <i class="fa-solid fa-reply me-1"></i>답글
+          </a>
+        </c:if>
+        <c:if test="${btn.updtBtn eq 'Y'}">
+          <a href="<c:out value="${btn.updtLink}" />" class="btn btn-gold btn-sm px-3">
+            <i class="fa-solid fa-pen me-1"></i>수정
+          </a>
+        </c:if>
+        <c:if test="${btn.delBtn eq 'Y'}">
+          <button class="delBtn btn btn-outline-danger btn-sm px-3" data-action="D" type="button">
+            <i class="fa-solid fa-trash me-1"></i>삭제
+          </button>
+        </c:if>
+        <c:if test="${btn.restrBtn eq 'Y'}">
+          <button class="restrBtn btn btn-outline-secondary btn-sm px-3" data-action="DR" type="button">복원</button>
+          <button class="realDelBtn btn btn-outline-danger btn-sm px-3" data-action="DD" type="button">완전삭제</button>
+        </c:if>
       </div>
     </div>
 
-  </main>
+    <%-- 관리자 이동 모달 --%>
+    <c:if test="${btn.moveBtn eq 'Y'}">
+    <div id="moveModal" class="siiruModal modal" style="display:none;">
+      <div class="siiruModalHeader"><p>게시글 이동</p></div>
+      <div class="siiruModalBody">
+        <div>
+          <input type="checkbox" id="removeAt" name="removeAt" value="Y" checked>
+          <label for="removeAt"><spring:message code="info.movedDelete" /></label>
+          <input type="text" id="boardTable-filter" name="boardTable-filter" placeholder="게시판 검색..." value="" style="display:inline-block;width:70%;">
+        </div>
+        <div id="board" class="boardFindView">
+          <div class="scroll-container">
+            <table id="boardTable"><caption><spring:message code="info.moveList" /></caption>
+              <tbody><tr><td class="nodata"><spring:message code="info.moveList.nodata" /></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="siiruModalFooter siiru-tr">
+        <span id="moveBoardView" class="moveBoard"></span>
+        <input type="hidden" id="moveBoardId" name="moveBoardId" value="">
+        <button class="moveSBtn siiru-btn siiru-btn-small siiru-btn-primary" data-action="M" type="button"><spring:message code="info.move" /></button>
+        <a href="#close" class="siiru-btn siiru-btn-small siiru-btn-danger siiru-ml5" rel="modal:close"><spring:message code="button.close" /></a>
+      </div>
+    </div>
+    </c:if>
 
-  <div data-include="include/footer.html"></div>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/sub.js"></script>
-</body>
-</html>
+    <%-- 댓글 영역 --%>
+    <c:if test="${boardMaster.comtAt eq 'Y'}">
+    <div class="siiruBoardComt mt-4">
+      <dl>
+        <dt>
+          <span><spring:message code="info.comment" /> (<small id="comtMCount">0</small>)</span>
+          <c:if test="${btn.comtBtn eq 'Y'}">
+            <button class="comtBtn siiru-btn siiru-btn-small siiru-btn-primary ms-2"
+              data-modal="#comtMModal" data-action="MI" type="button"><spring:message code="button.create" /></button>
+          </c:if>
+        </dt>
+        <dd>
+          <ul id="boardComtList" class="siiru-clr">
+            <li><p class="nodata"><spring:message code="info.comment.nodata" /></p></li>
+          </ul>
+        </dd>
+      </dl>
+    </div>
+    </c:if>
+
+  </form>
+
+<%-- 게시판 하단 출력 --%>
+<c:if test="${not empty boardMaster.fterCn}">
+  <div class="siiru-clr"><jsp:include page="${fterCn}" /></div>
+</c:if>
+</div>
+<%-- 레이아웃 하단 출력 --%>
+<c:if test="${footerUrl != null}"><jsp:include page="${footerUrl}" /></c:if>
+<%@ include file="/WEB-INF/jsp/home/siiru/include/footer.jsp" %>

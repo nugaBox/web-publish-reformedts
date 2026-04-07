@@ -58,7 +58,34 @@
           <th><span class="text-danger">*</span> <label for="boardSj"><c:out value="${boardFieldNm.boardSj}" /></label></th>
           <td>
             <input type="text" id="boardSj" name="boardSj" class="form-control" maxlength="200"
-              value="<c:out value="${boardData.boardSj}" />" placeholder="제목을 입력해 주세요.">
+              value="<c:out value="${boardData.boardSj}" />" placeholder="기사 제목을 입력해 주세요.">
+          </td>
+        </tr>
+
+        <%-- 출처 (etc2) --%>
+        <tr>
+          <th><label for="etc2">출처 <span class="small fw-normal text-muted">(매체명)</span></label></th>
+          <td>
+            <input type="text" id="etc2" name="etc2" class="form-control" maxlength="100"
+              value="<c:out value="${boardData.etc2}" />" placeholder="예: 기독일보, 국민일보" style="max-width:300px;">
+          </td>
+        </tr>
+
+        <%-- 게시일자 (etc3) --%>
+        <tr>
+          <th><label for="etc3">게시일자 <span class="small fw-normal text-muted">(보도일)</span></label></th>
+          <td>
+            <input type="text" id="etc3" name="etc3" class="form-control maskDate nothangul" maxlength="10"
+              value="<c:out value="${boardData.etc3}" />" placeholder="YYYY-MM-DD" style="max-width:160px;">
+          </td>
+        </tr>
+
+        <%-- 원문 링크 (etc1) --%>
+        <tr>
+          <th><label for="etc1">원문 링크</label></th>
+          <td>
+            <input type="text" id="etc1" name="etc1" class="form-control" maxlength="300"
+              value="<c:out value="${boardData.etc1}" />" placeholder="https://...">
           </td>
         </tr>
 
@@ -72,9 +99,11 @@
           </td>
         </tr>
 
-        <%-- 게시판 항목관리 커스텀 필드 --%>
+        <%-- 게시판 항목관리 커스텀 필드 (CMS에서 etc2/etc3 외 추가 설정 시) --%>
         <c:if test="${not empty boardItem && fn:length(boardItem) > 0}">
           <c:forEach var="item" items="${boardItem}">
+          <%-- etc1, etc2, etc3는 위에서 명시적으로 처리하므로 중복 방지 --%>
+          <c:if test="${item.iemId ne 'etc1' && item.iemId ne 'etc2' && item.iemId ne 'etc3'}">
           <tr id="cFocus_<c:out value="${item.iemId}" />">
             <th>
               <c:if test="${item.reqrdAt eq 'Y'}"><span class="text-danger">*</span> </c:if>
@@ -102,24 +131,26 @@
               </c:choose>
             </td>
           </tr>
+          </c:if>
           </c:forEach>
         </c:if>
 
-        <%-- 설명 (본문) --%>
+        <%-- 내용 / 요약 --%>
         <tr>
-          <th style="vertical-align:top; padding-top:1rem;">설명</th>
+          <th style="vertical-align:top; padding-top:1rem;">내용 요약</th>
           <td>
-            <textarea id="boardCn" name="boardCn" rows="6" class="form-control"
-              placeholder="사진에 대한 설명이나 행사 내용을 입력해 주세요."><c:out value="${boardData.boardCn}" /></textarea>
+            <textarea id="boardCn" name="boardCn" rows="8" class="form-control"
+              placeholder="기사 내용 요약 또는 본문을 입력해 주세요."><c:out value="${boardData.boardCn}" /></textarea>
           </td>
         </tr>
 
-        <%-- 사진 / 파일 업로드 (CMS 파일 첨부) --%>
+        <%-- 대표 이미지 / 파일 업로드 (CMS 파일 첨부) --%>
         <c:if test="${form.fileAt eq 'Y'}">
         <tr>
           <th style="vertical-align:top; padding-top:1rem;">
             <c:out value="${boardFieldNm.file}" />
-            <span class="d-block fw-normal small mt-1">
+            <span class="d-block fw-normal small mt-1 text-muted">대표 이미지 및 첨부</span>
+            <span class="d-block mt-1">
               <button class="fileAdd btn btn-outline-secondary btn-sm" type="button">+ 파일 추가</button>
             </span>
           </th>
@@ -141,24 +172,17 @@
               </div>
               <div class="file-upload-area mt-2" onclick="this.nextElementSibling.click()" style="cursor:pointer;">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
-                <p class="mt-2 mb-1 small">클릭하여 사진 / 파일 업로드</p>
-                <p class="small text-muted mb-0">JPG, PNG, GIF, PDF 등 (최대 10MB)</p>
+                <p class="mt-2 mb-1 small">클릭하여 대표 이미지 / 파일 업로드</p>
+                <p class="small text-muted mb-0">JPG, PNG, PDF 등 (최대 10MB)</p>
               </div>
               <input type="file" name="fileNm0" class="file d-none">
               <div class="d-flex gap-3 mt-2">
-                <div class="form-check">
-                  <input type="checkbox" id="insrtFile0" name="insrtChk[]" class="fileCheckbox form-check-input"
-                    data-input="insrt" value="Y"<c:if test="${boardFile.file.insrtAt eq 'Y'}"> checked</c:if>>
-                  <label class="form-check-label" for="insrtFile0">본문에 삽입</label>
-                </div>
                 <div class="form-check">
                   <input type="checkbox" id="thumbFile0" name="thumbChk[]" class="fileCheckbox form-check-input"
                     data-input="thumb" value="Y"<c:if test="${boardFile.file.thumbAt eq 'Y'}"> checked</c:if>>
                   <label class="form-check-label" for="thumbFile0">대표 썸네일로 사용</label>
                 </div>
               </div>
-              <textarea name="fileAlt[]" rows="2" class="form-control mt-2"
-                placeholder="파일 설명 (이미지 alt 텍스트)"><c:out value="${boardFile.file.fileAlt}" /></textarea>
             </div>
             <div id="fileForm">
               <c:if test="${not empty boardFile.fileList && fn:length(boardFile.fileList) > 0}">
@@ -179,22 +203,12 @@
                     <label for="delFile${status.index+1}" class="form-check-label ms-1">삭제</label>
                   </div>
                   <input type="file" name="fileNm${status.index+1}" class="file form-control mt-2">
-                  <div class="d-flex gap-3 mt-1">
-                    <div class="form-check">
-                      <input type="checkbox" id="insrtFile${status.index+1}" name="insrtChk[]"
-                        class="fileCheckbox form-check-input" data-input="insrt" value="Y"
-                        <c:if test="${file.insrtAt eq 'Y'}">checked</c:if>>
-                      <label class="form-check-label" for="insrtFile${status.index+1}">본문에 삽입</label>
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" id="thumbFile${status.index+1}" name="thumbChk[]"
-                        class="fileCheckbox form-check-input" data-input="thumb" value="Y"
-                        <c:if test="${file.thumbAt eq 'Y'}">checked</c:if>>
-                      <label class="form-check-label" for="thumbFile${status.index+1}">대표 썸네일</label>
-                    </div>
+                  <div class="form-check mt-1">
+                    <input type="checkbox" id="thumbFile${status.index+1}" name="thumbChk[]"
+                      class="fileCheckbox form-check-input" data-input="thumb" value="Y"
+                      <c:if test="${file.thumbAt eq 'Y'}">checked</c:if>>
+                    <label class="form-check-label" for="thumbFile${status.index+1}">대표 썸네일</label>
                   </div>
-                  <textarea name="fileAlt[]" rows="2" class="form-control mt-1"
-                    placeholder="파일 설명"><c:out value="${file.fileAlt}" /></textarea>
                 </div>
                 </c:forEach>
               </c:if>
@@ -251,9 +265,7 @@ function board() {
       + '<input type="hidden" name="fileDelAt[]" value="N">'
       + '<input type="hidden" name="fileDelChk[]" value="">'
       + '<input type="file" name="fileNm'+n+'" class="file form-control">'
-      + '<div class="d-flex gap-3 mt-1"><div class="form-check"><input type="checkbox" id="insrtFile'+n+'" name="insrtChk[]" data-input="insrt" class="fileCheckbox form-check-input" value="Y"><label class="form-check-label" for="insrtFile'+n+'">본문에 삽입</label></div>'
-      + '<div class="form-check"><input type="checkbox" id="thumbFile'+n+'" name="thumbChk[]" data-input="thumb" class="fileCheckbox form-check-input" value="Y"><label class="form-check-label" for="thumbFile'+n+'">대표 썸네일</label></div></div>'
-      + '<textarea name="fileAlt[]" rows="2" class="form-control mt-1" placeholder="파일 설명"></textarea>'
+      + '<div class="form-check mt-1"><input type="checkbox" id="thumbFile'+n+'" name="thumbChk[]" data-input="thumb" class="fileCheckbox form-check-input" value="Y"><label class="form-check-label" for="thumbFile'+n+'">대표 썸네일</label></div>'
       + '</div>';
     $('#fileForm').append(html);
   });

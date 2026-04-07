@@ -1,192 +1,134 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="../">
-  <title>앨범 — 개혁신학연구회</title>
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="assets/css/pretendard.css">
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/sub.css">
-</head>
-<body>
+<%-- 뷰페이지에서 목록 출력일 경우. 상단부분을 제거하기 위한 조건. 시작 --%>
+<c:if test="${listView eq 'N'}">
+<%@ include file="/WEB-INF/jsp/home/siiru/include/header.jsp" %>
+<%-- 레이아웃 상단 출력 --%>
+<c:if test="${headerUrl != null}"><jsp:include page="${headerUrl}" /></c:if>
+<div class="siiru-boardWrap">
+<%-- 게시판 상단 출력 --%>
+<c:if test="${not empty boardMaster.hderCn}">
+  <div class="siiru-clr"><jsp:include page="${hderCn}" /></div>
+</c:if>
+<%-- 게시판 검색 폼 (hidden · JS로 페이징/검색 제출) --%>
+<form id="boardSearchForm" name="boardSearchForm" method="post" action="<c:out value="${path.sContext}" />boardList.do" style="display:none;">
+  <input type="hidden" name="pageId" value="<c:out value="${param.pageId}" />">
+  <input type="hidden" id="movePage" name="movePage" value="<c:out value="${page}" default="1" />">
+  <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="<c:out value="${param.searchCtgryNm}" />">
+  <c:if test="${not empty boardMaster.listDe}"><input type="hidden" id="searchBase" name="searchBase" value="<c:out value="${param.searchBase}" />"></c:if>
+  <input type="hidden" id="boardId" name="boardId" value="<c:out value="${param.boardId}" />">
+  <input type="hidden" id="searchTy" name="searchTy" value="<c:out value="${param.searchTy}" />">
+  <input type="hidden" id="searchQuery" name="searchQuery" value="<c:out value="${param.searchQuery}" />">
+</form>
+</c:if>
+<%-- 뷰페이지에서 목록 출력일 경우. 상단부분을 제거하기 위한 조건. 끝 --%>
 
-  <div data-include="include/header.html"></div>
-
-  <main id="main-content">
-
-    <header class="page-hero">
-      <img src="assets/images/main_reformedts.jpg" alt="개혁신학연구회" class="hero-bg-img">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">앨범</h1>
-        <div class="breadcrumb-custom">
-          <span>Home</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span class="active-item">연구회 소식</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span>앨범</span>
-        </div>
+  <%-- 목록 상단: 제목 + 검색 + 글쓰기 --%>
+  <div class="content-title-area d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <h3>
+      <c:out value="${boardMaster.boardNm}" />
+      <small class="text-muted fw-normal ms-2 fs-6">Total <fmt:formatNumber value="${totalCnt}" pattern="#,###" /></small>
+    </h3>
+    <div class="d-flex gap-2 align-items-center flex-wrap">
+      <div class="search-container">
+        <input type="text" class="form-control" id="searchQueryInput" placeholder="검색어 입력"
+          value="<c:out value="${param.searchQuery}" default="" />">
+        <button type="button" class="border-0 bg-transparent" onclick="doSearch()">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
-    </header>
-
-    <div class="container py-5 my-lg-4">
-      <div class="row g-5">
-
-        <aside class="col-lg-3 d-none d-lg-block">
-          <div class="sticky-top" style="top:100px; z-index:10;">
-            <div class="sidebar-heading">
-              <h2>News</h2>
-              <small class="text-muted">연구회 소식</small>
-            </div>
-            <div class="list-group sidebar-nav">
-              <a class="list-group-item" href="board/notice-list.html">
-                <span>공지사항</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/press-list.html">
-                <span>언론보도</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/member-news-list.html">
-                <span>회원동정</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item active" href="board/album-list.html">
-                <span>앨범</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-            </div>
-            <div class="info-box">
-              <h6>사진 제공 안내</h6>
-              <p>행사 사진 업로드를 원하시면 사무국으로 원본 파일을 보내 주세요.</p>
-            </div>
-          </div>
-        </aside>
-
-        <section class="col-lg-9">
-
-          <div class="content-title-area d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <h3>앨범 <small class="text-muted fw-normal ms-2 fs-6">Total 24</small></h3>
-            <div class="d-flex gap-2 align-items-center flex-wrap">
-              <div class="search-container">
-                <input class="form-control" type="text" placeholder="검색어 입력">
-                <i class="fas fa-search"></i>
-              </div>
-              <a href="board/media-write.html" class="btn btn-gold btn-sm px-3 py-2">
-                <i class="fa-solid fa-pen me-1"></i>글쓰기
-              </a>
-            </div>
-          </div>
-
-          <!-- ── 앨범 멀티미디어 그리드 ──
-               CMS 설정:
-               · data-per-page="6"  — 한 페이지 노출 개수 (기본 6 = 3열×2행)
-               · style="--media-cols:3" — 열 수 (기본 3)
-          -->
-          <div class="media-grid" data-per-page="6" style="--media-cols:3;">
-
-            <a href="board/media-view.html" class="media-card">
-              <div class="media-card-thumb">
-                <!-- 썸네일: <img src="assets/images/album/2025-seminar.jpg" alt=""> -->
-                <div class="media-card-thumb-placeholder">
-                  <i class="fa-regular fa-images"></i>
-                </div>
-                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>18</span>
-              </div>
-              <div class="media-card-body">
-                <p class="media-card-title">2025 상반기 정기 세미나</p>
-                <p class="media-card-meta">2025.03.12</p>
-              </div>
-            </a>
-
-            <a href="board/media-view.html" class="media-card">
-              <div class="media-card-thumb">
-                <div class="media-card-thumb-placeholder">
-                  <i class="fa-regular fa-images"></i>
-                </div>
-                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>32</span>
-              </div>
-              <div class="media-card-body">
-                <p class="media-card-title">서철원 박사 전집 개정판 출판 기념회</p>
-                <p class="media-card-meta">2025.02.18</p>
-              </div>
-            </a>
-
-            <a href="board/media-view.html" class="media-card">
-              <div class="media-card-thumb">
-                <div class="media-card-thumb-placeholder">
-                  <i class="fa-regular fa-images"></i>
-                </div>
-                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>25</span>
-              </div>
-              <div class="media-card-body">
-                <p class="media-card-title">2024 하반기 정기 세미나 — 종말론</p>
-                <p class="media-card-meta">2024.10.26</p>
-              </div>
-            </a>
-
-            <a href="board/media-view.html" class="media-card">
-              <div class="media-card-thumb">
-                <div class="media-card-thumb-placeholder">
-                  <i class="fa-regular fa-images"></i>
-                </div>
-                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>45</span>
-              </div>
-              <div class="media-card-body">
-                <p class="media-card-title">제4회 개혁신학 학술대회</p>
-                <p class="media-card-meta">2024.09.07</p>
-              </div>
-            </a>
-
-            <a href="board/media-view.html" class="media-card">
-              <div class="media-card-thumb">
-                <div class="media-card-thumb-placeholder">
-                  <i class="fa-regular fa-images"></i>
-                </div>
-                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>14</span>
-              </div>
-              <div class="media-card-body">
-                <p class="media-card-title">2024 상반기 정기 세미나 — 성경 무오성</p>
-                <p class="media-card-meta">2024.05.18</p>
-              </div>
-            </a>
-
-            <a href="board/media-view.html" class="media-card">
-              <div class="media-card-thumb">
-                <div class="media-card-thumb-placeholder">
-                  <i class="fa-regular fa-images"></i>
-                </div>
-                <span class="media-count-badge"><i class="fa-solid fa-image me-1"></i>22</span>
-              </div>
-              <div class="media-card-body">
-                <p class="media-card-title">목회자 특강 — 개혁주의 설교의 원리</p>
-                <p class="media-card-meta">2024.03.09</p>
-              </div>
-            </a>
-
-          </div><!-- /.media-grid -->
-
-          <nav class="mt-5" aria-label="페이지 이동">
-            <ul class="pagination justify-content-center">
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angles-left small"></i></a></li>
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left small"></i></a></li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right small"></i></a></li>
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angles-right small"></i></a></li>
-            </ul>
-          </nav>
-
-        </section>
-      </div>
+      <c:if test="${wrtBtn eq 'Y'}">
+        <a href="<c:out value="${wrtLink}" />" class="btn btn-gold btn-sm px-3 py-2">
+          <i class="fa-solid fa-pen me-1"></i>글쓰기
+        </a>
+      </c:if>
     </div>
+  </div>
 
-  </main>
+  <%-- 갤러리 그리드 --%>
+  <div class="media-grid" style="--media-cols:3;">
+  <c:choose>
+    <%-- 게시글 없음 --%>
+    <c:when test="${empty boardList || fn:length(boardList) == 0}">
+      <p class="text-center py-5 text-muted w-100"><spring:message code="info.nodata" /></p>
+    </c:when>
+    <%-- 게시글 있음 --%>
+    <c:otherwise>
+      <c:forEach var="listData" items="${boardList}" varStatus="status">
+      <c:choose>
+        <c:when test="${boardAuth.viewAuth eq 'Y'}">
+          <a href="<c:out value="${listData.href}" />" data-view="G" data-seq="<c:out value="${listData.seq}" />"
+            class="media-card<c:if test="${listData.delDt eq 'Y'}"> throughline</c:if>">
+        </c:when>
+        <c:otherwise>
+          <div class="media-card<c:if test="${listData.delDt eq 'Y'}"> throughline</c:if>">
+        </c:otherwise>
+      </c:choose>
+        <div class="media-card-thumb">
+          <c:choose>
+            <c:when test="${not empty listData.thumb && listData.thumb ne ''}">
+              <img src="<c:out value="${listData.thumb}" />" alt="<c:out value="${listData.thumbAlt}" />">
+            </c:when>
+            <c:otherwise>
+              <div class="media-card-thumb-placeholder">
+                <i class="fa-regular fa-images"></i>
+              </div>
+            </c:otherwise>
+          </c:choose>
+          <%-- 이미지 수 배지 (imageList 수) --%>
+          <c:if test="${not empty listData.imgCnt && listData.imgCnt ne '0'}">
+            <span class="media-count-badge">
+              <i class="fa-solid fa-image me-1"></i><c:out value="${listData.imgCnt}" />
+            </span>
+          </c:if>
+        </div>
+        <div class="media-card-body">
+          <p class="media-card-title<c:if test="${listData.newAt eq 'Y'}"> new</c:if>">
+            <c:if test="${not empty listData.ctgryNm}">[<c:out value="${listData.ctgryNm}" />]&nbsp;</c:if>
+            <c:out value="${listData.boardSj}" />
+          </p>
+          <p class="media-card-meta"><c:out value="${listData.regDt}" /></p>
+        </div>
+      <c:choose>
+        <c:when test="${boardAuth.viewAuth eq 'Y'}"></a></c:when>
+        <c:otherwise></div></c:otherwise>
+      </c:choose>
+      </c:forEach>
+    </c:otherwise>
+  </c:choose>
+  </div>
 
-  <div data-include="include/footer.html"></div>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/sub.js"></script>
-</body>
-</html>
+  <%-- 페이징 (CMS JS 자동 생성) --%>
+  <div id="boardPage" class="mt-4">
+    <div class="pagination justify-content-center"></div>
+  </div>
+
+<%-- 뷰페이지에서 목록 출력일 경우. 하단부분을 제거하기 위한 조건. 시작 --%>
+<c:if test="${listView eq 'N'}">
+<c:if test="${not empty boardMaster.fterCn}">
+  <div class="siiru-clr"><jsp:include page="${fterCn}" /></div>
+</c:if>
+</div>
+<script>
+if (window.addEventListener) window.addEventListener("load", boardList, false);
+else if (window.attachEvent) window.attachEvent("onload", boardList);
+else window.onload = boardList;
+function boardList() {
+  window.doSearch = function() {
+    $('#boardSearchForm #searchQuery').val($('#searchQueryInput').val());
+    $('#boardSearchForm #movePage').val('1');
+    $('#boardSearchForm').submit();
+  };
+  $('#searchQueryInput').on('keypress', function(e) {
+    if (e.which === 13) doSearch();
+  });
+  pagination('boardPage', ${page}, ${pageCnt}, ${totalCnt});
+  $('.pagination').on('click', 'li a', function(e) {
+    e.preventDefault();
+    $('#boardSearchForm #movePage').val($(this).data('move'));
+    $('#boardSearchForm').submit();
+  });
+}
+</script>
+<c:if test="${footerUrl != null}"><jsp:include page="${footerUrl}" /></c:if>
+<%@ include file="/WEB-INF/jsp/home/siiru/include/footer.jsp" %>
+</c:if>
+<%-- 뷰페이지에서 목록 출력일 경우. 하단부분을 제거하기 위한 조건. 끝 --%>

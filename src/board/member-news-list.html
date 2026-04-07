@@ -1,184 +1,184 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="../">
-  <title>회원동정 — 개혁신학연구회</title>
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="assets/css/pretendard.css">
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/sub.css">
-</head>
-<body>
+<%-- 뷰페이지에서 목록 출력일 경우. 상단부분을 제거하기 위한 조건. 시작 --%>
+<c:if test="${listView eq 'N'}">
+<%@ include file="/WEB-INF/jsp/home/siiru/include/header.jsp" %>
+<%-- 레이아웃 상단 출력 --%>
+<c:if test="${headerUrl != null}"><jsp:include page="${headerUrl}" /></c:if>
+<div class="siiru-boardWrap">
+<%-- 게시판 상단 출력 --%>
+<c:if test="${not empty boardMaster.hderCn}">
+  <div class="siiru-clr"><jsp:include page="${hderCn}" /></div>
+</c:if>
+<%-- 게시판 검색 폼 (hidden · JS로 페이징/검색 제출) --%>
+<form id="boardSearchForm" name="boardSearchForm" method="post" action="<c:out value="${path.sContext}" />boardList.do" style="display:none;">
+  <input type="hidden" name="pageId" value="<c:out value="${param.pageId}" />">
+  <input type="hidden" id="movePage" name="movePage" value="<c:out value="${page}" default="1" />">
+  <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="<c:out value="${param.searchCtgryNm}" />">
+  <c:if test="${not empty boardMaster.listDe}"><input type="hidden" id="searchBase" name="searchBase" value="<c:out value="${param.searchBase}" />"></c:if>
+  <input type="hidden" id="boardId" name="boardId" value="<c:out value="${param.boardId}" />">
+  <input type="hidden" id="searchTy" name="searchTy" value="<c:out value="${param.searchTy}" />">
+  <input type="hidden" id="searchQuery" name="searchQuery" value="<c:out value="${param.searchQuery}" />">
+  <input type="hidden" id="searchDateSet" name="searchDateSet" value="<c:out value="${param.searchDateSet}" />">
+  <input type="hidden" id="searchSDe" name="searchSDe" value="<c:out value="${param.searchSDe}" />">
+  <input type="hidden" id="searchEDe" name="searchEDe" value="<c:out value="${param.searchEDe}" />">
+  <c:if test="${boardMaster.ctgryAt eq 'Y'}">
+    <input type="hidden" id="searchCtgry" name="searchCtgry" value="<c:out value="${param.searchCtgry}" />">
+  </c:if>
+</form>
+</c:if>
+<%-- 뷰페이지에서 목록 출력일 경우. 상단부분을 제거하기 위한 조건. 끝 --%>
 
-  <div data-include="include/header.html"></div>
-
-  <main id="main-content">
-
-    <header class="page-hero">
-      <img src="assets/images/main_reformedts.jpg" alt="개혁신학연구회" class="hero-bg-img">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">회원동정</h1>
-        <div class="breadcrumb-custom">
-          <span>Home</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span class="active-item">연구회 소식</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span>회원동정</span>
-        </div>
+  <%-- 목록 상단: 제목 + 검색 + 글쓰기 --%>
+  <div class="content-title-area d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <h3>
+      <c:out value="${boardMaster.boardNm}" />
+      <small class="text-muted fw-normal ms-2 fs-6">Total <fmt:formatNumber value="${totalCnt}" pattern="#,###" /></small>
+    </h3>
+    <div class="d-flex gap-2 align-items-center flex-wrap">
+      <div class="search-container">
+        <input type="text" class="form-control" id="searchQueryInput" placeholder="검색어 입력"
+          value="<c:out value="${param.searchQuery}" default="" />">
+        <button type="button" class="border-0 bg-transparent" onclick="doSearch()">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
-    </header>
-
-    <div class="container py-5 my-lg-4">
-      <div class="row g-5">
-
-        <aside class="col-lg-3 d-none d-lg-block">
-          <div class="sticky-top" style="top:100px; z-index:10;">
-            <div class="sidebar-heading">
-              <h2>News</h2>
-              <small class="text-muted">연구회 소식</small>
-            </div>
-            <div class="list-group sidebar-nav">
-              <a class="list-group-item" href="board/notice-list.html">
-                <span>공지사항</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/press-list.html">
-                <span>언론보도</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item active" href="board/member-news-list.html">
-                <span>회원동정</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/album-list.html">
-                <span>앨범</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-            </div>
-            <div class="info-box">
-              <h6>동정 소식 제보</h6>
-              <p>회원님의 목회·학술 활동 소식을 사무국으로 알려 주시면 게재해 드립니다.</p>
-            </div>
-          </div>
-        </aside>
-
-        <section class="col-lg-9">
-
-          <div class="content-title-area d-flex justify-content-between align-items-center flex-wrap gap-3">
-            <h3>회원동정 <small class="text-muted fw-normal ms-2 fs-6">Total 56</small></h3>
-            <div class="d-flex gap-2 align-items-center flex-wrap">
-              <div class="search-container">
-                <input class="form-control" type="text" placeholder="검색어 입력">
-                <i class="fas fa-search"></i>
-              </div>
-              <a href="board/general-write.html" class="btn btn-gold btn-sm px-3 py-2">
-                <i class="fa-solid fa-pen me-1"></i>글쓰기
-              </a>
-            </div>
-          </div>
-
-          <div class="notice-header d-none d-md-grid"
-            style="grid-template-columns: 80px 1fr 100px 120px 80px;">
-            <div class="text-center">번호</div>
-            <div>제목</div>
-            <div class="text-center">작성자</div>
-            <div class="text-center">작성일</div>
-            <div class="text-center">조회</div>
-          </div>
-
-          <div class="notice-list">
-
-            <div class="notice-item d-grid align-items-center"
-              style="grid-template-columns: 80px 1fr 100px 120px 80px;">
-              <div class="text-center notice-info d-none d-md-block">56</div>
-              <div class="pe-3">
-                <a href="board/general-view.html" class="text-decoration-none">
-                  <p class="notice-title">홍길동 목사, 총신대학교 신학대학원 특강 강사 위촉</p>
-                </a>
-                <div class="d-md-none notice-info mt-1">관리자 | 2025.03.12</div>
-              </div>
-              <div class="text-center notice-info d-none d-md-block">관리자</div>
-              <div class="text-center notice-info d-none d-md-block">2025.03.12</div>
-              <div class="text-center notice-info d-none d-md-block">312</div>
-            </div>
-
-            <div class="notice-item d-grid align-items-center"
-              style="grid-template-columns: 80px 1fr 100px 120px 80px;">
-              <div class="text-center notice-info d-none d-md-block">55</div>
-              <div class="pe-3">
-                <a href="board/general-view.html" class="text-decoration-none">
-                  <p class="notice-title">김철수 목사, 고신대학교 신학세미나 주제 강연</p>
-                </a>
-              </div>
-              <div class="text-center notice-info d-none d-md-block">관리자</div>
-              <div class="text-center notice-info d-none d-md-block">2025.03.05</div>
-              <div class="text-center notice-info d-none d-md-block">187</div>
-            </div>
-
-            <div class="notice-item d-grid align-items-center"
-              style="grid-template-columns: 80px 1fr 100px 120px 80px;">
-              <div class="text-center notice-info d-none d-md-block">54</div>
-              <div class="pe-3">
-                <a href="board/general-view.html" class="text-decoration-none">
-                  <p class="notice-title">윤재혁 교수, 개혁신학 관련 논문 한국신학논총 게재</p>
-                </a>
-              </div>
-              <div class="text-center notice-info d-none d-md-block">관리자</div>
-              <div class="text-center notice-info d-none d-md-block">2025.02.25</div>
-              <div class="text-center notice-info d-none d-md-block">245</div>
-            </div>
-
-            <div class="notice-item d-grid align-items-center"
-              style="grid-template-columns: 80px 1fr 100px 120px 80px;">
-              <div class="text-center notice-info d-none d-md-block">53</div>
-              <div class="pe-3">
-                <a href="board/general-view.html" class="text-decoration-none">
-                  <p class="notice-title">이영수 목사, 대구 지역 신학생 멘토링 프로그램 운영</p>
-                </a>
-              </div>
-              <div class="text-center notice-info d-none d-md-block">관리자</div>
-              <div class="text-center notice-info d-none d-md-block">2025.02.18</div>
-              <div class="text-center notice-info d-none d-md-block">178</div>
-            </div>
-
-            <div class="notice-item d-grid align-items-center"
-              style="grid-template-columns: 80px 1fr 100px 120px 80px;">
-              <div class="text-center notice-info d-none d-md-block">52</div>
-              <div class="pe-3">
-                <a href="board/general-view.html" class="text-decoration-none">
-                  <p class="notice-title">정준호 목사, 광주 지역 교역자 수련회 강사 봉사</p>
-                </a>
-              </div>
-              <div class="text-center notice-info d-none d-md-block">관리자</div>
-              <div class="text-center notice-info d-none d-md-block">2025.02.10</div>
-              <div class="text-center notice-info d-none d-md-block">134</div>
-            </div>
-
-          </div>
-
-          <nav class="mt-5" aria-label="페이지 이동">
-            <ul class="pagination justify-content-center">
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angles-left small"></i></a></li>
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left small"></i></a></li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-right small"></i></a></li>
-              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angles-right small"></i></a></li>
-            </ul>
-          </nav>
-
-        </section>
-      </div>
+      <c:if test="${wrtBtn eq 'Y'}">
+        <a href="<c:out value="${wrtLink}" />" class="btn btn-gold btn-sm px-3 py-2">
+          <i class="fa-solid fa-pen me-1"></i>글쓰기
+        </a>
+      </c:if>
     </div>
+  </div>
 
-  </main>
+  <%-- 목록 헤더 (데스크탑) --%>
+  <div class="notice-header d-none d-md-grid" style="grid-template-columns: 80px 1fr 110px 120px 70px;">
+    <div class="text-center">번호</div>
+    <div>제목</div>
+    <div class="text-center">작성자</div>
+    <div class="text-center">작성일</div>
+    <div class="text-center">조회</div>
+  </div>
 
-  <div data-include="include/footer.html"></div>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/sub.js"></script>
-</body>
-</html>
+  <%-- 게시글 목록 --%>
+  <div class="notice-list">
+  <c:choose>
+    <%-- 게시글 없음 --%>
+    <c:when test="${empty boardList || fn:length(boardList) == 0}">
+      <div class="notice-item text-center py-5 text-muted" style="display:block;">
+        <spring:message code="info.nodata" />
+      </div>
+    </c:when>
+    <%-- 게시글 있음 --%>
+    <c:otherwise>
+      <c:forEach var="listData" items="${boardList}" varStatus="status">
+      <div class="notice-item<c:if test="${listData.noticeAt eq 'Y'}"> sticky</c:if><c:if test="${listData.delDt eq 'Y'}"> throughline</c:if> d-grid align-items-center"
+        style="grid-template-columns: 80px 1fr 110px 120px 70px;">
+
+        <%-- 번호 / 공지 뱃지 --%>
+        <div class="text-center notice-info d-none d-md-block">
+          <c:choose>
+            <c:when test="${listData.noticeAt eq 'Y'}">
+              <span class="notice-badge">NOTICE</span>
+            </c:when>
+            <c:otherwise>
+              <c:out value="${listData.sn}" />
+            </c:otherwise>
+          </c:choose>
+        </div>
+
+        <%-- 제목 --%>
+        <div class="pe-3 d-flex align-items-center gap-2">
+          <c:choose>
+            <c:when test="${boardAuth.viewAuth eq 'Y'}">
+              <a href="<c:out value="${listData.href}" />" data-view="L" data-seq="<c:out value="${listData.seq}" />"
+                class="text-decoration-none flex-grow-1">
+                <p class="notice-title mb-0<c:if test="${listData.newAt eq 'Y'}"> new</c:if>">
+                  <c:if test="${listData.levelSn > 1}">
+                    <c:forEach begin="2" end="${listData.levelSn}" step="1"><span class="reply-indent"></span></c:forEach>
+                    <i class="fa-solid fa-reply fa-flip-horizontal small me-1 text-muted"></i>
+                  </c:if>
+                  <c:if test="${not empty listData.ctgryNm}">[<c:out value="${listData.ctgryNm}" />]&nbsp;</c:if>
+                  <c:if test="${not empty listData.stateNm && listData.stateNm ne ''}">[<c:out value="${listData.stateNm}" />]&nbsp;</c:if>
+                  <c:out value="${listData.boardSj}" />
+                  <c:if test="${listData.comtCnt ne ''}">
+                    <small class="text-muted"> [<c:out value="${listData.comtCnt}" />]</small>
+                  </c:if>
+                </p>
+                <div class="d-md-none notice-info mt-1 small">
+                  <c:out value="${listData.userNm}" /> | <c:out value="${listData.regDt}" />
+                </div>
+              </a>
+            </c:when>
+            <c:otherwise>
+              <p class="notice-title mb-0 flex-grow-1">
+                <c:out value="${listData.boardSj}" />
+              </p>
+            </c:otherwise>
+          </c:choose>
+          <c:if test="${listData.secretAt eq 'Y'}">
+            <i class="fas fa-lock notice-info small flex-shrink-0"></i>
+          </c:if>
+          <c:if test="${listData.fileNm ne ''}">
+            <i class="fas fa-paperclip notice-info small flex-shrink-0"></i>
+          </c:if>
+        </div>
+
+        <%-- 작성자 --%>
+        <div class="text-center notice-info d-none d-md-block">
+          <c:out value="${listData.userNm}" />
+        </div>
+
+        <%-- 작성일 --%>
+        <div class="text-center notice-info d-none d-md-block">
+          <c:out value="${listData.regDt}" />
+        </div>
+
+        <%-- 조회수 --%>
+        <div class="text-center notice-info d-none d-md-block">
+          <c:out value="${listData.rdcnt}" />
+        </div>
+
+      </div>
+      </c:forEach>
+    </c:otherwise>
+  </c:choose>
+  </div>
+
+  <%-- 페이징 (CMS JS 자동 생성) --%>
+  <div id="boardPage" class="mt-4">
+    <div class="pagination justify-content-center"></div>
+  </div>
+
+<%-- 뷰페이지에서 목록 출력일 경우. 하단부분을 제거하기 위한 조건. 시작 --%>
+<c:if test="${listView eq 'N'}">
+<c:if test="${not empty boardMaster.fterCn}">
+  <div class="siiru-clr"><jsp:include page="${fterCn}" /></div>
+</c:if>
+</div>
+<script>
+if (window.addEventListener) window.addEventListener("load", boardList, false);
+else if (window.attachEvent) window.attachEvent("onload", boardList);
+else window.onload = boardList;
+function boardList() {
+  // 검색 실행
+  window.doSearch = function() {
+    $('#boardSearchForm #searchQuery').val($('#searchQueryInput').val());
+    $('#boardSearchForm #movePage').val('1');
+    $('#boardSearchForm').submit();
+  };
+  $('#searchQueryInput').on('keypress', function(e) {
+    if (e.which === 13) doSearch();
+  });
+  // 페이징 표출 [레이어ID, 현재페이지, 전체페이지수, 전체건수]
+  pagination('boardPage', ${page}, ${pageCnt}, ${totalCnt});
+  // 페이징 버튼 클릭
+  $('.pagination').on('click', 'li a', function(e) {
+    e.preventDefault();
+    $('#boardSearchForm #movePage').val($(this).data('move'));
+    $('#boardSearchForm').submit();
+  });
+}
+</script>
+<c:if test="${footerUrl != null}"><jsp:include page="${footerUrl}" /></c:if>
+<%@ include file="/WEB-INF/jsp/home/siiru/include/footer.jsp" %>
+</c:if>
+<%-- 뷰페이지에서 목록 출력일 경우. 하단부분을 제거하기 위한 조건. 끝 --%>

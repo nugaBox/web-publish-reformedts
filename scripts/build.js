@@ -141,7 +141,7 @@ const topmenuPath = path.join(DIST, "include", "topmenu.html");
 fs.writeFileSync(topmenuPath, generateTopmenu(menuData), "utf-8");
 console.log("✅  include/topmenu.html — menuData 기반으로 생성");
 
-// 3. HTML 처리: include 인라인 + 이미지 경로 치환
+// 3. HTML 처리: include 인라인 + 이미지 경로 치환 (루트 HTML)
 const htmlFiles = fs.readdirSync(DIST).filter((f) => f.endsWith(".html"));
 
 for (const file of htmlFiles) {
@@ -153,6 +153,27 @@ for (const file of htmlFiles) {
 
   fs.writeFileSync(filePath, html, "utf-8");
   console.log(`✅  ${file} — include 인라인, 이미지 경로 치환 (→ ${CMS.imgHtml})`);
+}
+
+// 3-1. board/ 서브디렉토리 HTML 처리: 이미지 경로 치환만 수행
+//      (JSP include 사용으로 data-include 인라인 불필요)
+const boardDir = path.join(DIST, "board");
+if (fs.existsSync(boardDir)) {
+  const boardHtmlFiles = fs.readdirSync(boardDir).filter((f) => f.endsWith(".html"));
+
+  for (const file of boardHtmlFiles) {
+    const filePath = path.join(boardDir, file);
+    let html = fs.readFileSync(filePath, "utf-8");
+    const before = html;
+
+    html = replaceImgPathsHtml(html);
+
+    if (html !== before) {
+      fs.writeFileSync(filePath, html, "utf-8");
+      console.log(`✅  board/${file} — 이미지 경로 치환 (→ ${CMS.imgHtml})`);
+    }
+  }
+  console.log(`✅  board/ — ${boardHtmlFiles.length}개 HTML 파일 처리 완료`);
 }
 
 // 4. CSS 처리: 웹폰트 경로 + 이미지 경로 치환

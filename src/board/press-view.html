@@ -32,23 +32,38 @@
         <c:out value="${boardData.boardSj}" />
       </h2>
       <div class="post-meta">
-        <span><i class="fa-solid fa-user"></i> <c:out value="${boardData.userNm}" /></span>
-        <span><i class="fa-solid fa-calendar"></i> <c:out value="${boardData.regDt}" /></span>
-        <span><i class="fa-solid fa-eye"></i> <c:out value="${boardData.rdcnt}" /></span>
-        <c:if test="${not empty imageList}">
-          <span><i class="fa-solid fa-images"></i> 사진 <fmt:formatNumber value="${fn:length(imageList)}" />장</span>
+        <%-- 출처 (etc2) --%>
+        <c:if test="${not empty boardData.etc2 && boardData.etc2 ne ''}">
+          <span><i class="fa-solid fa-newspaper"></i> <c:out value="${boardData.etc2}" /></span>
         </c:if>
+        <%-- 게시일자 (etc3) --%>
+        <c:if test="${not empty boardData.etc3 && boardData.etc3 ne ''}">
+          <span><i class="fa-solid fa-calendar"></i> <c:out value="${boardData.etc3}" /></span>
+        </c:if>
+        <span><i class="fa-solid fa-user"></i> <c:out value="${boardData.userNm}" /></span>
+        <span><i class="fa-solid fa-eye"></i> <c:out value="${boardData.rdcnt}" /></span>
       </div>
+      <%-- 게시판 항목관리 추가 필드 --%>
+      <c:if test="${not empty boardItem && fn:length(boardItem) > 0}">
+      <div class="post-meta flex-wrap">
+        <c:forEach var="item" items="${boardItem}">
+          <span>
+            <strong><c:out value="${item.iemNm}" /> :</strong>
+            <c:out value="${item.val}" escapeXml="false" />
+          </span>
+        </c:forEach>
+      </div>
+      </c:if>
     </div>
 
-    <%-- 대표 이미지 / 설명 --%>
-    <c:if test="${not empty boardData.boardCn && boardData.boardCn ne ''}">
-    <div class="post-content" style="min-height:auto; padding:1rem 0;">
-      <c:out value="${boardData.boardCn}" escapeXml="false" />
+    <%-- 대표 이미지 (썸네일) --%>
+    <c:if test="${not empty boardData.thumb && boardData.thumb ne ''}">
+    <div class="media-card-thumb rounded mb-4" style="max-height:420px; overflow:hidden;">
+      <img src="<c:out value="${boardData.thumb}" />" alt="<c:out value="${boardData.boardSj}" />" class="w-100" style="object-fit:cover;">
     </div>
     </c:if>
 
-    <%-- 첨부파일 (PDF, 문서 등 이미지 제외) --%>
+    <%-- 첨부파일 --%>
     <c:if test="${boardMaster.fileAt eq 'Y' && (not empty boardFile && fn:length(boardFile) > 0)}">
     <div class="post-attachments">
       <h6><i class="fa-solid fa-paperclip me-1"></i> 첨부파일</h6>
@@ -60,39 +75,38 @@
             <c:out value="${file.fileNm}" />
             <small class="text-muted ms-1">(<c:out value="${file.fileSizeStr}" default="0 bytes" />)</small>
           </a>
+          <c:if test="${boardMaster.prevewAt ne 'N' && file.filePreViewUrl ne ''}">
+            <a href="<c:out value="${file.filePreViewUrl}" />" class="btn btn-outline-secondary btn-sm ms-2 py-0" target="_blank">미리보기</a>
+          </c:if>
         </li>
         </c:forEach>
       </ul>
     </div>
     </c:if>
 
-    <%-- 동영상 --%>
-    <c:if test="${not empty videoList && fn:length(videoList) > 0}">
-    <div class="mb-4">
-      <c:forEach var="video" items="${videoList}">
-        <video src="<c:out value="${video.fileSrc}" />" controls class="w-100 mb-2 rounded"></video>
-        <c:if test="${not empty video.fileAlt && video.fileAlt ne ''}">
-          <small class="d-block text-muted mb-3"><c:out value="${video.fileAlt}" escapeXml="false" /></small>
-        </c:if>
-      </c:forEach>
-    </div>
-    </c:if>
-
-    <%-- 사진 갤러리 그리드 --%>
-    <c:if test="${not empty imageList && fn:length(imageList) > 0}">
-    <div class="mb-4">
-      <div class="d-flex align-items-center mb-3">
-        <span class="section-label">Gallery</span>
-        <div class="section-divider"></div>
-        <span class="small text-muted ms-3"><fmt:formatNumber value="${fn:length(imageList)}" />장</span>
-      </div>
-      <div class="gallery-grid">
+    <%-- 본문 영역 --%>
+    <div class="post-content">
+      <%-- 이미지 첨부 --%>
+      <c:if test="${not empty imageList && fn:length(imageList) > 0}">
+      <div class="mb-4">
         <c:forEach var="image" items="${imageList}">
-        <div class="gallery-item">
-          <img src="<c:out value="${image.fileSrc}" />" alt="<c:out value="${image.fileImgAlt}" />">
-        </div>
+          <img src="<c:out value="${image.fileSrc}" />" alt="<c:out value="${image.fileImgAlt}" />" class="img-fluid mb-2 rounded">
+          <c:if test="${not empty image.fileAlt && image.fileAlt ne ''}">
+            <small class="d-block text-muted mb-3"><c:out value="${image.fileAlt}" escapeXml="false" /></small>
+          </c:if>
         </c:forEach>
       </div>
+      </c:if>
+      <%-- 게시글 본문 --%>
+      <c:out value="${boardData.boardCn}" escapeXml="false" />
+    </div>
+
+    <%-- 원문 링크 (etc1이 URL인 경우 활용 가능) --%>
+    <c:if test="${not empty boardData.etc1 && boardData.etc1 ne ''}">
+    <div class="mt-3 mb-4">
+      <a href="<c:out value="${boardData.etc1}" />" class="btn btn-outline-secondary btn-sm px-3" target="_blank">
+        <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>원문 보기
+      </a>
     </div>
     </c:if>
 

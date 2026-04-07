@@ -1,201 +1,452 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="../">
-  <title>글쓰기 — 개혁신학연구회</title>
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="assets/css/pretendard.css">
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/sub.css">
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/home/siiru/include/header.jsp" %>
+<%-- 레이아웃 상단 출력 --%>
+<c:if test="${headerUrl != null}"><jsp:include page="${headerUrl}" /></c:if>
+<div class="siiru-boardWrap">
+<%-- 게시판 상단 출력 --%>
+<c:if test="${not empty boardMaster.hderCn}">
+  <div class="siiru-clr"><jsp:include page="${hderCn}" /></div>
+</c:if>
 
-  <div data-include="include/header.html"></div>
+  <%-- 검색 정보 유지용 hidden form --%>
+  <form id="boardSearchForm" name="boardSearchForm" method="post">
+    <input type="hidden" name="pageId" value="<c:out value="${param.pageId}" />">
+    <input type="hidden" id="movePage" name="movePage" value="<c:out value="${param.movePage}" />">
+    <input type="hidden" id="boardId" name="boardId" value="<c:out value="${param.boardId}" />">
+    <input type="hidden" id="searchCtgry" name="searchCtgry" value="<c:out value="${param.searchCtgry}" />">
+    <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="<c:out value="${param.searchCtgryNm}" />">
+    <c:if test="${not empty boardMaster.listDe}"><input type="hidden" id="searchBase" name="searchBase" value="<c:out value="${param.searchBase}" />"></c:if>
+    <input type="hidden" id="searchSDe" name="searchSDe" value="<c:out value="${param.searchSDe}" />">
+    <input type="hidden" id="searchEDe" name="searchEDe" value="<c:out value="${param.searchEDe}" />">
+    <input type="hidden" id="searchPrcs" name="searchPrcs" value="<c:out value="${param.searchPrcs}" />">
+    <input type="hidden" id="searchTy" name="searchTy" value="<c:out value="${param.searchTy}" />">
+    <input type="hidden" id="searchQuery" name="searchQuery" value="<c:out value="${param.searchQuery}" />">
+  </form>
 
-  <main id="main-content">
+  <%-- 게시글 등록/수정 폼 --%>
+  <form id="boardForm" name="boardForm" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="action" name="action" value="<c:out value="${boardData.pageAction}" />">
+    <input type="hidden" id="seq" name="seq" value="<c:out value="${boardData.seq}" />">
+    <input type="hidden" id="levelSn" name="levelSn" value="<c:out value="${boardData.levelSn}" />">
+    <input type="hidden" id="beginDt" name="beginDt" value="">
+    <input type="hidden" id="endDt" name="endDt" value="">
+    <input type="hidden" id="noticeBeginDt" name="noticeBeginDt" value="">
+    <input type="hidden" id="noticeEndDt" name="noticeEndDt" value="">
 
-    <header class="page-hero">
-      <img src="assets/images/main_reformedts.jpg" alt="개혁신학연구회" class="hero-bg-img">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <!-- CMS: 게시판명 출력 -->
-        <h1 class="hero-title">글쓰기</h1>
-        <div class="breadcrumb-custom">
-          <span>Home</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span class="active-item">연구회 소식</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span>공지사항</span>
-          <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i>
-          <span>글쓰기</span>
-        </div>
-      </div>
-    </header>
+    <div class="content-title-area"><h3>글쓰기</h3></div>
 
-    <div class="container py-5 my-lg-4">
-      <div class="row g-5">
+    <table class="write-form-table mb-4">
+      <tbody>
 
-        <aside class="col-lg-3 d-none d-lg-block">
-          <div class="sticky-top" style="top:100px; z-index:10;">
-            <div class="sidebar-heading">
-              <h2>News</h2>
-              <small class="text-muted">연구회 소식</small>
+        <%-- 분류 --%>
+        <c:if test="${form.ctgryAt eq 'Y'}">
+        <tr>
+          <th><span class="text-danger">*</span> <label for="ctgrySn"><c:out value="${boardFieldNm.ctgryNm}" /></label></th>
+          <td>
+            <select id="ctgrySn" name="ctgrySn" class="form-select" style="max-width:200px;">
+              <option value=""><spring:message code="info.choose" /></option>
+              <c:if test="${not empty ctgryList and fn:length(ctgryList) > 0}">
+                <c:forEach var="ctgry" items="${ctgryList}">
+                  <option value="<c:out value="${ctgry.value}" />"<c:out value="${ctgry.selected}" />><c:out value="${ctgry.name}" /></option>
+                </c:forEach>
+              </c:if>
+            </select>
+          </td>
+        </tr>
+        </c:if>
+
+        <%-- 제목 --%>
+        <tr>
+          <th><span class="text-danger">*</span> <label for="boardSj"><c:out value="${boardFieldNm.boardSj}" /></label></th>
+          <td>
+            <input type="text" id="boardSj" name="boardSj" class="form-control" maxlength="200"
+              value="<c:out value="${boardData.boardSj}" />" placeholder="제목을 입력해 주세요.">
+          </td>
+        </tr>
+
+        <%-- 작성자 --%>
+        <tr>
+          <th><span class="text-danger">*</span> <label for="userNm"><c:out value="${boardFieldNm.userNm}" /></label></th>
+          <td>
+            <input type="text" id="userNm" name="userNm" class="form-control" maxlength="50"
+              value="<c:out value="${boardData.userNm}" />"
+              style="max-width:200px;"<c:if test="${form.userReadOnly eq 'Y'}"> readonly</c:if>>
+          </td>
+        </tr>
+
+        <%-- 비밀번호 --%>
+        <c:if test="${form.passwdAt eq 'Y'}">
+        <tr>
+          <th><span class="text-danger">*</span> <label for="passwd"><spring:message code="info.passwd" /></label></th>
+          <td>
+            <input type="password" id="passwd" name="passwd" class="form-control" maxlength="20"
+              value="" autocomplete="off" style="max-width:200px;">
+          </td>
+        </tr>
+        </c:if>
+
+        <%-- 자동등록방지(CAPTCHA) --%>
+        <c:if test="${form.captchaAt eq 'Y'}">
+        <tr>
+          <th><span class="text-danger">*</span> <label for="captcha"><spring:message code="info.captcha" /></label></th>
+          <td>
+            <div id="captchaAudio" class="siiru-hidden"></div>
+            <img src="<c:url value="${path.context}captcha.do" />" class="captchaImg mb-2" alt="자동등록방지 이미지">
+            <button class="captchaBtn btn btn-outline-secondary btn-sm me-1" type="button"><spring:message code="info.reload" /></button>
+            <button class="captchaAudioBtn btn btn-outline-secondary btn-sm" type="button"><spring:message code="info.audio" /></button>
+            <input type="text" id="captcha" name="captcha" class="form-control mt-2" value=""
+              autocomplete="off" placeholder="<spring:message code="info.captcha.msg" />" style="max-width:200px;">
+          </td>
+        </tr>
+        </c:if>
+
+        <%-- 공개 설정 (비밀글) --%>
+        <c:if test="${form.secretAt eq 'Y'}">
+        <tr>
+          <th><label for="secretAt"><spring:message code="info.secret" /></label></th>
+          <td>
+            <div class="form-check">
+              <input type="checkbox" id="secretAt" name="secretAt" class="form-check-input" value="Y"
+                <c:if test="${boardData.secretAt eq 'Y'}">checked</c:if>>
+              <label class="form-check-label" for="secretAt"><i class="fa-solid fa-lock me-1 small"></i><spring:message code="info.secret" /></label>
             </div>
-            <div class="list-group sidebar-nav">
-              <a class="list-group-item active" href="board/notice-list.html">
-                <span>공지사항</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/press-list.html">
-                <span>언론보도</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/member-news-list.html">
-                <span>회원동정</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
-              <a class="list-group-item" href="board/album-list.html">
-                <span>앨범</span><i class="fa-solid fa-chevron-right"></i>
-              </a>
+          </td>
+        </tr>
+        </c:if>
+
+        <%-- 메인 노출 --%>
+        <c:if test="${form.mainExpsrAt eq 'Y'}">
+        <tr>
+          <th><label for="mainExpsrAt"><spring:message code="info.mainExpsr" /></label></th>
+          <td>
+            <div class="form-check">
+              <input type="checkbox" id="mainExpsrAt" name="mainExpsrAt" class="form-check-input" value="Y"
+                <c:if test="${boardData.mainExpsrAt eq 'Y'}">checked</c:if>>
+              <label class="form-check-label" for="mainExpsrAt"><spring:message code="info.mainExpsr" /></label>
             </div>
-          </div>
-        </aside>
+          </td>
+        </tr>
+        </c:if>
 
-        <section class="col-lg-9">
+        <%-- 공지사항 설정 (관리자) --%>
+        <c:if test="${form.noticeAt eq 'Y'}">
+        <tr>
+          <th><label for="noticeAt"><spring:message code="info.notice" /></label></th>
+          <td>
+            <div class="form-check mb-2">
+              <input type="checkbox" id="noticeAt" name="noticeAt" class="form-check-input" value="Y"
+                <c:if test="${boardData.noticeAt eq 'Y'}">checked</c:if>>
+              <label class="form-check-label" for="noticeAt"><spring:message code="info.notice" /></label>
+            </div>
+            <div id="ndtFocus" class="d-flex align-items-center gap-2 flex-wrap">
+              <input type="text" id="noticeBeginDate" name="noticeBeginDate" class="form-control maskDate nothangul small"
+                maxlength="10" value="<c:out value="${boardData.noticeBeginDate}" />" placeholder="시작일 YYYY-MM-DD"
+                style="max-width:140px;"<c:if test="${boardData.noticeAt ne 'Y'}"> disabled</c:if>>
+              <input type="text" id="noticeBeginTime" name="noticeBeginTime" class="form-control maskTime nothangul"
+                maxlength="5" value="<c:out value="${boardData.noticeBeginTime}" />" placeholder="HH:MM"
+                style="max-width:80px;"<c:if test="${boardData.noticeAt ne 'Y'}"> disabled</c:if>>
+              <span>~</span>
+              <input type="text" id="noticeEndDate" name="noticeEndDate" class="form-control maskDate nothangul small"
+                maxlength="10" value="<c:out value="${boardData.noticeEndDate}" />" placeholder="종료일 YYYY-MM-DD"
+                style="max-width:140px;"<c:if test="${boardData.noticeAt ne 'Y'}"> disabled</c:if>>
+              <input type="text" id="noticeEndTime" name="noticeEndTime" class="form-control maskTime nothangul"
+                maxlength="5" value="<c:out value="${boardData.noticeEndTime}" />" placeholder="HH:MM"
+                style="max-width:80px;"<c:if test="${boardData.noticeAt ne 'Y'}"> disabled</c:if>>
+            </div>
+          </td>
+        </tr>
+        </c:if>
 
-          <div class="content-title-area">
-            <h3>글쓰기</h3>
-          </div>
+        <%-- 게시 기간 (관리자) --%>
+        <c:if test="${form.pdAt eq 'Y'}">
+        <tr id="dtFocus">
+          <th><label for="beginDate"><spring:message code="info.postDt" /></label></th>
+          <td>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <input type="text" id="beginDate" name="beginDate" class="form-control maskDate nothangul"
+                maxlength="10" value="<c:out value="${boardData.beginDate}" />" placeholder="시작일 YYYY-MM-DD"
+                style="max-width:140px;">
+              <input type="text" id="beginTime" name="beginTime" class="form-control maskTime nothangul"
+                maxlength="5" value="<c:out value="${boardData.beginTime}" />" placeholder="HH:MM"
+                style="max-width:80px;">
+              <span>~</span>
+              <input type="text" id="endDate" name="endDate" class="form-control maskDate nothangul"
+                maxlength="10" value="<c:out value="${boardData.endDate}" />" placeholder="종료일 YYYY-MM-DD"
+                style="max-width:140px;">
+              <input type="text" id="endTime" name="endTime" class="form-control maskTime nothangul"
+                maxlength="5" value="<c:out value="${boardData.endTime}" />" placeholder="HH:MM"
+                style="max-width:80px;">
+            </div>
+          </td>
+        </tr>
+        </c:if>
 
-          <form action="#" method="post" enctype="multipart/form-data">
-
-            <table class="write-form-table mb-4">
-              <tbody>
-
-                <!-- 분류 (CMS: 게시판 설정에 따라 노출/숨김) -->
-                <tr>
-                  <th>분류</th>
-                  <td>
-                    <select class="form-select" style="max-width:200px;">
-                      <option value="">분류 선택</option>
-                      <option>공지</option>
-                      <option>일반</option>
-                      <option>안내</option>
-                    </select>
-                  </td>
-                </tr>
-
-                <!-- 제목 -->
-                <tr>
-                  <th>제목 <span class="text-danger">*</span></th>
-                  <td>
-                    <input type="text" class="form-control" placeholder="제목을 입력해 주세요." required>
-                  </td>
-                </tr>
-
-                <!-- 작성자 (CMS: 로그인 사용자 자동 입력) -->
-                <tr>
-                  <th>작성자</th>
-                  <td>
-                    <input type="text" class="form-control" value="관리자" style="max-width:200px;" readonly>
-                  </td>
-                </tr>
-
-                <!-- 공개 설정 -->
-                <tr>
-                  <th>공개 설정</th>
-                  <td>
-                    <div class="d-flex gap-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="visibility" id="vis-public" value="public" checked>
-                        <label class="form-check-label" for="vis-public">전체 공개</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="visibility" id="vis-member" value="member">
-                        <label class="form-check-label" for="vis-member">회원 공개</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="visibility" id="vis-private" value="private">
-                        <label class="form-check-label" for="vis-private"><i class="fa-solid fa-lock me-1 small"></i>비밀글</label>
-                      </div>
+        <%-- 게시판 항목관리 커스텀 필드 --%>
+        <c:if test="${not empty boardItem && fn:length(boardItem) > 0}">
+          <c:forEach var="item" items="${boardItem}">
+          <tr id="cFocus_<c:out value="${item.iemId}" />">
+            <th>
+              <c:if test="${item.reqrdAt eq 'Y'}"><span class="text-danger">*</span> </c:if>
+              <label for="<c:out value="${item.iemId}" />"><c:out value="${item.iemNm}" /></label>
+            </th>
+            <td>
+              <c:choose>
+                <c:when test="${item.iemSe eq 'T' || item.iemSe eq 'U' || item.iemSe eq 'V' || item.iemSe eq 'E'}">
+                  <input type="text" id="<c:out value="${item.iemId}" />" name="<c:out value="${item.iemId}" />"
+                    class="form-control" maxlength="100" value="<c:out value="${item.val}" />"
+                    <c:if test="${item.iemSe eq 'U' || item.iemSe eq 'V'}">placeholder="http://"</c:if>>
+                </c:when>
+                <c:when test="${item.iemSe eq 'A'}">
+                  <textarea id="<c:out value="${item.iemId}" />" name="<c:out value="${item.iemId}" />"
+                    class="form-control" maxlength="1000" rows="4"><c:out value="${item.val}" /></textarea>
+                </c:when>
+                <c:when test="${item.iemSe eq 'S'}">
+                  <select id="<c:out value="${item.iemId}" />" name="<c:out value="${item.iemId}" />" class="form-select" style="max-width:200px;">
+                    <option value="">선택</option>
+                    <c:forEach var="code" items="${item.codeList}">
+                      <option value="<c:out value="${code.codeId}" />"<c:out value="${code.selected}" />><c:out value="${code.codeNm}" /></option>
+                    </c:forEach>
+                  </select>
+                </c:when>
+                <c:when test="${item.iemSe eq 'R'}">
+                  <c:forEach var="code" items="${item.codeList}" varStatus="codeStatus">
+                    <div class="form-check form-check-inline">
+                      <input type="radio" id="<c:out value="${item.iemId}" />_<c:out value="${codeStatus.index}" />"
+                        name="<c:out value="${item.iemId}" />" class="form-check-input"
+                        value="<c:out value="${code.codeId}" />"<c:out value="${code.checked}" />>
+                      <label class="form-check-label" for="<c:out value="${item.iemId}" />_<c:out value="${codeStatus.index}" />"><c:out value="${code.codeNm}" /></label>
                     </div>
-                  </td>
-                </tr>
-
-                <!-- 내용 -->
-                <tr>
-                  <th style="vertical-align:top; padding-top:1rem;">내용 <span class="text-danger">*</span></th>
-                  <td>
-                    <!-- CMS: 리치 에디터(Quill, TinyMCE 등) 교체 영역 -->
-                    <div class="mb-2 d-flex gap-1 flex-wrap">
-                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="굵게"><b>B</b></button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="기울임"><i>I</i></button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="밑줄"><u>U</u></button>
-                      <span class="border-start mx-1"></span>
-                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="좌측 정렬"><i class="fa-solid fa-align-left"></i></button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="가운데"><i class="fa-solid fa-align-center"></i></button>
-                      <span class="border-start mx-1"></span>
-                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="이미지 삽입"><i class="fa-regular fa-image"></i></button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" title="링크 삽입"><i class="fa-solid fa-link"></i></button>
+                  </c:forEach>
+                </c:when>
+                <c:when test="${item.iemSe eq 'C'}">
+                  <c:forEach var="code" items="${item.codeList}" varStatus="codeStatus">
+                    <div class="form-check form-check-inline">
+                      <input type="checkbox" id="<c:out value="${item.iemId}" />_<c:out value="${codeStatus.index}" />"
+                        name="<c:out value="${item.iemId}" />[]" class="form-check-input"
+                        value="<c:out value="${code.codeId}" />"<c:out value="${code.checked}" />>
+                      <label class="form-check-label" for="<c:out value="${item.iemId}" />_<c:out value="${codeStatus.index}" />"><c:out value="${code.codeNm}" /></label>
                     </div>
-                    <textarea class="content-editor-area" name="content" placeholder="내용을 입력해 주세요."></textarea>
-                  </td>
-                </tr>
+                  </c:forEach>
+                  <input type="hidden" id="<c:out value="${item.iemId}" />" name="<c:out value="${item.iemId}" />" value="<c:out value="${item.val}" />">
+                </c:when>
+                <c:when test="${item.iemSe eq 'D'}">
+                  <input type="text" id="<c:out value="${item.iemId}" />" name="<c:out value="${item.iemId}" />"
+                    class="form-control maskDate nothangul" maxlength="10" value="<c:out value="${item.val}" />"
+                    style="max-width:140px;">
+                </c:when>
+                <c:otherwise>
+                  <input type="text" id="<c:out value="${item.iemId}" />" name="<c:out value="${item.iemId}" />"
+                    class="form-control" maxlength="100" value="<c:out value="${item.val}" />">
+                </c:otherwise>
+              </c:choose>
+            </td>
+          </tr>
+          </c:forEach>
+        </c:if>
 
-                <!-- 첨부파일 -->
-                <tr>
-                  <th style="vertical-align:top; padding-top:1rem;">첨부파일</th>
-                  <td>
-                    <div class="file-upload-area mb-2" onclick="document.getElementById('file-input').click()">
-                      <i class="fa-solid fa-cloud-arrow-up"></i>
-                      <p class="mt-2 mb-1">클릭하거나 파일을 드래그하여 업로드</p>
-                      <p class="small text-muted">PDF, Word, PPT, 이미지 (최대 20MB / 파일당)</p>
-                    </div>
-                    <input type="file" id="file-input" name="files" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.gif" class="d-none">
-                    <div id="file-list" class="small text-muted"></div>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-
-            <!-- 버튼 -->
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="board/notice-list.html" class="btn btn-outline-secondary px-4">
-                <i class="fa-solid fa-list me-1"></i>목록
-              </a>
-              <div class="d-flex gap-2">
-                <button type="reset" class="btn btn-outline-secondary px-4">
-                  <i class="fa-solid fa-rotate-left me-1"></i>초기화
-                </button>
-                <button type="submit" class="btn btn-gold px-5">
-                  <i class="fa-solid fa-check me-1"></i>등록
-                </button>
+        <%-- 첨부파일 --%>
+        <c:if test="${form.fileAt eq 'Y'}">
+        <tr>
+          <th style="vertical-align:top; padding-top:1rem;">
+            <c:out value="${boardFieldNm.file}" />
+            <span class="d-block fw-normal small mt-1">
+              <button class="fileAdd btn btn-outline-secondary btn-sm" type="button">+ 파일 추가</button>
+            </span>
+          </th>
+          <td class="fileChk">
+            <div class="fileLayer">
+              <div class="fileInfo">
+                <input type="hidden" name="fileSn[]" value="<c:out value="${boardFile.file.fileSn}" />">
+                <input type="hidden" name="rlFileOldNm[]" value="<c:out value="${boardFile.file.rlFileNm}" />">
+                <input type="hidden" name="fileOldNm[]" value="<c:out value="${boardFile.file.fileNm}" />">
+                <input type="hidden" name="insrtAt[]" value="<c:out value="${boardFile.file.insrtAt}" default="N" />">
+                <input type="hidden" name="thumbAt[]" value="<c:out value="${boardFile.file.thumbAt}" default="N" />">
+                <input type="hidden" name="fileDelAt[]" value="N">
+                <span class="fileView">
+                  <a href="<c:out value="${boardFile.file.fileUrl}" />" target="_blank"><c:out value="${boardFile.file.fileNm}" /></a>
+                </span>
+                <input type="checkbox" class="fileCheckbox form-check-input ms-2" id="delFile0"
+                  name="fileDelChk[]" data-input="fileDel" value="Y">
+                <label for="delFile0" class="form-check-label ms-1">삭제</label>
               </div>
+              <input type="file" name="fileNm0" class="file form-control mt-2">
+              <div class="form-check mt-1">
+                <input type="checkbox" id="insrtFile0" name="insrtChk[]" class="fileCheckbox form-check-input"
+                  data-input="insrt" value="Y"<c:if test="${boardFile.file.insrtAt eq 'Y'}"> checked</c:if>>
+                <label class="form-check-label" for="insrtFile0">본문에 삽입</label>
+              </div>
+              <textarea name="fileAlt[]" rows="2" class="form-control mt-1"
+                placeholder="파일 설명 (이미지 alt 텍스트)"><c:out value="${boardFile.file.fileAlt}" /></textarea>
             </div>
+            <div id="fileForm">
+              <c:if test="${not empty boardFile.fileList && fn:length(boardFile.fileList) > 0}">
+                <c:forEach var="file" items="${boardFile.fileList}" varStatus="status">
+                <div class="fileLayer mt-3">
+                  <div class="fileInfo">
+                    <input type="hidden" name="fileSn[]" value="<c:out value="${file.fileSn}" />">
+                    <input type="hidden" name="rlFileOldNm[]" value="<c:out value="${file.rlFileNm}" />">
+                    <input type="hidden" name="fileOldNm[]" value="<c:out value="${file.fileNm}" />">
+                    <input type="hidden" name="insrtAt[]" value="<c:out value="${file.insrtAt}" default="N" />">
+                    <input type="hidden" name="thumbAt[]" value="<c:out value="${file.thumbAt}" default="N" />">
+                    <input type="hidden" name="fileDelAt[]" value="N">
+                    <span class="fileView">
+                      <a href="<c:out value="${file.fileUrl}" />" target="_blank"><c:out value="${file.fileNm}" /></a>
+                    </span>
+                    <input type="checkbox" class="fileCheckbox form-check-input ms-2"
+                      id="delFile${status.index+1}" name="fileDelChk[]" data-input="fileDel" value="Y">
+                    <label for="delFile${status.index+1}" class="form-check-label ms-1">삭제</label>
+                  </div>
+                  <input type="file" name="fileNm${status.index+1}" class="file form-control mt-2">
+                  <div class="form-check mt-1">
+                    <input type="checkbox" id="insrtFile${status.index+1}" name="insrtChk[]"
+                      class="fileCheckbox form-check-input" data-input="insrt" value="Y"
+                      <c:if test="${file.insrtAt eq 'Y'}">checked</c:if>>
+                    <label class="form-check-label" for="insrtFile${status.index+1}">본문에 삽입</label>
+                  </div>
+                  <textarea name="fileAlt[]" rows="2" class="form-control mt-1"
+                    placeholder="파일 설명"><c:out value="${file.fileAlt}" /></textarea>
+                </div>
+                </c:forEach>
+              </c:if>
+            </div>
+          </td>
+        </tr>
+        </c:if>
 
-          </form>
+        <%-- 내용 (에디터) --%>
+        <tr>
+          <th style="vertical-align:top; padding-top:1rem;">내용 <span class="text-danger">*</span></th>
+          <td>
+            <textarea id="boardCn" name="boardCn" rows="20" class="content-editor-area"
+              style="width:100%;"><c:out value="${boardData.boardCn}" /></textarea>
+          </td>
+        </tr>
 
-        </section>
+      </tbody>
+    </table>
+
+    <%-- 버튼 --%>
+    <div class="d-flex justify-content-between align-items-center">
+      <a href="<c:out value="${listLink}" />" class="btn btn-outline-secondary px-4">
+        <i class="fa-solid fa-list me-1"></i>목록
+      </a>
+      <div class="d-flex gap-2">
+        <button type="reset" class="btn btn-outline-secondary px-4">
+          <i class="fa-solid fa-rotate-left me-1"></i>초기화
+        </button>
+        <button type="submit" class="btn btn-gold px-5">
+          <i class="fa-solid fa-check me-1"></i>등록
+        </button>
       </div>
     </div>
 
-  </main>
+  </form>
 
-  <div data-include="include/footer.html"></div>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/sub.js"></script>
-  <script>
-    // 파일 선택 시 파일명 표시 (데모용)
-    document.getElementById('file-input')?.addEventListener('change', function () {
-      const list = document.getElementById('file-list');
-      list.innerHTML = [...this.files].map(f =>
-        `<div><i class="fa-solid fa-paperclip me-1"></i>${f.name} (${(f.size/1024).toFixed(1)} KB)</div>`
-      ).join('');
-    });
-  </script>
-</body>
-</html>
+<%-- 게시판 하단 출력 --%>
+<c:if test="${not empty boardMaster.fterCn}">
+  <div class="siiru-clr"><jsp:include page="${fterCn}" /></div>
+</c:if>
+</div>
+
+<c:if test="${form.addressAt eq 'Y'}">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</c:if>
+<script>
+if (window.addEventListener) window.addEventListener("load", board, false);
+else if (window.attachEvent) window.attachEvent("onload", board);
+else window.onload = board;
+var submitYN = 'N';
+function board() {
+  // 공지사항 체크시 기간 입력 활성화
+  $(':checkbox[name="noticeAt"]').change(function() {
+    var disabled = !$(this).is(':checked');
+    $('#noticeBeginDate, #noticeBeginTime, #noticeEndDate, #noticeEndTime').prop('disabled', disabled);
+  });
+  // 게시기간 날짜 변경시 시간 자동
+  $('#beginDate').change(function() { if ($('#beginTime').val() == '') $('#beginTime').val('00:00'); });
+  $('#endDate').change(function()   { if ($('#endTime').val() == '') $('#endTime').val('23:59'); });
+  $('#noticeBeginDate').change(function() { if ($('#noticeBeginTime').val() == '') $('#noticeBeginTime').val('00:00'); });
+  $('#noticeEndDate').change(function()   { if ($('#noticeEndTime').val() == '') $('#noticeEndTime').val('23:59'); });
+  // 파일 정보 표출
+  $('input[name="rlFileOldNm[]"]').each(function() {
+    if ($(this).val() != '') $(this).closest('.fileLayer').find('.fileInfo').show();
+  });
+  // 파일 체크박스
+  $('.fileChk').on('click', '.fileCheckbox', function() {
+    $(this).closest('.fileLayer').find('input[name="'+$.trim($(this).data('input'))+'At[]"]').val($(this).is(':checked') ? 'Y' : 'N');
+  });
+  // 파일 추가
+  $('.fileAdd').click(function() {
+    var n = $('.fileChk .file').length;
+    var html = '<div class="fileLayer mt-3">'
+      + '<input type="hidden" name="fileSn[]" value="0">'
+      + '<input type="hidden" name="rlFileOldNm[]" value="">'
+      + '<input type="hidden" name="fileOldNm[]" value="">'
+      + '<input type="hidden" name="insrtAt[]" value="N">'
+      + '<input type="hidden" name="thumbAt[]" value="N">'
+      + '<input type="hidden" name="fileDelAt[]" value="N">'
+      + '<input type="hidden" name="fileDelChk[]" value="">'
+      + '<input type="file" name="fileNm'+n+'" class="file form-control">'
+      + '<div class="form-check mt-1"><input type="checkbox" id="insrtFile'+n+'" name="insrtChk[]" data-input="insrt" class="fileCheckbox form-check-input" value="Y"><label class="form-check-label" for="insrtFile'+n+'">본문에 삽입</label></div>'
+      + '<textarea name="fileAlt[]" rows="2" class="form-control mt-1" placeholder="파일 설명"></textarea>'
+      + '</div>';
+    $('#fileForm').append(html);
+  });
+  // 에디터 초기화
+  <c:if test="${form.editrAt eq 'Y'}">
+  var oEditors = CKEDITOR.replace('boardCn', {
+    height: 300,
+    filebrowserImageUploadUrl: '${path.context}ckImageUpload.do?folder1=bb&folder2='+$.trim($('#boardId').val())
+  });
+  </c:if>
+  // 우편번호
+  <c:if test="${form.addressAt eq 'Y'}">
+  $('.zipFind').click(function() { zipFind($.trim($(this).data('iem'))); });
+  </c:if>
+  // 저장 버튼
+  $('#boardForm').submit(function(e) {
+    if (submitYN == 'Y') { alert('<spring:message code="info.wait.msg" />'); return false; }
+    <c:if test="${form.ctgryAt eq 'Y'}">
+    if ($.trim($('#ctgrySn').val()) == '') {
+      alert('<spring:message code="errors.required" arguments="${alertMsg.ctgryNm}" />');
+      $('#ctgrySn').focus(); return false;
+    }
+    </c:if>
+    if ($.trim($('#boardSj').val()) == '') {
+      alert('<spring:message code="errors.required" arguments="${alertMsg.boardSj}" />');
+      $('#boardSj').focus(); return false;
+    }
+    if ($.trim($('#userNm').val()) == '') {
+      alert('<spring:message code="errors.required" arguments="${alertMsg.userNm}" />');
+      $('#userNm').focus(); return false;
+    }
+    <c:if test="${form.passwdAt eq 'Y'}">
+    if ($.trim($('#passwd').val()) == '') {
+      alert('<spring:message code="errors.required" arguments="${alertMsg.passwd}" />');
+      $('#passwd').focus(); return false;
+    }
+    </c:if>
+    <c:if test="${form.captchaAt eq 'Y'}">
+    if ($.trim($('#captcha').val()) == '') {
+      alert('<spring:message code="errors.required" arguments="${alertMsg.captcha}" />');
+      $('#captcha').focus(); return false;
+    }
+    </c:if>
+    <%-- 게시판 항목 필수값 체크 --%>
+    <c:if test="${not empty boardItem && fn:length(boardItem) > 0}">
+      <c:forEach var="item" items="${boardItem}">
+        <c:if test="${item.reqrdAt eq 'Y'}">
+    if ($.trim($('#<c:out value="${item.iemId}" />').val()) == '') {
+      alert('<spring:message code="errors.required" arguments="${alertMsg[item.iemId]}" />');
+      $('html,body').animate({scrollTop:$('#cFocus_<c:out value="${item.iemId}" />').offset().top}, 0);
+      return false;
+    }
+        </c:if>
+      </c:forEach>
+    </c:if>
+    submitYN = 'Y';
+  });
+}
+</script>
+<%-- 레이아웃 하단 출력 --%>
+<c:if test="${footerUrl != null}"><jsp:include page="${footerUrl}" /></c:if>
+<%@ include file="/WEB-INF/jsp/home/siiru/include/footer.jsp" %>
