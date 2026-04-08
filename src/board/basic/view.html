@@ -1,0 +1,124 @@
+<div class="siiru-boardWrap">
+
+  <!-- 숨김 폼: 페이지/검색 파라미터 보존 -->
+  <form id="boardSearchForm" name="boardSearchForm" method="post" action="#" style="display:none;">
+    <input type="hidden" name="pageId" value="">
+    <input type="hidden" id="movePage" name="movePage" value="1">
+    <input type="hidden" id="boardId" name="boardId" value="">
+    <input type="hidden" id="searchCtgry" name="searchCtgry" value="">
+    <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="">
+    <input type="hidden" id="searchSDe" name="searchSDe" value="">
+    <input type="hidden" id="searchEDe" name="searchEDe" value="">
+    <input type="hidden" id="searchTy" name="searchTy" value="">
+    <input type="hidden" id="searchQuery" name="searchQuery" value="">
+  </form>
+
+  <!-- 게시글 뷰 -->
+  <div class="siiruBoard-view">
+    <form id="boardForm" name="boardForm" method="post">
+      <input type="hidden" id="seq" name="seq" value="15">
+
+      <!-- 제목 -->
+      <h4>
+        <span class="notice">공지</span>
+        [학술행사] 2025 겨울 정기 학술발표회 개최 안내
+      </h4>
+
+      <!-- 게시글 정보 -->
+      <div class="siiruBoardInfo">
+        <div class="boardInfo-view">
+          <span><i class="fa-solid fa-user"></i> 관리자</span>
+          <span><i class="fa-regular fa-calendar"></i> 2025-12-01</span>
+          <span><i class="fa-solid fa-eye"></i> 조회 87</span>
+          <span><i class="fa-regular fa-clock"></i> 게시기간 2025-12-01 ~ 2025-12-31</span>
+        </div>
+
+        <!-- 추가 항목 -->
+        <dl>
+          <dt>분류</dt>
+          <dd>학술행사</dd>
+        </dl>
+        <dl>
+          <dt>장소</dt>
+          <dd>총신대학교 신학대학원 강당 (서울 동작구)</dd>
+        </dl>
+
+        <!-- 첨부파일 -->
+        <dl>
+          <dt>첨부파일</dt>
+          <dd>
+            <ul>
+              <li>
+                <a href="#">
+                  <i class="fa-solid fa-file-pdf" style="color: #dc3545;"></i>
+                  2025_겨울학술발표회_안내문.pdf
+                </a>
+                <small class="text-muted ms-2">[1.8 MB, 다운로드 24회]</small>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa-solid fa-file-word" style="color: #0d6efd;"></i>
+                  발표신청서_양식.docx
+                </a>
+                <small class="text-muted ms-2">[52 KB, 다운로드 18회]</small>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+
+      <!-- 본문 -->
+      <div class="siiruBoardBody">
+        <p>개혁신학연구회는 2025년 겨울 정기 학술발표회를 아래와 같이 개최합니다. 이번 발표회는 <strong>「개혁주의 신학의 현대적 적용」</strong>을 대주제로 하여 다양한 신학 분야의 발표와 토론이 진행될 예정입니다. 회원 여러분의 많은 관심과 참석을 바랍니다.</p>
+
+        <p><strong>▶ 행사 안내</strong></p>
+        <ul>
+          <li><strong>일시</strong>: 2025년 12월 20일 (토) 오전 10시 ~ 오후 5시</li>
+          <li><strong>장소</strong>: 총신대학교 신학대학원 강당 (서울 동작구)</li>
+          <li><strong>참가비</strong>: 무료 (회원), 2만원 (비회원)</li>
+          <li><strong>점심 제공</strong>: 등록 참가자에 한해 중식 제공</li>
+        </ul>
+
+        <p><strong>▶ 발표 일정 (예정)</strong></p>
+        <ol>
+          <li>개회 예배 및 인사말</li>
+          <li>주제 발표 1: 「칼빈의 삼위일체론과 그 신학적 함의」</li>
+          <li>주제 발표 2: 「개혁주의 성례론의 현대적 이해」</li>
+          <li>종합 토론 및 폐회</li>
+        </ol>
+
+        <p>발표 참가 및 사전 등록은 첨부된 신청서를 작성 후 이메일로 제출해 주시기 바랍니다. 자세한 문의는 사무국(02-XXX-XXXX)으로 연락해 주십시오.</p>
+      </div>
+
+      <!-- 버튼 영역 -->
+      <div class="siiruBoard-move">
+        <div class="btn-group-left">
+          <a href="../board/basic/list.html" class="btn btn-outline-secondary btn-sm">
+            <i class="fa-solid fa-list me-1"></i>목록
+          </a>
+        </div>
+        <div class="btn-group-right">
+          <a href="../board/basic/write.html" class="btn btn-outline-secondary btn-sm">
+            <i class="fa-solid fa-pen me-1"></i>수정
+          </a>
+          <button type="button" class="btn btn-outline-danger btn-sm">
+            <i class="fa-solid fa-trash me-1"></i>삭제
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 이전/다음 글 -->
+  <div class="board-nav mt-3">
+    <div class="board-nav-item">
+      <span class="nav-dir"><i class="fa-solid fa-chevron-up fa-xs me-1"></i>이전글</span>
+      <a href="../board/basic/view.html">제24회 정기 학술대회 발표문 배포 공지</a>
+    </div>
+    <div class="board-nav-item">
+      <span class="nav-dir"><i class="fa-solid fa-chevron-down fa-xs me-1"></i>다음글</span>
+      <a href="../board/basic/view.html">2026년 연회비 납부 및 회원 갱신 안내</a>
+    </div>
+  </div>
+
+</div>

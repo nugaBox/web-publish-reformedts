@@ -1,0 +1,92 @@
+<div class="siiru-boardWrap">
+
+  <!-- 숨김 폼: 페이지/검색 파라미터 보존 -->
+  <form id="boardSearchForm" name="boardSearchForm" method="post" action="#" style="display:none;">
+    <input type="hidden" name="pageId" value="">
+    <input type="hidden" id="movePage" name="movePage" value="1">
+    <input type="hidden" id="boardId" name="boardId" value="">
+    <input type="hidden" id="searchCtgry" name="searchCtgry" value="">
+    <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="">
+    <input type="hidden" id="searchSDe" name="searchSDe" value="">
+    <input type="hidden" id="searchEDe" name="searchEDe" value="">
+    <input type="hidden" id="searchTy" name="searchTy" value="">
+    <input type="hidden" id="searchQuery" name="searchQuery" value="">
+  </form>
+
+  <!-- 게시글 뷰 -->
+  <div class="siiruBoard-view">
+    <form id="boardForm" name="boardForm" method="post">
+      <input type="hidden" id="seq" name="seq" value="6">
+
+      <!-- 제목 -->
+      <h4>2025 가을 정기 학술대회 현장</h4>
+
+      <!-- 게시글 정보 -->
+      <div class="siiruBoardInfo">
+        <div class="boardInfo-view">
+          <span><i class="fa-solid fa-user"></i> 관리자</span>
+          <span><i class="fa-regular fa-calendar"></i> 2025-11-28</span>
+          <span><i class="fa-solid fa-eye"></i> 조회 234</span>
+          <span><i class="fa-regular fa-images"></i> 사진 12장</span>
+        </div>
+        <!-- 분류 -->
+        <dl>
+          <dt>분류</dt>
+          <dd>학술행사</dd>
+        </dl>
+      </div>
+
+      <!-- 본문 + 이미지 갤러리 -->
+      <div class="siiruBoardBody">
+        <p>2025년 11월 개최된 가을 정기 학술대회의 현장 사진입니다. 이번 학술대회는 총신대학교 신학대학원 강당에서 약 80여 명의 회원이 참석한 가운데 성황리에 마무리되었습니다.</p>
+
+        <!-- 이미지 갤러리 -->
+        <div class="d-flex align-items-center mb-3 mt-4">
+          <span class="section-label">Gallery</span>
+          <div class="section-divider"></div>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+        </div>
+      </div>
+
+      <!-- 버튼 영역 -->
+      <div class="siiruBoard-move">
+        <div class="btn-group-left">
+          <a href="../board/multimedia/list.html" class="btn btn-outline-secondary btn-sm">
+            <i class="fa-solid fa-list me-1"></i>목록
+          </a>
+        </div>
+        <div class="btn-group-right">
+          <a href="../board/multimedia/write.html" class="btn btn-outline-secondary btn-sm">
+            <i class="fa-solid fa-pen me-1"></i>수정
+          </a>
+          <button type="button" class="btn btn-outline-danger btn-sm">
+            <i class="fa-solid fa-trash me-1"></i>삭제
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 이전/다음 글 -->
+  <div class="board-nav mt-3">
+    <div class="board-nav-item">
+      <span class="nav-dir"><i class="fa-solid fa-chevron-up fa-xs me-1"></i>이전글</span>
+      <a href="../board/multimedia/view.html">개혁주의 신학 특강 — 구원론 편</a>
+    </div>
+    <div class="board-nav-item">
+      <span class="nav-dir"><i class="fa-solid fa-chevron-down fa-xs me-1"></i>다음글</span>
+      <a href="../board/multimedia/view.html">개혁신학연구회 창립 기념 학술제 및 만찬</a>
+    </div>
+  </div>
+
+</div>

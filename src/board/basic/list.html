@@ -1,0 +1,176 @@
+<div class="siiru-boardWrap">
+
+  <!-- 검색 폼 -->
+  <div class="siiruBoard-search">
+    <form id="boardSearchForm" name="boardSearchForm" method="post" action="#">
+      <input type="hidden" name="pageId" value="">
+      <input type="hidden" id="movePage" name="movePage" value="1">
+      <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="">
+      <input type="hidden" id="boardId" name="boardId" value="">
+      <!-- dateSearch: CMS 필드 유지, sub.css에서 숨김 처리 -->
+      <div class="dateSearch" aria-hidden="true">
+        <input type="radio" id="dateSet0" name="searchDateSet" value="0">
+        <input type="radio" id="dateSet1" name="searchDateSet" value="6">
+        <input type="radio" id="dateSet2" name="searchDateSet" value="30">
+        <input type="radio" id="dateSet3" name="searchDateSet" value="90">
+        <input type="radio" id="dateSet4" name="searchDateSet" value="180">
+        <input type="radio" id="dateSet5" name="searchDateSet" value="365">
+        <input type="text" class="maskDate" id="searchSDe" name="searchSDe" maxlength="10" autocomplete="off">
+        <input type="text" class="maskDate" id="searchEDe" name="searchEDe" maxlength="10" autocomplete="off">
+      </div>
+      <div class="siiruBoard-searchRow">
+        <select id="searchTy" name="searchTy" class="form-select siiruBoard-searchSelect">
+          <option value="1">제목+내용</option>
+          <option value="2">제목</option>
+          <option value="3">내용</option>
+          <option value="4">작성자</option>
+        </select>
+        <div class="input-group">
+          <input type="text" id="searchQuery" name="searchQuery" class="form-control siiruBoard-searchInput" placeholder="검색어를 입력하세요">
+          <button type="submit" class="btn siiruBoard-searchBtn">
+            <i class="fa-solid fa-magnifying-glass"></i><span class="ms-1">검색</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 게시글 수 + 글쓰기 버튼 -->
+  <div class="siiruBoard-infobar">
+    <p class="siiruBoard-count mb-0">전체 <strong>15</strong>건 · today 3</p>
+    <a href="../board/basic/write.html" class="btn siiruBoard-writeBtn">
+      <i class="fa-solid fa-pencil me-1"></i>글쓰기
+    </a>
+  </div>
+
+  <!-- 게시판 목록 -->
+  <div class="siiruBoard-list">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col" class="col-num">번호</th>
+          <th scope="col" class="col-title title-col">제목</th>
+          <th scope="col" class="col-author">작성자</th>
+          <th scope="col" class="col-date">작성일</th>
+          <th scope="col" class="col-view">조회</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 공지사항 -->
+        <tr class="notice-row">
+          <td><span class="notice">공지</span></td>
+          <th scope="row">
+            <a href="../board/basic/view.html">2025년 정기 세미나 일정 안내 및 참가 신청</a>
+          </th>
+          <td>관리자</td>
+          <td>2025-12-10</td>
+          <td>428</td>
+        </tr>
+        <tr class="notice-row">
+          <td><span class="notice">공지</span></td>
+          <th scope="row">
+            <a href="../board/basic/view.html">개혁신학연구회 제25호 논문집 발간 안내</a>
+            <i class="fa-solid fa-paperclip attach-icon ms-1"></i>
+          </th>
+          <td>관리자</td>
+          <td>2025-11-22</td>
+          <td>312</td>
+        </tr>
+        <!-- 일반 게시글 -->
+        <tr>
+          <td>15</td>
+          <th scope="row">
+            <a href="../board/basic/view.html">2025 겨울 정기 학술발표회 개최 안내</a>
+            <i class="fa-solid fa-paperclip attach-icon ms-1"></i>
+          </th>
+          <td>김철수</td>
+          <td>2025-12-01</td>
+          <td>87</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <th scope="row">
+            <a href="../board/basic/view.html">제24회 정기 학술대회 발표문 배포 공지</a>
+          </th>
+          <td>이영희</td>
+          <td>2025-11-18</td>
+          <td>156</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <th scope="row">
+            <a href="../board/basic/view.html">2026년 연회비 납부 및 회원 갱신 안내</a>
+          </th>
+          <td>관리자</td>
+          <td>2025-11-05</td>
+          <td>234</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <th scope="row">
+            <a href="../board/basic/view.html">개혁주의 신학 특강 시리즈 — 하반기 일정 안내</a>
+          </th>
+          <td>박민수</td>
+          <td>2025-10-22</td>
+          <td>98</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <th scope="row">
+            <a href="../board/basic/view.html">[답변] 2025 가을 학술제 장소 변경 공지</a>
+          </th>
+          <td>관리자</td>
+          <td>2025-10-18</td>
+          <td>72</td>
+        </tr>
+        <tr class="throughline">
+          <td>10</td>
+          <th scope="row"><span>삭제된 게시글입니다.</span></th>
+          <td>—</td>
+          <td>2025-10-15</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <th scope="row">
+            <a href="../board/basic/view.html">서기보 선출 결과 공고</a>
+          </th>
+          <td>관리자</td>
+          <td>2025-09-30</td>
+          <td>445</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <th scope="row">
+            <a href="../board/basic/view.html">하반기 정기 이사회 회의록 공개</a>
+            <i class="fa-solid fa-paperclip attach-icon ms-1"></i>
+          </th>
+          <td>관리자</td>
+          <td>2025-09-15</td>
+          <td>189</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 페이징 -->
+  <div id="boardPage" class="mt-4">
+    <nav aria-label="게시판 페이지 이동">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" aria-label="이전">
+            <i class="fa-solid fa-chevron-left fa-xs"></i>
+          </a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="다음">
+            <i class="fa-solid fa-chevron-right fa-xs"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>

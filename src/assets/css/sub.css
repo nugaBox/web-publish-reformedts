@@ -273,75 +273,19 @@
   pointer-events: none;
 }
 
-.notice-header {
-  background-color: var(--surface-container-low);
-  padding: 0.75rem 1.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #6c757d;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-radius: 4px;
-}
-
-.notice-item {
-  padding: 1.25rem 1.5rem;
-  background-color: white;
-  border-bottom: 1px solid #f0f1f2;
-  transition: background-color var(--transition-base);
-  cursor: pointer;
-}
-
-.notice-item:hover {
-  background-color: var(--surface-container-low);
-}
-
-.notice-item.sticky {
-  background-color: rgba(255, 222, 165, 0.1);
-}
-
-.notice-item.sticky:hover {
-  background-color: rgba(255, 222, 165, 0.2);
-}
-
-.notice-badge {
-  background-color: var(--secondary-gold);
-  color: white;
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-}
-
-.notice-title {
-  font-weight: 600;
-  color: #2e3132;
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.notice-item.sticky .notice-title {
-  font-weight: 700;
-}
-
-.notice-info {
-  color: #6c757d;
-  font-size: 0.85rem;
-}
 
 /* ── Pagination ─────────────────────────────────────────────── */
 .pagination .page-link {
   border: 1px solid var(--border-color);
   color: var(--text-muted);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 4px;
+  margin: 0 3px;
   border-radius: var(--radius-md) !important;
+  font-size: 0.95rem;
   font-weight: 500;
   transition: background-color var(--transition-base);
 }
@@ -636,165 +580,397 @@
 }
 
 /* ── CMS 게시판 스킨 래퍼 ───────────────────────────────────── */
-/* CMS가 출력하는 .siiru-boardWrap 내부 컨텐츠 공통 간격 */
-.siiru-boardWrap {
-  padding-top: 1rem;
+.siiru-boardWrap { padding-top: 1rem; }
+.siiru-clr::after { content: ""; display: table; clear: both; }
+
+/* ── siiruBoard-search — 검색 폼 ────────────────────────────── */
+body .siiruBoard-search {
+  margin-bottom: 0.75rem;
+}
+body .siiruBoard-searchRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+body .siiruBoard-searchSelect {
+  width: auto;
+  min-width: 7.5rem;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  border-color: var(--border-color);
+  border-radius: var(--radius-md);
+  height: 44px;
+}
+body .siiruBoard-searchSelect:focus {
+  border-color: var(--secondary-gold);
+  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
+}
+body .siiruBoard-searchInput {
+  font-size: 0.95rem;
+  border-color: var(--border-color);
+  height: 44px;
+}
+body .siiruBoard-searchInput:focus {
+  border-color: var(--secondary-gold);
+  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
+}
+body .siiruBoard-searchBtn {
+  background-color: var(--primary-navy);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0 1.25rem;
+  height: 44px;
+  white-space: nowrap;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border: 0 !important; /* siiru.min.css border:0 !important 유지 */
+  transition: background-color var(--transition-base);
+}
+body .siiruBoard-searchBtn:hover {
+  background-color: var(--primary-container);
+  color: #fff;
+}
+@media (max-width: 480px) {
+  body .siiruBoard-searchRow { flex-wrap: wrap; }
+  body .siiruBoard-searchSelect { width: 100%; min-width: unset; }
 }
 
-.siiru-clr::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* ── Board 게시판 목록 공통 ──────────────────────────────────── */
-.board-meta-bar {
+/* ── siiruBoard-infobar — 게시글 수 + 글쓰기 버튼 바 ─────────── */
+body .siiruBoard-infobar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  padding: 0.5rem 0 0.75rem;
 }
-
-.board-count {
-  font-size: 0.85rem;
+body .siiruBoard-count {
+  font-size: 0.9rem;
   color: var(--text-muted);
 }
+body .siiruBoard-count strong {
+  color: var(--primary-navy);
+  font-weight: 700;
+}
+body .siiruBoard-writeBtn {
+  background-color: var(--secondary-gold);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-base);
+  white-space: nowrap;
+}
+body .siiruBoard-writeBtn:hover {
+  background-color: #5a4312;
+  color: #fff;
+}
 
-.notice-item .attach-icon {
+/* ============================================================
+   Board — 게시판 공통
+   CMS 클래스(.siiruBoard-list, .siiruBoard-gallery 등)를 직접
+   스타일링하여 CMS 스킨 파일을 그대로 복붙해도 동일하게 출력됨
+   ============================================================ */
+
+/* ── CMS 제공 요소 중 화면에 표시하지 않을 항목 ─────────────── */
+/* 운영서버 JSP 출력 HTML을 수정할 수 없으므로 CSS로 숨김 처리  */
+.siiru-boardWrap .dateSearch { display: none; }
+
+/* ── siiruBoard-list — 일반 게시판 테이블 목록 ─────────────── */
+body .siiruBoard-list {
+  border-top: 2px solid var(--primary-navy);
+  margin-top: 1.25rem;
+}
+body .siiruBoard-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+body .siiruBoard-list thead th {
+  background-color: var(--surface-container-low);
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  white-space: nowrap;
+}
+body .siiruBoard-list thead th.title-col { text-align: left; }
+body .siiruBoard-list tbody td,
+body .siiruBoard-list tbody th {
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #f0f1f2;
+  font-size: 1rem;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--text-muted);
+}
+body .siiruBoard-list tbody th[scope="row"] {
+  text-align: left;
+  color: var(--text-main);
+  font-weight: 400;
+}
+body .siiruBoard-list tbody tr:hover {
+  background-color: var(--surface-container-low);
+  cursor: pointer;
+}
+body .siiruBoard-list tbody tr.notice-row {
+  background-color: rgba(255, 222, 165, 0.08);
+}
+body .siiruBoard-list tbody tr.notice-row:hover {
+  background-color: rgba(255, 222, 165, 0.15);
+}
+body .siiruBoard-list tbody tr.throughline td,
+body .siiruBoard-list tbody tr.throughline th {
+  text-decoration: line-through;
+  opacity: 0.5;
+  color: var(--text-muted) !important; /* siiru.min.css color:red !important 상쇄 */
+}
+body .siiruBoard-list .notice {
+  display: inline-block;
+  background-color: var(--secondary-gold);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.2rem 0.45rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+body .siiruBoard-list tbody th[scope="row"] a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color var(--transition-base);
+}
+body .siiruBoard-list tbody th[scope="row"] a:hover { color: var(--secondary-gold); }
+body .siiruBoard-list .attach-icon {
   color: var(--secondary-gold);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
+}
+body .siiruBoard-list td.nodata {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+@media (max-width: 767px) {
+  body .siiruBoard-list .col-author,
+  body .siiruBoard-list .col-date,
+  body .siiruBoard-list .col-view { display: none; }
 }
 
-/* ── Board 뷰 페이지 ─────────────────────────────────────────── */
-.post-header {
-  border-bottom: 2px solid var(--primary-navy);
-  padding-bottom: 1.25rem;
-  margin-bottom: 1.5rem;
+/* ── siiruBoard-gallery — 멀티미디어 카드 그리드 ─────────────── */
+body .siiruBoard-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.25rem;
 }
+@media (max-width: 991px) { body .siiruBoard-gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 479px) { body .siiruBoard-gallery { grid-template-columns: 1fr; } }
 
-.post-header .post-title {
+body .siiruBoard-galleryBox {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+body .siiruBoard-galleryBox:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -4px rgba(0, 6, 19, 0.12);
+}
+body .siiruBoard-galleryBox > a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+body .siiruBoard-galleryBox .photoBox {
+  aspect-ratio: 16 / 9;
+  background-color: var(--surface-container);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .siiruBoard-galleryBox .photoBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+body .siiruBoard-galleryBox:hover .photoBox img { transform: scale(1.04); }
+body .siiruBoard-galleryBox .thumb-placeholder {
+  color: var(--border-color);
+  font-size: 2.5rem;
+}
+/* 썸네일 없는 경우 배경 placeholder */
+body .siiruBoard-galleryBox .thumb-placeholder-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--surface-container) 0%, var(--surface-container-low) 100%);
+  color: var(--border-color);
+  font-size: 2.75rem;
+  position: absolute;
+  inset: 0;
+}
+body .siiruBoard-galleryBox .photo-count {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 6, 19, 0.65);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(4px);
+}
+body .siiruBoard-galleryBox dl { padding: 1rem; margin: 0; }
+body .siiruBoard-galleryBox dt {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.5;
+}
+body .siiruBoard-galleryBox dd { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+
+/* ── siiruBoard-view — 게시글 뷰 ───────────────────────────── */
+body .siiruBoard-view h4 {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--primary-navy);
   line-height: 1.4;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
+  border-bottom: 2px solid var(--primary-navy);
+  padding-bottom: 1rem;
 }
-
-.post-meta {
+body .siiruBoard-view h4 .notice {
+  display: inline-block;
+  background-color: var(--secondary-gold);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.2rem 0.45rem;
+  border-radius: 3px;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+body .siiruBoardInfo {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.boardInfo-view {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   font-size: 0.82rem;
   color: var(--text-muted);
-  border-top: 1px solid var(--border-color);
-  padding-top: 0.75rem;
+  padding: 0.75rem 0;
 }
-
-.post-meta span {
+.boardInfo-view span { display: flex; align-items: center; gap: 0.35rem; }
+.boardInfo-view i { color: var(--secondary-gold); }
+body .siiruBoardInfo dl {
   display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 0;
+  border-top: 1px dashed var(--border-color);
+  margin: 0;
+}
+body .siiruBoardInfo dt {
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 5rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+body .siiruBoardInfo dd { color: var(--text-main); font-size: 0.875rem; margin: 0; }
+body .siiruBoardInfo dd ul { list-style: none; padding: 0; margin: 0; }
+body .siiruBoardInfo dd ul li { padding: 0.2rem 0; }
+body .siiruBoardInfo dd ul li a {
+  color: var(--primary-navy);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
-
-.post-meta i {
+body .siiruBoardInfo dd ul li a:hover {
   color: var(--secondary-gold);
+  text-decoration: underline;
 }
-
-.post-content {
-  min-height: 300px;
-  padding: 2rem 0;
+body .siiruBoardBody {
+  min-height: 260px;
+  padding: 1.75rem 0;
   border-bottom: 1px solid var(--border-color);
   font-size: 0.95rem;
   line-height: 1.9;
   color: var(--text-muted);
 }
+body .siiruBoardBody .imageView img { max-width: 100%; height: auto; display: block; margin-bottom: 0.5rem; }
+body .siiruBoardBody .videoView video { width: 100%; border-radius: var(--radius-md); margin-bottom: 0.75rem; }
+body .siiruBoardBody .audioView audio { width: 100%; margin-bottom: 0.75rem; }
 
-.post-attachments {
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.post-attachments h6 {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.attach-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.attach-list li a {
-  display: inline-flex;
+body .siiruBoard-move {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+}
+body .siiruBoard-move .btn-group-left,
+body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
+
+/* 이전/다음 글 네비 */
+.board-nav { border-top: 1px solid var(--border-color); }
+.board-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #f0f1f2;
   font-size: 0.875rem;
-  color: var(--primary-navy);
-  text-decoration: none;
-  padding: 0.35rem 0;
 }
-
-.attach-list li a:hover {
-  color: var(--secondary-gold);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.post-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-  margin-top: 2rem;
-}
-
-.post-nav-item {
-  background-color: var(--surface-container-low);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 1rem;
-  text-decoration: none;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  transition: background-color var(--transition-base);
-}
-
-.post-nav-item:hover {
-  background-color: var(--surface-container);
-  color: var(--primary-navy);
-}
-
-.post-nav-item .nav-dir {
-  font-size: 0.7rem;
+.board-nav-item .nav-dir {
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--secondary-gold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: block;
-  margin-bottom: 0.2rem;
-}
-
-.post-nav-title {
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
+  min-width: 3.5rem;
 }
+.board-nav-item a {
+  color: var(--text-muted);
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.board-nav-item a:hover { color: var(--secondary-gold); }
 
-/* ── 미디어 뷰 갤러리 그리드 ────────────────────────────────── */
+/* ── 갤러리 그리드 (멀티미디어 뷰 이미지) ──────────────────── */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
 }
-
-/* gallery-item: CMS imageList <img> 를 감싸는 컨테이너 */
 .gallery-item {
   aspect-ratio: 1;
   overflow: hidden;
@@ -808,12 +984,7 @@
   cursor: pointer;
   transition: opacity var(--transition-base);
 }
-
-.gallery-item:hover {
-  opacity: 0.85;
-}
-
-/* CMS imageList에서 출력되는 실제 img 태그 */
+.gallery-item:hover { opacity: 0.85; }
 .gallery-item img {
   width: 100%;
   height: 100%;
@@ -821,96 +992,84 @@
   display: block;
   transition: transform 0.4s ease;
 }
+.gallery-item:hover img { transform: scale(1.04); }
+@media (max-width: 575px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 
-.gallery-item:hover img {
-  transform: scale(1.04);
+/* ── siiruBoard-write — 게시글 작성 폼 ─────────────────────── */
+body .siiruBoard-write {
+  border-top: 2px solid var(--primary-navy);
 }
-
-@media (max-width: 575px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+body .siiruBoard-write dl {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0;
 }
-
-/* ── 게시판 쓰기/수정 폼 ─────────────────────────────────────── */
-.write-form-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.write-form-table th,
-.write-form-table td {
-  border: 1px solid var(--border-color);
-  padding: 0.75rem 1rem;
-  vertical-align: middle;
-}
-
-.write-form-table th {
+body .siiruBoard-write dt {
   background-color: var(--surface-container-low);
+  padding: 0.85rem 1rem;
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--primary-navy);
   white-space: nowrap;
-  width: 9rem;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--border-color);
 }
-
-.write-form-table .form-control,
-.write-form-table .form-select {
-  border: 1px solid var(--border-color);
+body .siiruBoard-write dt span { color: #dc3545; margin-right: 0.25rem; }
+body .siiruBoard-write dd {
+  padding: 0.75rem 1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+body .siiruBoard-write .form-control,
+body .siiruBoard-write .form-select {
   font-size: 0.9rem;
-  background-color: #fff;
+  border-color: var(--border-color);
 }
-
-.write-form-table .form-control:focus,
-.write-form-table .form-select:focus {
+body .siiruBoard-write .form-control:focus,
+body .siiruBoard-write .form-select:focus {
   border-color: var(--secondary-gold);
   box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
 }
-
-.content-editor-area {
-  width: 100%;
-  min-height: 360px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1rem;
-  font-family: var(--font-base);
-  font-size: 0.9rem;
-  resize: vertical;
-  line-height: 1.7;
+body .siiruBoard-btnArea {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.content-editor-area:focus {
-  outline: none;
-  border-color: var(--secondary-gold);
-  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
-}
-
-.file-upload-area {
+/* ── 파일 업로드 ─────────────────────────────────────────────── */
+.file-upload-drop {
   border: 2px dashed var(--border-color);
   border-radius: var(--radius-md);
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
   background-color: var(--surface-container-low);
   cursor: pointer;
   transition: border-color var(--transition-base), background-color var(--transition-base);
 }
-
-.file-upload-area:hover {
+.file-upload-drop:hover {
   border-color: var(--secondary-gold);
   background-color: rgba(255, 222, 165, 0.08);
 }
-
-.file-upload-area i {
-  font-size: 2rem;
-  color: var(--secondary-gold);
-  margin-bottom: 0.5rem;
+.file-upload-drop i { font-size: 1.75rem; color: var(--secondary-gold); display: block; margin-bottom: 0.35rem; }
+.file-upload-drop p { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+.file-list { list-style: none; padding: 0; margin-top: 0.75rem; }
+.file-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--border-color);
+  font-size: 0.85rem;
 }
+.file-list li:last-child { border-bottom: none; }
 
-.file-upload-area p {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.thumb-upload-preview {
+/* ── 썸네일 업로드 미리보기 ─────────────────────────────────── */
+.thumb-preview {
   aspect-ratio: 16 / 9;
   background-color: var(--surface-container);
   border-radius: var(--radius-md);
@@ -922,8 +1081,8 @@
   cursor: pointer;
   transition: border-color var(--transition-base);
   overflow: hidden;
+  max-width: 320px;
 }
-
-.thumb-upload-preview:hover {
-  border-color: var(--secondary-gold);
-}
+.thumb-preview:hover { border-color: var(--secondary-gold); }
+.thumb-preview i { font-size: 2rem; color: var(--secondary-gold); margin-bottom: 0.35rem; }
+.thumb-preview span { font-size: 0.8rem; color: var(--text-muted); }

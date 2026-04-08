@@ -1,0 +1,162 @@
+<div class="siiru-boardWrap">
+
+  <!-- 검색 폼 -->
+  <div class="siiruBoard-search">
+    <form id="boardSearchForm" name="boardSearchForm" method="post" action="#">
+      <input type="hidden" name="pageId" value="">
+      <input type="hidden" id="movePage" name="movePage" value="1">
+      <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="">
+      <input type="hidden" id="boardId" name="boardId" value="">
+      <!-- dateSearch: CMS 필드 유지, sub.css에서 숨김 처리 -->
+      <div class="dateSearch" aria-hidden="true">
+        <input type="radio" id="dateSet0" name="searchDateSet" value="0">
+        <input type="radio" id="dateSet1" name="searchDateSet" value="6">
+        <input type="radio" id="dateSet2" name="searchDateSet" value="30">
+        <input type="radio" id="dateSet3" name="searchDateSet" value="90">
+        <input type="radio" id="dateSet4" name="searchDateSet" value="180">
+        <input type="radio" id="dateSet5" name="searchDateSet" value="365">
+        <input type="text" class="maskDate" id="searchSDe" name="searchSDe" maxlength="10" autocomplete="off">
+        <input type="text" class="maskDate" id="searchEDe" name="searchEDe" maxlength="10" autocomplete="off">
+      </div>
+      <div class="siiruBoard-searchRow">
+        <select id="searchTy" name="searchTy" class="form-select siiruBoard-searchSelect">
+          <option value="1">제목+내용</option>
+          <option value="2">제목</option>
+          <option value="3">내용</option>
+          <option value="4">작성자</option>
+        </select>
+        <div class="input-group">
+          <input type="text" id="searchQuery" name="searchQuery" class="form-control siiruBoard-searchInput" placeholder="검색어를 입력하세요">
+          <button type="submit" class="btn siiruBoard-searchBtn">
+            <i class="fa-solid fa-magnifying-glass"></i><span class="ms-1">검색</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 게시글 수 + 등록 버튼 -->
+  <div class="siiruBoard-infobar">
+    <p class="siiruBoard-count mb-0">전체 <strong>18</strong>건 · today 2</p>
+    <a href="../board/multimedia/write.html" class="btn siiruBoard-writeBtn">
+      <i class="fa-solid fa-plus me-1"></i>등록
+    </a>
+  </div>
+
+  <!-- 갤러리 그리드 -->
+  <div class="siiruBoard-gallery">
+
+    <div class="siiruBoard-galleryBox">
+      <a href="../board/multimedia/view.html">
+        <div class="photoBox">
+          <div class="thumb-placeholder-bg">
+            <i class="fa-regular fa-images"></i>
+          </div>
+          <span class="photo-count"><i class="fa-solid fa-images fa-xs me-1"></i>12</span>
+        </div>
+        <dl>
+          <dt>[학술행사] 2025 가을 정기 학술대회 현장</dt>
+          <dd><i class="fa-regular fa-calendar fa-xs me-1"></i>2025-11-28</dd>
+        </dl>
+      </a>
+    </div>
+
+    <div class="siiruBoard-galleryBox">
+      <a href="../board/multimedia/view.html">
+        <div class="photoBox">
+          <div class="thumb-placeholder-bg">
+            <i class="fa-regular fa-images"></i>
+          </div>
+          <span class="photo-count"><i class="fa-solid fa-images fa-xs me-1"></i>8</span>
+        </div>
+        <dl>
+          <dt>[특강] 개혁주의 신학 특강 — 구원론 편</dt>
+          <dd><i class="fa-regular fa-calendar fa-xs me-1"></i>2025-10-15</dd>
+        </dl>
+      </a>
+    </div>
+
+    <div class="siiruBoard-galleryBox">
+      <a href="../board/multimedia/view.html">
+        <div class="photoBox">
+          <div class="thumb-placeholder-bg">
+            <i class="fa-regular fa-images"></i>
+          </div>
+          <span class="photo-count"><i class="fa-solid fa-images fa-xs me-1"></i>24</span>
+        </div>
+        <dl>
+          <dt>개혁신학연구회 창립 기념 학술제 및 만찬</dt>
+          <dd><i class="fa-regular fa-calendar fa-xs me-1"></i>2025-09-20</dd>
+        </dl>
+      </a>
+    </div>
+
+    <div class="siiruBoard-galleryBox">
+      <a href="../board/multimedia/view.html">
+        <div class="photoBox">
+          <div class="thumb-placeholder-bg">
+            <i class="fa-regular fa-images"></i>
+          </div>
+          <span class="photo-count"><i class="fa-solid fa-images fa-xs me-1"></i>6</span>
+        </div>
+        <dl>
+          <dt>[세미나] 하반기 신학 세미나 현장</dt>
+          <dd><i class="fa-regular fa-calendar fa-xs me-1"></i>2025-08-30</dd>
+        </dl>
+      </a>
+    </div>
+
+    <div class="siiruBoard-galleryBox">
+      <a href="../board/multimedia/view.html">
+        <div class="photoBox">
+          <div class="thumb-placeholder-bg">
+            <i class="fa-regular fa-images"></i>
+          </div>
+          <span class="photo-count"><i class="fa-solid fa-images fa-xs me-1"></i>15</span>
+        </div>
+        <dl>
+          <dt>창립 20주년 기념 학술제 및 만찬</dt>
+          <dd><i class="fa-regular fa-calendar fa-xs me-1"></i>2025-07-12</dd>
+        </dl>
+      </a>
+    </div>
+
+    <div class="siiruBoard-galleryBox">
+      <a href="../board/multimedia/view.html">
+        <div class="photoBox">
+          <div class="thumb-placeholder-bg">
+            <i class="fa-regular fa-images"></i>
+          </div>
+          <span class="photo-count"><i class="fa-solid fa-images fa-xs me-1"></i>9</span>
+        </div>
+        <dl>
+          <dt>[이사회] 2025년 정기 이사회 모습</dt>
+          <dd><i class="fa-regular fa-calendar fa-xs me-1"></i>2025-06-05</dd>
+        </dl>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- 페이징 -->
+  <div id="boardPage" class="mt-4">
+    <nav aria-label="게시판 페이지 이동">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" aria-label="이전">
+            <i class="fa-solid fa-chevron-left fa-xs"></i>
+          </a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="다음">
+            <i class="fa-solid fa-chevron-right fa-xs"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>

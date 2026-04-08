@@ -32,33 +32,33 @@ const CMS = {
 const menuData = [
   {
     menuNm: "연구회 소개",
-    menuUrl: "sub.html",
+    menuUrl: "/sub/about.html",
     subMenu: [
-      { menuNm: "연구회 소개",      menuUrl: "sub.html" },
-      { menuNm: "서철원 박사 소개", menuUrl: "#" },
-      { menuNm: "연혁",             menuUrl: "#" },
-      { menuNm: "섬기는 분들",      menuUrl: "#" },
-      { menuNm: "회칙 및 규정",     menuUrl: "#" },
-      { menuNm: "후원 안내",        menuUrl: "#" },
+      { menuNm: "연구회 소개",      menuUrl: "/sub/about.html" },
+      { menuNm: "서철원 박사 소개", menuUrl: "/sub/dr-seo.html" },
+      { menuNm: "연혁",             menuUrl: "/sub/history.html" },
+      { menuNm: "섬기는 분들",      menuUrl: "/sub/members.html" },
+      { menuNm: "회칙 및 규정",     menuUrl: "/sub/rules.html" },
+      { menuNm: "후원 안내",        menuUrl: "/sub/support.html" },
     ],
   },
   {
     menuNm: "교육 및 세미나",
-    menuUrl: "#",
+    menuUrl: "/boardpage/seminar/list.html",
     subMenu: [
-      { menuNm: "세미나 안내",   menuUrl: "#" },
-      { menuNm: "논문 및 발제문", menuUrl: "#" },
-      { menuNm: "자료실",        menuUrl: "#" },
+      { menuNm: "세미나 안내",    menuUrl: "/boardpage/seminar/list.html" },
+      { menuNm: "논문 및 발제문", menuUrl: "/boardpage/papers/list.html" },
+      { menuNm: "자료실",         menuUrl: "/boardpage/resources/list.html" },
     ],
   },
   {
     menuNm: "연구회 소식",
-    menuUrl: "sub2.html",
+    menuUrl: "/boardpage/notice/list.html",
     subMenu: [
-      { menuNm: "공지사항",    menuUrl: "#" },
-      { menuNm: "언론보도",    menuUrl: "#" },
-      { menuNm: "회원동정",    menuUrl: "#" },
-      { menuNm: "사진 게시판", menuUrl: "#" },
+      { menuNm: "공지사항", menuUrl: "/boardpage/notice/list.html" },
+      { menuNm: "언론보도", menuUrl: "/boardpage/press/list.html" },
+      { menuNm: "회원동정", menuUrl: "/boardpage/member-news/list.html" },
+      { menuNm: "앨범",     menuUrl: "/boardpage/album/list.html" },
     ],
   },
 ];
@@ -109,18 +109,26 @@ function generateTopmenu(data) {
   return `<ul class="navbar-nav gap-lg-3">\n${items.join("\n")}\n</ul>\n`;
 }
 
-/** HTML 파일의 data-include 태그를 실제 파일 내용으로 인라인 (재귀로 중첩 include 처리) */
-function inlineIncludes(html) {
+/**
+ * HTML 파일의 data-include 태그를 실제 파일 내용으로 인라인 (재귀로 중첩 include 처리)
+ * @param {string} html      - 처리할 HTML 문자열
+ * @param {string} baseDir   - include 경로를 해석할 기준 디렉토리 (기본: DIST 루트)
+ */
+function inlineIncludes(html, baseDir = DIST) {
   return html.replace(
     /<div\s+data-include="([^"]+)"><\/div>/g,
     (match, includePath) => {
-      const full = path.join(DIST, includePath);
+      // /로 시작하는 경로는 DIST 루트 기준, 아니면 baseDir 기준 상대경로
+      const full = includePath.startsWith("/")
+        ? path.join(DIST, includePath.slice(1))
+        : path.resolve(baseDir, includePath);
       if (!fs.existsSync(full)) {
-        console.warn(`  ⚠️  include 파일 없음: ${includePath}`);
+        console.warn(`  ⚠️  include 파일 없음: ${includePath} (기준: ${path.relative(DIST, baseDir)})`);
         return match;
       }
       const content = fs.readFileSync(full, "utf-8").trim();
-      return inlineIncludes(content); // 중첩 include 재귀 처리
+      // 중첩 include는 항상 DIST 루트 기준 (include 경로가 루트 상대 경로이기 때문)
+      return inlineIncludes(content, DIST);
     }
   );
 }
@@ -148,32 +156,63 @@ for (const file of htmlFiles) {
   const filePath = path.join(DIST, file);
   let html = fs.readFileSync(filePath, "utf-8");
 
-  html = inlineIncludes(html);
+  html = inlineIncludes(html, DIST); // 루트 기준 include 해석
   html = replaceImgPathsHtml(html);
 
   fs.writeFileSync(filePath, html, "utf-8");
   console.log(`✅  ${file} — include 인라인, 이미지 경로 치환 (→ ${CMS.imgHtml})`);
 }
 
-// 3-1. board/ 서브디렉토리 HTML 처리: 이미지 경로 치환만 수행
-//      (JSP include 사용으로 data-include 인라인 불필요)
-const boardDir = path.join(DIST, "board");
-if (fs.existsSync(boardDir)) {
-  const boardHtmlFiles = fs.readdirSync(boardDir).filter((f) => f.endsWith(".html"));
-
-  for (const file of boardHtmlFiles) {
-    const filePath = path.join(boardDir, file);
+// 3-1. boardpage/ 처리: data-include 인라인 (../../board/... 등 상대경로 지원) + 이미지 경로 치환
+const boardpageDir = path.join(DIST, "boardpage");
+if (fs.existsSync(boardpageDir)) {
+  // 3-1a. boardpage/ 루트 HTML (있을 경우)
+  const boardpageFiles = fs.readdirSync(boardpageDir).filter((f) => f.endsWith(".html"));
+  for (const file of boardpageFiles) {
+    const filePath = path.join(boardpageDir, file);
     let html = fs.readFileSync(filePath, "utf-8");
-    const before = html;
-
+    html = inlineIncludes(html, boardpageDir);
     html = replaceImgPathsHtml(html);
+    fs.writeFileSync(filePath, html, "utf-8");
+    console.log(`✅  boardpage/${file} — include 인라인, 이미지 경로 치환`);
+  }
 
-    if (html !== before) {
+  // 3-1b. boardpage/ 서브디렉토리 HTML (seminar/, papers/, notice/ 등)
+  let boardpageSubCount = 0;
+  for (const entry of fs.readdirSync(boardpageDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const subDir = path.join(boardpageDir, entry.name);
+    for (const file of fs.readdirSync(subDir).filter((f) => f.endsWith(".html"))) {
+      const filePath = path.join(subDir, file);
+      let html = fs.readFileSync(filePath, "utf-8");
+      html = inlineIncludes(html, subDir); // 서브디렉토리 기준 (../../include/... 지원)
+      html = replaceImgPathsHtml(html);
       fs.writeFileSync(filePath, html, "utf-8");
-      console.log(`✅  board/${file} — 이미지 경로 치환 (→ ${CMS.imgHtml})`);
+      boardpageSubCount++;
     }
   }
-  console.log(`✅  board/ — ${boardHtmlFiles.length}개 HTML 파일 처리 완료`);
+  if (boardpageSubCount > 0) {
+    console.log(`✅  boardpage/*/ — ${boardpageSubCount}개 서브페이지 include 인라인, 이미지 경로 치환`);
+  }
+}
+
+// 3-2. board/ 서브디렉토리 HTML 처리: 이미지 경로 치환만 수행 (board 스킨 파일)
+const boardDir = path.join(DIST, "board");
+if (fs.existsSync(boardDir)) {
+  let boardCount = 0;
+  for (const subDir of fs.readdirSync(boardDir)) {
+    const subPath = path.join(boardDir, subDir);
+    if (!fs.statSync(subPath).isDirectory()) continue;
+    for (const file of fs.readdirSync(subPath).filter((f) => f.endsWith(".html"))) {
+      const filePath = path.join(subPath, file);
+      let html = fs.readFileSync(filePath, "utf-8");
+      const before = html;
+      html = replaceImgPathsHtml(html);
+      if (html !== before) fs.writeFileSync(filePath, html, "utf-8");
+      boardCount++;
+    }
+  }
+  console.log(`✅  board/ — ${boardCount}개 스킨 HTML 이미지 경로 치환 완료`);
 }
 
 // 4. CSS 처리: 웹폰트 경로 + 이미지 경로 치환

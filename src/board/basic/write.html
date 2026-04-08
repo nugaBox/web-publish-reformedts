@@ -1,0 +1,109 @@
+<div class="siiru-boardWrap">
+
+  <!-- 숨김 폼: 페이지/검색 파라미터 보존 -->
+  <form id="boardSearchForm" name="boardSearchForm" method="post" action="#">
+    <input type="hidden" name="pageId" value="">
+    <input type="hidden" id="movePage" name="movePage" value="1">
+    <input type="hidden" id="boardId" name="boardId" value="">
+    <input type="hidden" id="searchCtgry" name="searchCtgry" value="">
+    <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="">
+    <input type="hidden" id="searchSDe" name="searchSDe" value="">
+    <input type="hidden" id="searchEDe" name="searchEDe" value="">
+    <input type="hidden" id="searchTy" name="searchTy" value="">
+    <input type="hidden" id="searchQuery" name="searchQuery" value="">
+  </form>
+
+  <!-- 게시글 등록 폼 -->
+  <form id="boardForm" name="boardForm" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="action" name="action" value="insert">
+    <input type="hidden" id="seq" name="seq" value="">
+    <input type="hidden" id="levelSn" name="levelSn" value="0">
+    <input type="hidden" id="beginDt" name="beginDt" value="">
+    <input type="hidden" id="endDt" name="endDt" value="">
+    <input type="hidden" id="noticeBeginDt" name="noticeBeginDt" value="">
+    <input type="hidden" id="noticeEndDt" name="noticeEndDt" value="">
+
+    <div class="siiruBoard-write">
+
+      <!-- 분류 -->
+      <dl>
+        <dt><span>*</span> <label for="ctgrySn">분류</label></dt>
+        <dd>
+          <select id="ctgrySn" name="ctgrySn" class="form-select" style="max-width: 200px;">
+            <option value="">선택하세요</option>
+            <option value="1">학술행사</option>
+            <option value="2">공지사항</option>
+            <option value="3">자료배포</option>
+            <option value="4">기타</option>
+          </select>
+        </dd>
+      </dl>
+
+      <!-- 제목 -->
+      <dl>
+        <dt><span>*</span> <label for="boardSj">제목</label></dt>
+        <dd>
+          <input type="text" id="boardSj" name="boardSj" class="form-control" maxlength="200" placeholder="제목을 입력하세요">
+        </dd>
+      </dl>
+
+      <!-- 작성자 -->
+      <dl>
+        <dt><span>*</span> <label for="userNm">작성자</label></dt>
+        <dd>
+          <input type="text" id="userNm" name="userNm" class="form-control" maxlength="50" style="max-width: 200px;" placeholder="작성자명">
+        </dd>
+      </dl>
+
+      <!-- 공지 설정 -->
+      <dl>
+        <dt><label for="noticeAt">공지 설정</label></dt>
+        <dd>
+          <input type="checkbox" id="noticeAt" name="noticeAt" value="Y">
+          <label for="noticeAt"> 공지로 등록 </label>
+        </dd>
+      </dl>
+
+      <!-- 추가 항목: 장소 -->
+      <dl>
+        <dt><label for="item_place">장소</label></dt>
+        <dd>
+          <input type="text" id="item_place" name="item_place" class="form-control" placeholder="행사 장소 입력">
+        </dd>
+      </dl>
+
+      <!-- 본문 -->
+      <dl>
+        <dt><span>*</span> <label for="boardCn">내용</label></dt>
+        <dd>
+          <textarea id="boardCn" name="boardCn" class="form-control" rows="12" placeholder="내용을 입력하세요."></textarea>
+        </dd>
+      </dl>
+
+      <!-- 첨부파일 -->
+      <dl>
+        <dt><label>첨부파일</label></dt>
+        <dd>
+          <div class="file-upload-drop" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <p class="mt-1 mb-0">파일을 드래그하거나 클릭하여 업로드<br><small class="text-muted">최대 10MB · PDF, Word, HWP, 이미지 등</small></p>
+          </div>
+          <input type="file" id="fileInput" name="file" class="d-none" multiple>
+          <ul class="file-list mt-2" id="fileList"></ul>
+        </dd>
+      </dl>
+
+    </div>
+
+    <!-- 버튼 -->
+    <div class="siiruBoard-btnArea">
+      <button type="submit" class="btn btn-gold px-4">
+        <i class="fa-solid fa-check me-1"></i>등록
+      </button>
+      <a href="../board/basic/list.html" class="btn btn-outline-secondary px-4">
+        <i class="fa-solid fa-xmark me-1"></i>취소
+      </a>
+    </div>
+  </form>
+
+</div>
