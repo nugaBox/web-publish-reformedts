@@ -580,12 +580,16 @@
 }
 
 /* ── CMS 게시판 스킨 래퍼 ───────────────────────────────────── */
-.siiru-boardWrap { padding-top: 1rem; }
+.siiru-boardWrap { padding-top: 1rem; font-size: 1rem !important; } /* siiru 전역 font-size 리셋 방어 */
 .siiru-clr::after { content: ""; display: table; clear: both; }
 
 /* ── siiruBoard-search — 검색 폼 ────────────────────────────── */
 body .siiruBoard-search {
   margin-bottom: 0.75rem;
+  float: none;          /* siiru: float:right 상쇄 */
+  overflow: visible;    /* siiru: overflow:hidden 상쇄 */
+  text-align: left;
+  padding: 0;
 }
 body .siiruBoard-searchRow {
   display: flex;
@@ -629,6 +633,33 @@ body .siiruBoard-searchBtn {
 body .siiruBoard-searchBtn:hover {
   background-color: var(--primary-container);
   color: #fff;
+}
+/* siiru.min.css의 .siiruBoard-search input[type="text"] (명시도 0,2,1) 상쇄 — 동일 명시도, 나중 로드 */
+body .siiruBoard-search .siiruBoard-searchInput {
+  height: 44px;
+  font-size: 0.95rem;
+  min-width: unset;
+  display: block;
+  border-color: var(--border-color);
+  vertical-align: top;
+}
+body .siiruBoard-search .siiruBoard-searchInput:focus {
+  border-color: var(--secondary-gold);
+  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
+}
+/* siiru.min.css의 .siiruBoard-search button (명시도 0,2,1) 상쇄 */
+body .siiruBoard-search .siiruBoard-searchBtn {
+  height: 44px;
+  width: auto;
+  background-color: var(--primary-navy);
+  background-image: none;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  vertical-align: top;
+}
+body .siiruBoard-search .siiruBoard-searchBtn:hover {
+  background-color: var(--primary-container);
 }
 @media (max-width: 480px) {
   body .siiruBoard-searchRow { flex-wrap: wrap; }
@@ -679,6 +710,7 @@ body .siiruBoard-writeBtn:hover {
 body .siiruBoard-list {
   border-top: 2px solid var(--primary-navy);
   margin-top: 1.25rem;
+  margin-bottom: 0;  /* siiru: margin-bottom:10px 상쇄 */
 }
 body .siiruBoard-list table {
   width: 100%;
@@ -687,7 +719,7 @@ body .siiruBoard-list table {
 body .siiruBoard-list thead th {
   background-color: var(--surface-container-low);
   padding: 0.85rem 1rem;
-  font-size: 0.85rem;
+  font-size: 0.85rem !important; /* siiru: 작은 px 값 상쇄 */
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -701,7 +733,7 @@ body .siiruBoard-list tbody td,
 body .siiruBoard-list tbody th {
   padding: 1rem 1rem;
   border-bottom: 1px solid #f0f1f2;
-  font-size: 1rem;
+  font-size: 1rem !important; /* siiru: font-size 리셋 상쇄 */
   text-align: center;
   vertical-align: middle;
   color: var(--text-muted);
@@ -729,9 +761,9 @@ body .siiruBoard-list tbody tr.throughline th {
 }
 body .siiruBoard-list .notice {
   display: inline-block;
-  background-color: var(--secondary-gold);
-  color: white;
-  font-size: 0.65rem;
+  background-color: var(--secondary-gold) !important; /* siiru: teal 계열 색상 !important 상쇄 */
+  color: white !important;
+  font-size: 0.65rem !important;
   font-weight: 800;
   padding: 0.2rem 0.45rem;
   border-radius: 3px;
@@ -742,7 +774,7 @@ body .siiruBoard-list tbody th[scope="row"] a {
   color: var(--text-main);
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1rem !important; /* siiru: font-size 리셋 상쇄 */
   transition: color var(--transition-base);
 }
 body .siiruBoard-list tbody th[scope="row"] a:hover { color: var(--secondary-gold); }
@@ -768,11 +800,17 @@ body .siiruBoard-gallery {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 1.25rem;
+  border: none;         /* siiru: border-top/bottom:1px solid #999 상쇄 */
+  padding-top: 0;       /* siiru: padding-top:20px 상쇄 */
+  overflow: visible;    /* siiru: overflow:hidden 상쇄 */
 }
 @media (max-width: 991px) { body .siiruBoard-gallery { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 479px) { body .siiruBoard-gallery { grid-template-columns: 1fr; } }
 
 body .siiruBoard-galleryBox {
+  float: none;          /* siiru: float:left 상쇄 */
+  width: auto;          /* siiru: width:250px/99% 상쇄 */
+  margin: 0;            /* siiru: margin:0 10px 20px 상쇄 */
   border-radius: 0.75rem;
   overflow: hidden;
   background: #fff;
@@ -848,6 +886,11 @@ body .siiruBoard-galleryBox dt {
 body .siiruBoard-galleryBox dd { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
 
 /* ── siiruBoard-view — 게시글 뷰 ───────────────────────────── */
+body .siiruBoard-view {
+  border-top: none;     /* siiru: border-top:1px solid #757c86 상쇄 */
+  margin-bottom: 0;     /* siiru: margin-bottom:20px 상쇄 */
+  width: 100%;
+}
 body .siiruBoard-view h4 {
   font-size: 1.35rem;
   font-weight: 700;
@@ -855,13 +898,14 @@ body .siiruBoard-view h4 {
   line-height: 1.4;
   margin-bottom: 0;
   border-bottom: 2px solid var(--primary-navy);
-  padding-bottom: 1rem;
+  padding: 0 0 1rem;    /* siiru: padding:10px 상쇄 */
+  background: none;     /* siiru: background-color:#efefef 상쇄 */
 }
 body .siiruBoard-view h4 .notice {
   display: inline-block;
-  background-color: var(--secondary-gold);
-  color: white;
-  font-size: 0.65rem;
+  background-color: var(--secondary-gold) !important; /* siiru: teal 계열 색상 !important 상쇄 */
+  color: white !important;
+  font-size: 0.65rem !important;
   font-weight: 800;
   padding: 0.2rem 0.45rem;
   border-radius: 3px;
@@ -877,17 +921,17 @@ body .siiruBoardInfo {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  font-size: 0.82rem;
+  font-size: 0.875rem !important; /* siiru: font-size 리셋 상쇄 */
   color: var(--text-muted);
   padding: 0.75rem 0;
 }
-.boardInfo-view span { display: flex; align-items: center; gap: 0.35rem; }
+.boardInfo-view span { display: flex; align-items: center; gap: 0.35rem; font-size: inherit !important; }
 .boardInfo-view i { color: var(--secondary-gold); }
 body .siiruBoardInfo dl {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem !important; /* siiru: font-size 리셋 상쇄 */
   padding: 0.5rem 0;
   border-top: 1px dashed var(--border-color);
   margin: 0;
@@ -897,11 +941,11 @@ body .siiruBoardInfo dt {
   color: var(--text-muted);
   white-space: nowrap;
   min-width: 5rem;
-  font-size: 0.78rem;
+  font-size: 0.82rem !important;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-body .siiruBoardInfo dd { color: var(--text-main); font-size: 0.875rem; margin: 0; }
+body .siiruBoardInfo dd { color: var(--text-main); font-size: 0.95rem !important; margin: 0; }
 body .siiruBoardInfo dd ul { list-style: none; padding: 0; margin: 0; }
 body .siiruBoardInfo dd ul li { padding: 0.2rem 0; }
 body .siiruBoardInfo dd ul li a {
@@ -920,10 +964,19 @@ body .siiruBoardBody {
   min-height: 260px;
   padding: 1.75rem 0;
   border-bottom: 1px solid var(--border-color);
-  font-size: 0.95rem;
-  line-height: 1.9;
+  border-top: none;     /* siiru: border-top:1px solid #dde2e8 상쇄 */
+  margin: 0;            /* siiru: margin:10px 20px 상쇄 */
+  font-size: 1rem !important;  /* siiru: * { font-size } 리셋 상쇄 */
+  line-height: 1.9 !important;
   color: var(--text-muted);
 }
+/* siiru .siiruBoard-view * { margin:0; padding:0; font-size:X } 로 초기화된 자식 요소 복원 */
+body .siiruBoardBody p { margin-bottom: 1em; font-size: inherit !important; }
+body .siiruBoardBody ul,
+body .siiruBoardBody ol { padding-left: 1.75rem; margin-bottom: 1rem; font-size: inherit !important; }
+body .siiruBoardBody li { margin-bottom: 0.25rem; font-size: inherit !important; }
+body .siiruBoardBody strong,
+body .siiruBoardBody b { font-weight: 700; font-size: inherit !important; }
 body .siiruBoardBody .imageView img { max-width: 100%; height: auto; display: block; margin-bottom: 0.5rem; }
 body .siiruBoardBody .videoView video { width: 100%; border-radius: var(--radius-md); margin-bottom: 0.75rem; }
 body .siiruBoardBody .audioView audio { width: 100%; margin-bottom: 0.75rem; }
@@ -998,9 +1051,10 @@ body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
 /* ── siiruBoard-write — 게시글 작성 폼 ─────────────────────── */
 body .siiruBoard-write {
   border-top: 2px solid var(--primary-navy);
+  margin-bottom: 0;     /* siiru: margin-bottom:20px 상쇄 */
 }
 body .siiruBoard-write dl {
-  display: grid;
+  display: grid !important; /* siiru: display 리셋 상쇄 */
   grid-template-columns: 9rem 1fr;
   border-bottom: 1px solid var(--border-color);
   margin: 0;
@@ -1008,31 +1062,47 @@ body .siiruBoard-write dl {
 body .siiruBoard-write dt {
   background-color: var(--surface-container-low);
   padding: 0.85rem 1rem;
-  font-size: 0.875rem;
+  font-size: 0.9rem !important; /* siiru: font-size 리셋 상쇄 */
   font-weight: 700;
   color: var(--primary-navy);
   white-space: nowrap;
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: flex-start; /* textarea dt는 상단 정렬 */
+  padding-top: 1rem;
   border-right: 1px solid var(--border-color);
 }
-body .siiruBoard-write dt span { color: #dc3545; margin-right: 0.25rem; }
+body .siiruBoard-write dt label {
+  font-size: inherit !important;
+  font-weight: inherit;
+  color: inherit;
+  margin: 0;
+}
+body .siiruBoard-write dt span { color: #dc3545; margin-right: 0.25rem; font-size: inherit !important; }
 body .siiruBoard-write dd {
   padding: 0.75rem 1rem;
   margin: 0;
-  display: flex;
-  align-items: center;
+  display: flex !important; /* siiru: display 리셋 상쇄 */
+  align-items: flex-start; /* center → flex-start: textarea/select 상단 정렬 */
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 body .siiruBoard-write .form-control,
 body .siiruBoard-write .form-select {
-  font-size: 0.9rem;
+  font-size: 0.95rem !important; /* siiru: font-size 리셋 상쇄 */
   border-color: var(--border-color);
+  width: 100%;
 }
 body .siiruBoard-write .form-control:focus,
 body .siiruBoard-write .form-select:focus {
   border-color: var(--secondary-gold);
   box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
 }
+/* 너비 제한이 인라인으로 걸린 입력 필드는 max-width 유지 */
+body .siiruBoard-write dd .form-control[style*="max-width"],
+body .siiruBoard-write dd .form-select[style*="max-width"] { width: auto; }
+/* checkbox + label 행 */
+body .siiruBoard-write dd input[type="checkbox"] { margin-top: 0.25rem; flex-shrink: 0; }
+body .siiruBoard-write dd label { font-size: 0.95rem !important; margin: 0; line-height: 1.5; }
 body .siiruBoard-btnArea {
   display: flex;
   justify-content: center;
@@ -1056,7 +1126,7 @@ body .siiruBoard-btnArea {
   background-color: rgba(255, 222, 165, 0.08);
 }
 .file-upload-drop i { font-size: 1.75rem; color: var(--secondary-gold); display: block; margin-bottom: 0.35rem; }
-.file-upload-drop p { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+.file-upload-drop p { font-size: 0.875rem !important; color: var(--text-muted); margin: 0; }
 .file-list { list-style: none; padding: 0; margin-top: 0.75rem; }
 .file-list li {
   display: flex;
