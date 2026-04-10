@@ -90,23 +90,20 @@
         <p>발표 참가 및 사전 등록은 첨부된 신청서를 작성 후 이메일로 제출해 주시기 바랍니다. 자세한 문의는 사무국(02-XXX-XXXX)으로 연락해 주십시오.</p>
       </div>
 
-      <!-- 버튼 영역 -->
-      <div class="siiruBoard-move">
-        <div class="btn-group-left">
-          <a href="list.html" class="btn btn-outline-secondary btn-sm">
-            <i class="fa-solid fa-list me-1"></i>목록
-          </a>
-        </div>
-        <div class="btn-group-right">
-          <a href="write.html" class="btn btn-outline-secondary btn-sm">
-            <i class="fa-solid fa-pen me-1"></i>수정
-          </a>
-          <button type="button" class="btn btn-outline-danger btn-sm">
-            <i class="fa-solid fa-trash me-1"></i>삭제
-          </button>
-        </div>
+      </form>
+    </div>
+
+    <!-- 버튼 영역 (JSP: siiruBoardBtnInfo > siiru-fl + siiru-fr) -->
+    <div class="siiruBoardBtnInfo">
+      <div class="siiru-fl">
+        <!-- 관리자 버튼 영역 (이동, 작성일수정 등) -->
       </div>
-    </form>
+      <div class="siiru-fr">
+        <a href="write.html" class="siiru-btn siiru-btn-warning siiru-ml5">수정</a>
+        <button type="button" class="siiru-btn siiru-btn-danger siiru-ml5">삭제</button>
+        <a href="list.html" class="siiru-btn siiru-ml5">목록</a>
+      </div>
+    </div>
   </div>
 
   <!-- 이전/다음 글 -->

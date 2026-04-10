@@ -1,7 +1,7 @@
 <div class="siiru-boardWrap">
 
   <!-- 숨김 폼: 페이지/검색 파라미터 보존 -->
-  <form id="boardSearchForm" name="boardSearchForm" method="post" action="#">
+  <form id="boardSearchForm" name="boardSearchForm" method="post">
     <input type="hidden" name="pageId" value="">
     <input type="hidden" id="movePage" name="movePage" value="1">
     <input type="hidden" id="boardId" name="boardId" value="">
@@ -9,6 +9,7 @@
     <input type="hidden" id="searchCtgryNm" name="searchCtgryNm" value="">
     <input type="hidden" id="searchSDe" name="searchSDe" value="">
     <input type="hidden" id="searchEDe" name="searchEDe" value="">
+    <input type="hidden" id="searchPrcs" name="searchPrcs" value="">
     <input type="hidden" id="searchTy" name="searchTy" value="">
     <input type="hidden" id="searchQuery" name="searchQuery" value="">
   </form>
@@ -25,11 +26,11 @@
 
     <div class="siiruBoard-write">
 
-      <!-- 분류 -->
+      <!-- 분류 (JSP: select — bare, no Bootstrap class) -->
       <dl>
         <dt><span>*</span> <label for="ctgrySn">분류</label></dt>
         <dd>
-          <select id="ctgrySn" name="ctgrySn" class="form-select" style="max-width: 200px;">
+          <select id="ctgrySn" name="ctgrySn" class="small2">
             <option value="">선택하세요</option>
             <option value="1">학술행사</option>
             <option value="2">공지사항</option>
@@ -39,23 +40,23 @@
         </dd>
       </dl>
 
-      <!-- 제목 -->
+      <!-- 제목 (JSP: input — bare, no Bootstrap class) -->
       <dl>
         <dt><span>*</span> <label for="boardSj">제목</label></dt>
         <dd>
-          <input type="text" id="boardSj" name="boardSj" class="form-control" maxlength="200" placeholder="제목을 입력하세요">
+          <input type="text" id="boardSj" name="boardSj" maxlength="200" placeholder="제목을 입력하세요">
         </dd>
       </dl>
 
-      <!-- 작성자 -->
+      <!-- 작성자 (JSP: class="small2") -->
       <dl>
         <dt><span>*</span> <label for="userNm">작성자</label></dt>
         <dd>
-          <input type="text" id="userNm" name="userNm" class="form-control" maxlength="50" style="max-width: 200px;" placeholder="작성자명">
+          <input type="text" class="small2" id="userNm" name="userNm" maxlength="50" placeholder="작성자명">
         </dd>
       </dl>
 
-      <!-- 공지 설정 -->
+      <!-- 공지 설정 (JSP: checkbox) -->
       <dl>
         <dt><label for="noticeAt">공지 설정</label></dt>
         <dd>
@@ -68,15 +69,15 @@
       <dl>
         <dt><label for="item_place">장소</label></dt>
         <dd>
-          <input type="text" id="item_place" name="item_place" class="form-control" placeholder="행사 장소 입력">
+          <input type="text" id="item_place" name="item_place" placeholder="행사 장소 입력">
         </dd>
       </dl>
 
-      <!-- 본문 -->
+      <!-- 본문 (JSP: textarea — bare, no Bootstrap class) -->
       <dl>
         <dt><span>*</span> <label for="boardCn">내용</label></dt>
         <dd>
-          <textarea id="boardCn" name="boardCn" class="form-control" rows="12" placeholder="내용을 입력하세요."></textarea>
+          <textarea id="boardCn" name="boardCn" rows="12" placeholder="내용을 입력하세요."></textarea>
         </dd>
       </dl>
 
@@ -86,21 +87,21 @@
         <dd>
           <div class="file-upload-drop" onclick="document.getElementById('fileInput').click()">
             <i class="fa-solid fa-cloud-arrow-up"></i>
-            <p class="mt-1 mb-0">파일을 드래그하거나 클릭하여 업로드<br><small class="text-muted">최대 10MB · PDF, Word, HWP, 이미지 등</small></p>
+            <p>파일을 드래그하거나 클릭하여 업로드<br><small>최대 10MB · PDF, Word, HWP, 이미지 등</small></p>
           </div>
-          <input type="file" id="fileInput" name="file" class="d-none" multiple>
-          <ul class="file-list mt-2" id="fileList"></ul>
+          <input type="file" id="fileInput" name="file" class="siiru-hidden" multiple>
+          <ul class="file-list" id="fileList"></ul>
         </dd>
       </dl>
 
     </div>
 
-    <!-- 버튼 -->
+    <!-- 버튼 (JSP: siiruBoard-btnArea) -->
     <div class="siiruBoard-btnArea">
-      <button type="submit" class="btn btn-gold px-4">
+      <button type="submit" class="siiru-btn siiru-btn-primary">
         <i class="fa-solid fa-check me-1"></i>등록
       </button>
-      <a href="list.html" class="btn btn-outline-secondary px-4">
+      <a href="list.html" class="siiru-btn">
         <i class="fa-solid fa-xmark me-1"></i>취소
       </a>
     </div>

@@ -13,7 +13,8 @@
   overflow: hidden;
   background-color: var(--primary-container);
   color: white;
-  margin-top: 72px; /* fixed-top navbar 높이 보정 */
+  margin-top: 72px;
+  /* fixed-top navbar 높이 보정 */
 }
 
 /* .hero-bg-img 기본 스타일은 style.css (공통) — 여기선 불투명도만 조정 */
@@ -274,31 +275,61 @@
 }
 
 
-/* ── Pagination ─────────────────────────────────────────────── */
-.pagination .page-link {
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  width: 44px;
-  height: 44px;
+/* ── Pagination (CMS: div.pagination > ul > li > a) ─────────── */
+.pagination {
+  text-align: center;
+  padding-top: 1.25rem;
+}
+
+.pagination ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.pagination li {
+  display: inline-block;
+}
+
+.pagination li a {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 3px;
-  border-radius: var(--radius-md) !important;
-  font-size: 0.95rem;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.9rem;
   font-weight: 500;
-  transition: background-color var(--transition-base);
+  text-decoration: none;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
-.pagination .page-item.active .page-link {
+.pagination li a.active {
   background-color: var(--primary-navy);
   border-color: var(--primary-navy);
-  color: white;
+  color: #fff;
 }
 
-.pagination .page-link:hover {
+.pagination li a:hover:not(.active) {
   background-color: var(--surface-container);
   color: var(--primary-navy);
+}
+
+/* 이전/다음/처음/끝 화살표 이미지 버튼: 테두리 없이 표시 */
+.pagination li a.first,
+.pagination li a.prev,
+.pagination li a.next,
+.pagination li a.last {
+  background-color: transparent;
+  border: none;
+  color: var(--text-muted);
 }
 
 /* ── Member Photo Card (섬기는 분들 페이지) ──────────────────── */
@@ -493,10 +524,15 @@
 }
 
 @media (max-width: 991px) {
-  .media-grid { grid-template-columns: repeat(2, 1fr); }
+  .media-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
 @media (max-width: 479px) {
-  .media-grid { grid-template-columns: 1fr; }
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .media-card {
@@ -580,120 +616,267 @@
 }
 
 /* ── CMS 게시판 스킨 래퍼 ───────────────────────────────────── */
-.siiru-boardWrap { padding-top: 1rem; font-size: 1rem !important; } /* siiru 전역 font-size 리셋 방어 */
-.siiru-clr::after { content: ""; display: table; clear: both; }
+.siiru-boardWrap {
+  padding-top: 1rem;
+  font-size: 1rem !important;
+}
+
+/* siiru 전역 font-size 리셋 방어 */
+.siiru-clr::after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 /* ── siiruBoard-search — 검색 폼 ────────────────────────────── */
+/* JSP 출력 구조: form > div.dateSearch(숨김) + select + input[text] + button */
 body .siiruBoard-search {
   margin-bottom: 0.75rem;
-  float: none;          /* siiru: float:right 상쇄 */
-  overflow: visible;    /* siiru: overflow:hidden 상쇄 */
+  float: none;
+  /* siiru: float:right 상쇄 */
+  overflow: visible;
+  /* siiru: overflow:hidden 상쇄 */
   text-align: left;
   padding: 0;
 }
-body .siiruBoard-searchRow {
+
+body .siiruBoard-search form {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
+  gap: 0.375rem;
+  justify-content: flex-end;
 }
-body .siiruBoard-searchSelect {
+
+/* siiru.css의 .siiruBoard-search select (명시도 0,2,1) 상쇄 */
+body .siiruBoard-search select {
+  display: inline-block;
   width: auto;
   min-width: 7.5rem;
   flex-shrink: 0;
+  height: 40px;
   font-size: 0.9rem;
-  border-color: var(--border-color);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  height: 44px;
+  background-color: #fff;
+  color: var(--text-main);
+  padding: 0 0.75rem;
+  cursor: pointer;
 }
-body .siiruBoard-searchSelect:focus {
+
+body .siiruBoard-search select:focus {
+  outline: none;
   border-color: var(--secondary-gold);
   box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
 }
-body .siiruBoard-searchInput {
+
+/* siiru.css의 .siiruBoard-search input[type="text"] (명시도 0,2,1) 상쇄 */
+body .siiruBoard-search input[type="text"]:not(.maskDate) {
+  display: inline-block;
+  height: 40px;
+  min-width: 180px;
   font-size: 0.95rem;
-  border-color: var(--border-color);
-  height: 44px;
-}
-body .siiruBoard-searchInput:focus {
-  border-color: var(--secondary-gold);
-  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
-}
-body .siiruBoard-searchBtn {
-  background-color: var(--primary-navy);
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0 1.25rem;
-  height: 44px;
-  white-space: nowrap;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  border: 0 !important; /* siiru.min.css border:0 !important 유지 */
-  transition: background-color var(--transition-base);
-}
-body .siiruBoard-searchBtn:hover {
-  background-color: var(--primary-container);
-  color: #fff;
-}
-/* siiru.min.css의 .siiruBoard-search input[type="text"] (명시도 0,2,1) 상쇄 — 동일 명시도, 나중 로드 */
-body .siiruBoard-search .siiruBoard-searchInput {
-  height: 44px;
-  font-size: 0.95rem;
-  min-width: unset;
-  display: block;
-  border-color: var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  padding: 0 0.75rem;
+  color: var(--text-main);
+  background-color: #fff;
   vertical-align: top;
 }
-body .siiruBoard-search .siiruBoard-searchInput:focus {
+
+body .siiruBoard-search input[type="text"]:not(.maskDate):focus {
+  outline: none;
   border-color: var(--secondary-gold);
   box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
 }
-/* siiru.min.css의 .siiruBoard-search button (명시도 0,2,1) 상쇄 */
-body .siiruBoard-search .siiruBoard-searchBtn {
-  height: 44px;
+
+/* siiru.css의 .siiruBoard-search button (명시도 0,2,1) 상쇄 */
+body .siiruBoard-search button[type="submit"] {
+  display: inline-block;
+  height: 40px;
   width: auto;
+  padding: 0 1.25rem;
   background-color: var(--primary-navy);
   background-image: none;
   color: #fff;
   font-size: 0.9rem;
   font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid var(--primary-navy);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  cursor: pointer;
   vertical-align: top;
-}
-body .siiruBoard-search .siiruBoard-searchBtn:hover {
-  background-color: var(--primary-container);
-}
-@media (max-width: 480px) {
-  body .siiruBoard-searchRow { flex-wrap: wrap; }
-  body .siiruBoard-searchSelect { width: 100%; min-width: unset; }
+  transition: background-color var(--transition-base);
 }
 
-/* ── siiruBoard-infobar — 게시글 수 + 글쓰기 버튼 바 ─────────── */
-body .siiruBoard-infobar {
+body .siiruBoard-search button[type="submit"]:hover {
+  background-color: var(--primary-container);
+  border-color: var(--primary-container);
+}
+
+@media (max-width: 480px) {
+  body .siiruBoard-search form {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  body .siiruBoard-search select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  body .siiruBoard-search input[type="text"]:not(.maskDate) {
+    flex: 1;
+    min-width: 0;
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+  }
+}
+
+/* ── siiruBoard-listInfo — 게시글 수 표시 (JSP 원본 클래스) ──── */
+body .siiruBoard-listInfo {
+  padding: 0.5rem 0 0.75rem;
+}
+
+body .siiruBoard-listInfo p {
+  font-size: 0.9rem !important;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── siiru-btn — CMS 공통 버튼 (JSP: siiru-btn, siiru-btn-primary 등) */
+.siiru-boardWrap .siiru-btn,
+body .siiru-btn {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  font-size: 0.875rem !important;
+  font-weight: 600;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border-color) !important;
+  /* siiru: border:0 !important 상쇄 */
+  background-color: var(--surface-container-low);
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base);
+  white-space: nowrap;
+}
+
+.siiru-boardWrap .siiru-btn:hover,
+body .siiru-btn:hover {
+  background-color: var(--surface-container);
+  color: var(--text-main);
+}
+
+.siiru-boardWrap .siiru-btn-primary,
+body .siiru-btn-primary {
+  background-color: var(--secondary-gold) !important;
+  border: 1px solid var(--secondary-gold) !important;
+  color: #fff !important;
+}
+
+.siiru-boardWrap .siiru-btn-primary:hover,
+body .siiru-btn-primary:hover {
+  background-color: #5a4312 !important;
+  border-color: #5a4312 !important;
+  color: #fff !important;
+}
+
+/* list/write 화면에서의 warning/danger: 기존 일반 스타일 (BtnInfo 규칙이 view에서 override) */
+.siiru-boardWrap .siiru-btn-warning,
+body .siiru-btn-warning {
+  background-color: var(--surface-container-low) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-muted) !important;
+}
+
+.siiru-boardWrap .siiru-btn-warning:hover,
+body .siiru-btn-warning:hover {
+  background-color: var(--surface-container) !important;
+  color: var(--text-main) !important;
+}
+
+.siiru-boardWrap .siiru-btn-danger,
+body .siiru-btn-danger {
+  background-color: #fff !important;
+  border: 1px solid #dc3545 !important;
+  color: #dc3545 !important;
+}
+
+.siiru-boardWrap .siiru-btn-danger:hover,
+body .siiru-btn-danger:hover {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+/* 글쓰기 버튼 배치 영역 */
+.siiru-boardWrap .siiru-tr {
+  text-align: right;
+}
+
+.siiru-boardWrap .siiru-mb20 {
+  margin-bottom: 1.25rem;
+}
+
+.siiru-boardWrap .siiru-ml5 {
+  margin-left: 0.3rem;
+}
+
+/* siiru-fl / siiru-fr (JSP 버튼 영역 플로팅) */
+.siiru-boardWrap .siiru-fl {
+  float: left;
+}
+
+.siiru-boardWrap .siiru-fr {
+  float: right;
+}
+
+/* ── siiruBoardBtnInfo — 뷰 버튼 영역 ──────────────────────── */
+body .siiruBoardBtnInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0 0.75rem;
+  padding-top: 1.25rem;
+  overflow: hidden;
+  /* float 자식 포함 */
 }
-body .siiruBoard-count {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+
+body .siiruBoardBtnInfo::after {
+  content: "";
+  display: table;
+  clear: both;
 }
-body .siiruBoard-count strong {
-  color: var(--primary-navy);
-  font-weight: 700;
+
+/* view 화면 — 목록 버튼(plain siiru-btn): 갈색 바탕 */
+body .siiruBoardBtnInfo .siiru-btn:not(.siiru-btn-warning):not(.siiru-btn-danger) {
+  background-color: var(--secondary-gold) !important;
+  border: 1px solid var(--secondary-gold) !important;
+  color: #fff !important;
 }
-body .siiruBoard-writeBtn {
-  background-color: var(--secondary-gold);
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0.45rem 1rem;
-  border-radius: var(--radius-md);
-  transition: background-color var(--transition-base);
-  white-space: nowrap;
+
+body .siiruBoardBtnInfo .siiru-btn:not(.siiru-btn-warning):not(.siiru-btn-danger):hover {
+  background-color: #5a4312 !important;
+  border: 1px solid #5a4312 !important;
+  color: #fff !important;
 }
-body .siiruBoard-writeBtn:hover {
-  background-color: #5a4312;
-  color: #fff;
+
+/* view 화면 — 수정·삭제 버튼: 갈색 테두리 outline */
+body .siiruBoardBtnInfo .siiru-btn-warning,
+body .siiruBoardBtnInfo .siiru-btn-danger {
+  background-color: transparent !important;
+  border: 1px solid var(--secondary-gold) !important;
+  color: var(--secondary-gold) !important;
+}
+
+body .siiruBoardBtnInfo .siiru-btn-warning:hover,
+body .siiruBoardBtnInfo .siiru-btn-danger:hover {
+  background-color: var(--secondary-gold) !important;
+  border-color: var(--secondary-gold) !important;
+  color: #fff !important;
+}
+
+/* write 화면 — 취소 버튼(siiruBoard-btnArea 안의 plain siiru-btn) 숨김 */
+body .siiruBoard-btnArea .siiru-btn:not(.siiru-btn-primary) {
+  display: none !important;
 }
 
 /* ============================================================
@@ -704,22 +887,28 @@ body .siiruBoard-writeBtn:hover {
 
 /* ── CMS 제공 요소 중 화면에 표시하지 않을 항목 ─────────────── */
 /* 운영서버 JSP 출력 HTML을 수정할 수 없으므로 CSS로 숨김 처리  */
-.siiru-boardWrap .dateSearch { display: none; }
+.siiru-boardWrap .dateSearch {
+  display: none;
+}
 
 /* ── siiruBoard-list — 일반 게시판 테이블 목록 ─────────────── */
 body .siiruBoard-list {
   border-top: 2px solid var(--primary-navy);
   margin-top: 1.25rem;
-  margin-bottom: 0;  /* siiru: margin-bottom:10px 상쇄 */
+  margin-bottom: 0;
+  /* siiru: margin-bottom:10px 상쇄 */
 }
+
 body .siiruBoard-list table {
   width: 100%;
   border-collapse: collapse;
 }
+
 body .siiruBoard-list thead th {
   background-color: var(--surface-container-low);
   padding: 0.85rem 1rem;
-  font-size: 0.85rem !important; /* siiru: 작은 px 값 상쇄 */
+  font-size: 0.85rem !important;
+  /* siiru: 작은 px 값 상쇄 */
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -728,40 +917,54 @@ body .siiruBoard-list thead th {
   text-align: center;
   white-space: nowrap;
 }
-body .siiruBoard-list thead th.title-col { text-align: left; }
+
+body .siiruBoard-list thead th.title-col {
+  text-align: left;
+}
+
 body .siiruBoard-list tbody td,
 body .siiruBoard-list tbody th {
   padding: 1rem 1rem;
   border-bottom: 1px solid #f0f1f2;
-  font-size: 1rem !important; /* siiru: font-size 리셋 상쇄 */
+  font-size: 1rem !important;
+  /* siiru: font-size 리셋 상쇄 */
   text-align: center;
   vertical-align: middle;
   color: var(--text-muted);
 }
+
 body .siiruBoard-list tbody th[scope="row"] {
   text-align: left;
   color: var(--text-main);
   font-weight: 400;
 }
+
 body .siiruBoard-list tbody tr:hover {
   background-color: var(--surface-container-low);
   cursor: pointer;
 }
+
 body .siiruBoard-list tbody tr.notice-row {
   background-color: rgba(255, 222, 165, 0.08);
 }
+
 body .siiruBoard-list tbody tr.notice-row:hover {
   background-color: rgba(255, 222, 165, 0.15);
 }
+
 body .siiruBoard-list tbody tr.throughline td,
 body .siiruBoard-list tbody tr.throughline th {
   text-decoration: line-through;
   opacity: 0.5;
-  color: var(--text-muted) !important; /* siiru.min.css color:red !important 상쇄 */
+  color: var(--text-muted) !important;
+  /* siiru.min.css color:red !important 상쇄 */
 }
-body .siiruBoard-list .notice {
-  display: inline-block;
-  background-color: var(--secondary-gold) !important; /* siiru: teal 계열 색상 !important 상쇄 */
+
+/* siiru: .siiruBoard-list table tbody .notice (명시도 0,2,2) 상쇄 — table path 포함으로 0,2,3 확보 */
+body .siiruBoard-list .notice,
+body .siiruBoard-list table tbody .notice {
+  background-color: var(--secondary-gold) !important;
+  /* siiru: teal 계열 색상 !important 상쇄 */
   color: white !important;
   font-size: 0.65rem !important;
   font-weight: 800;
@@ -770,28 +973,39 @@ body .siiruBoard-list .notice {
   white-space: nowrap;
   letter-spacing: 0.02em;
 }
+
 body .siiruBoard-list tbody th[scope="row"] a {
   color: var(--text-main);
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem !important; /* siiru: font-size 리셋 상쇄 */
+  font-size: 1rem !important;
+  /* siiru: font-size 리셋 상쇄 */
   transition: color var(--transition-base);
 }
-body .siiruBoard-list tbody th[scope="row"] a:hover { color: var(--secondary-gold); }
+
+body .siiruBoard-list tbody th[scope="row"] a:hover {
+  color: var(--secondary-gold);
+}
+
 body .siiruBoard-list .attach-icon {
   color: var(--secondary-gold);
   font-size: 0.72rem;
 }
+
 body .siiruBoard-list td.nodata {
   text-align: center;
   padding: 3rem;
   color: var(--text-muted);
   font-size: 0.9rem;
 }
+
 @media (max-width: 767px) {
+
   body .siiruBoard-list .col-author,
   body .siiruBoard-list .col-date,
-  body .siiruBoard-list .col-view { display: none; }
+  body .siiruBoard-list .col-view {
+    display: none;
+  }
 }
 
 /* ── siiruBoard-gallery — 멀티미디어 카드 그리드 ─────────────── */
@@ -800,53 +1014,81 @@ body .siiruBoard-gallery {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 1.25rem;
-  border: none;         /* siiru: border-top/bottom:1px solid #999 상쇄 */
-  padding-top: 0;       /* siiru: padding-top:20px 상쇄 */
-  overflow: visible;    /* siiru: overflow:hidden 상쇄 */
+  border: none;
+  /* siiru: border-top/bottom:1px solid #999 상쇄 */
+  padding-top: 0;
+  /* siiru: padding-top:20px 상쇄 */
+  overflow: visible;
+  /* siiru: overflow:hidden 상쇄 */
 }
-@media (max-width: 991px) { body .siiruBoard-gallery { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 479px) { body .siiruBoard-gallery { grid-template-columns: 1fr; } }
+
+@media (max-width: 991px) {
+  body .siiruBoard-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 479px) {
+  body .siiruBoard-gallery {
+    grid-template-columns: 1fr;
+  }
+}
 
 body .siiruBoard-galleryBox {
-  float: none;          /* siiru: float:left 상쇄 */
-  width: auto;          /* siiru: width:250px/99% 상쇄 */
-  margin: 0;            /* siiru: margin:0 10px 20px 상쇄 */
+  float: none;
+  /* siiru: float:left 상쇄 */
+  width: auto;
+  /* siiru: width:250px/99% 상쇄 */
+  margin: 0;
+  /* siiru: margin:0 10px 20px 상쇄 */
   border-radius: 0.75rem;
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--border-color);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
+
 body .siiruBoard-galleryBox:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 20px -4px rgba(0, 6, 19, 0.12);
 }
-body .siiruBoard-galleryBox > a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
+
+/* JSP: galleryBox > photoBox > a > img  /  galleryBox > dl > dt > a */
 body .siiruBoard-galleryBox .photoBox {
   aspect-ratio: 16 / 9;
+  height: auto;
+  /* siiru: height:200px 상쇄 */
   background-color: var(--surface-container);
   overflow: hidden;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
+/* photoBox 안의 링크가 photoBox 전체를 채워야 함 */
+body .siiruBoard-galleryBox .photoBox>a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
 body .siiruBoard-galleryBox .photoBox img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.4s ease;
 }
-body .siiruBoard-galleryBox:hover .photoBox img { transform: scale(1.04); }
+
+body .siiruBoard-galleryBox:hover .photoBox img {
+  transform: scale(1.04);
+}
+
 body .siiruBoard-galleryBox .thumb-placeholder {
   color: var(--border-color);
   font-size: 2.5rem;
 }
-/* 썸네일 없는 경우 배경 placeholder */
+
+/* 썸네일 없는 경우 placeholder — photoBox > a > div 구조 */
 body .siiruBoard-galleryBox .thumb-placeholder-bg {
   width: 100%;
   height: 100%;
@@ -856,9 +1098,10 @@ body .siiruBoard-galleryBox .thumb-placeholder-bg {
   background: linear-gradient(135deg, var(--surface-container) 0%, var(--surface-container-low) 100%);
   color: var(--border-color);
   font-size: 2.75rem;
-  position: absolute;
-  inset: 0;
+  aspect-ratio: 16 / 9;
+  /* 부모 a가 높이를 모를 때 자체 비율 유지 */
 }
+
 body .siiruBoard-galleryBox .photo-count {
   position: absolute;
   bottom: 0.5rem;
@@ -871,26 +1114,59 @@ body .siiruBoard-galleryBox .photo-count {
   border-radius: 2rem;
   backdrop-filter: blur(4px);
 }
-body .siiruBoard-galleryBox dl { padding: 1rem; margin: 0; }
+
+/* JSP: galleryBox > dl (photoBox의 형제 — 링크는 dt > a 안에) */
+body .siiruBoard-galleryBox dl {
+  padding: 0.75rem 1rem;
+  margin: 0;
+}
+
 body .siiruBoard-galleryBox dt {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem !important;
   color: var(--text-main);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  line-height: 1.5;
+  line-height: 1.45;
 }
-body .siiruBoard-galleryBox dd { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+
+body .siiruBoard-galleryBox dt a {
+  color: inherit;
+  text-decoration: none;
+  font-size: inherit !important;
+}
+
+body .siiruBoard-galleryBox dt a:hover {
+  color: var(--secondary-gold);
+}
+
+body .siiruBoard-galleryBox dd {
+  font-size: 0.82rem !important;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* JSP: dd.siiru-tr (날짜 우측 정렬) */
+body .siiruBoard-galleryBox dd.siiru-tr {
+  text-align: right;
+}
+
+body .siiruBoard-galleryBox dd span {
+  font-size: inherit !important;
+}
 
 /* ── siiruBoard-view — 게시글 뷰 ───────────────────────────── */
 body .siiruBoard-view {
-  border-top: none;     /* siiru: border-top:1px solid #757c86 상쇄 */
-  margin-bottom: 0;     /* siiru: margin-bottom:20px 상쇄 */
+  border-top: none;
+  /* siiru: border-top:1px solid #757c86 상쇄 */
+  margin-bottom: 0;
+  /* siiru: margin-bottom:20px 상쇄 */
   width: 100%;
 }
+
 body .siiruBoard-view h4 {
   font-size: 1.35rem;
   font-weight: 700;
@@ -898,12 +1174,16 @@ body .siiruBoard-view h4 {
   line-height: 1.4;
   margin-bottom: 0;
   border-bottom: 2px solid var(--primary-navy);
-  padding: 0 0 1rem;    /* siiru: padding:10px 상쇄 */
-  background: none;     /* siiru: background-color:#efefef 상쇄 */
+  padding: 0 0 1rem;
+  /* siiru: padding:10px 상쇄 */
+  background: none;
+  /* siiru: background-color:#efefef 상쇄 */
 }
+
 body .siiruBoard-view h4 .notice {
   display: inline-block;
-  background-color: var(--secondary-gold) !important; /* siiru: teal 계열 색상 !important 상쇄 */
+  background-color: var(--secondary-gold) !important;
+  /* siiru: teal 계열 색상 !important 상쇄 */
   color: white !important;
   font-size: 0.65rem !important;
   font-weight: 800;
@@ -912,74 +1192,193 @@ body .siiruBoard-view h4 .notice {
   margin-right: 0.4rem;
   vertical-align: middle;
 }
+
 body .siiruBoardInfo {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
 }
+
 .boardInfo-view {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  font-size: 0.875rem !important; /* siiru: font-size 리셋 상쇄 */
+  font-size: 1rem !important;
   color: var(--text-muted);
   padding: 0.75rem 0;
 }
-.boardInfo-view span { display: flex; align-items: center; gap: 0.35rem; font-size: inherit !important; }
-.boardInfo-view i { color: var(--secondary-gold); }
+
+.boardInfo-view span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: inherit !important;
+}
+
+.boardInfo-view i {
+  color: var(--secondary-gold);
+}
+
 body .siiruBoardInfo dl {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
-  font-size: 0.9rem !important; /* siiru: font-size 리셋 상쇄 */
+  font-size: 1rem !important;
   padding: 0.5rem 0;
   border-top: 1px dashed var(--border-color);
   margin: 0;
 }
+
 body .siiruBoardInfo dt {
+  float: none !important;
+  /* siiru: float:left 상쇄 */
   font-weight: 700;
   color: var(--text-muted);
   white-space: nowrap;
   min-width: 5rem;
-  font-size: 0.82rem !important;
+  font-size: 0.9rem !important;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-body .siiruBoardInfo dd { color: var(--text-main); font-size: 0.95rem !important; margin: 0; }
-body .siiruBoardInfo dd ul { list-style: none; padding: 0; margin: 0; }
-body .siiruBoardInfo dd ul li { padding: 0.2rem 0; }
+
+body .siiruBoardInfo dd {
+  float: none !important;
+  color: var(--text-main);
+  font-size: 1rem !important;
+  margin: 0;
+}
+
+body .siiruBoardInfo dd ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body .siiruBoardInfo dd ul li {
+  padding: 0.2rem 0;
+}
+
 body .siiruBoardInfo dd ul li a {
   color: var(--primary-navy);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 1rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
 }
+
 body .siiruBoardInfo dd ul li a:hover {
   color: var(--secondary-gold);
   text-decoration: underline;
 }
+
 body .siiruBoardBody {
   min-height: 260px;
   padding: 1.75rem 0;
   border-bottom: 1px solid var(--border-color);
-  border-top: none;     /* siiru: border-top:1px solid #dde2e8 상쇄 */
-  margin: 0;            /* siiru: margin:10px 20px 상쇄 */
-  font-size: 1rem !important;  /* siiru: * { font-size } 리셋 상쇄 */
+  border-top: none;
+  /* siiru: border-top:1px solid #dde2e8 상쇄 */
+  margin: 0;
+  /* siiru: margin:10px 20px 상쇄 */
+  font-size: 1rem !important;
+  /* siiru: * { font-size } 리셋 상쇄 */
   line-height: 1.9 !important;
   color: var(--text-muted);
 }
+
 /* siiru .siiruBoard-view * { margin:0; padding:0; font-size:X } 로 초기화된 자식 요소 복원 */
-body .siiruBoardBody p { margin-bottom: 1em; font-size: inherit !important; }
+body .siiruBoardBody p {
+  margin-bottom: 1em;
+  font-size: inherit !important;
+}
+
 body .siiruBoardBody ul,
-body .siiruBoardBody ol { padding-left: 1.75rem; margin-bottom: 1rem; font-size: inherit !important; }
-body .siiruBoardBody li { margin-bottom: 0.25rem; font-size: inherit !important; }
+body .siiruBoardBody ol {
+  padding-left: 1.75rem;
+  margin-bottom: 1rem;
+  font-size: inherit !important;
+}
+
+body .siiruBoardBody li {
+  margin-bottom: 0.25rem;
+  font-size: inherit !important;
+}
+
 body .siiruBoardBody strong,
-body .siiruBoardBody b { font-weight: 700; font-size: inherit !important; }
-body .siiruBoardBody .imageView img { max-width: 100%; height: auto; display: block; margin-bottom: 0.5rem; }
-body .siiruBoardBody .videoView video { width: 100%; border-radius: var(--radius-md); margin-bottom: 0.75rem; }
-body .siiruBoardBody .audioView audio { width: 100%; margin-bottom: 0.75rem; }
+body .siiruBoardBody b {
+  font-weight: 700;
+  font-size: inherit !important;
+}
+
+/* imageView: JSP 구조 — img + small 캡션이 쌍으로 반복 */
+body .siiruBoardBody .imageView {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+body .siiruBoardBody .imageView-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* 실제 img (JSP 출력) */
+body .siiruBoardBody .imageView img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  display: block;
+}
+
+/* 로컬 placeholder (실제 img 대체용) */
+body .siiruBoardBody .imageView-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-container);
+  border-radius: 0.375rem;
+  color: var(--border-color);
+  font-size: 2rem;
+}
+
+body .siiruBoardBody .imageView small {
+  font-size: 0.78rem !important;
+  color: var(--text-muted);
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  body .siiruBoardBody .imageView {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 479px) {
+  body .siiruBoardBody .imageView {
+    grid-template-columns: 1fr;
+  }
+}
+
+body .siiruBoardBody .videoView video {
+  width: 100%;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.75rem;
+}
+
+body .siiruBoardBody .audioView audio {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+/* boardContents: JSP의 실제 본문 출력 div */
+body .siiruBoardBody .boardContents {
+  overflow: hidden;
+}
 
 body .siiruBoard-move {
   display: flex;
@@ -989,19 +1388,27 @@ body .siiruBoard-move {
   gap: 0.75rem;
   padding-top: 1.25rem;
 }
+
 body .siiruBoard-move .btn-group-left,
-body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
+body .siiruBoard-move .btn-group-right {
+  display: flex;
+  gap: 0.5rem;
+}
 
 /* 이전/다음 글 네비 */
-.board-nav { border-top: 1px solid var(--border-color); }
+.board-nav {
+  border-top: 1px solid var(--border-color);
+}
+
 .board-nav-item {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0.7rem 0;
   border-bottom: 1px solid #f0f1f2;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
+
 .board-nav-item .nav-dir {
   font-size: 0.72rem;
   font-weight: 700;
@@ -1009,6 +1416,7 @@ body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
   white-space: nowrap;
   min-width: 3.5rem;
 }
+
 .board-nav-item a {
   color: var(--text-muted);
   text-decoration: none;
@@ -1016,7 +1424,10 @@ body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.board-nav-item a:hover { color: var(--secondary-gold); }
+
+.board-nav-item a:hover {
+  color: var(--secondary-gold);
+}
 
 /* ── 갤러리 그리드 (멀티미디어 뷰 이미지) ──────────────────── */
 .gallery-grid {
@@ -1024,6 +1435,7 @@ body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
 }
+
 .gallery-item {
   aspect-ratio: 1;
   overflow: hidden;
@@ -1037,7 +1449,11 @@ body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
   cursor: pointer;
   transition: opacity var(--transition-base);
 }
-.gallery-item:hover { opacity: 0.85; }
+
+.gallery-item:hover {
+  opacity: 0.85;
+}
+
 .gallery-item img {
   width: 100%;
   height: 100%;
@@ -1045,64 +1461,150 @@ body .siiruBoard-move .btn-group-right { display: flex; gap: 0.5rem; }
   display: block;
   transition: transform 0.4s ease;
 }
-.gallery-item:hover img { transform: scale(1.04); }
-@media (max-width: 575px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 575px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 /* ── siiruBoard-write — 게시글 작성 폼 ─────────────────────── */
 body .siiruBoard-write {
   border-top: 2px solid var(--primary-navy);
-  margin-bottom: 0;     /* siiru: margin-bottom:20px 상쇄 */
+  margin-bottom: 0;
+  /* siiru: margin-bottom:20px 상쇄 */
 }
+
 body .siiruBoard-write dl {
-  display: grid !important; /* siiru: display 리셋 상쇄 */
+  display: grid !important;
+  /* siiru: display 리셋 상쇄 */
   grid-template-columns: 9rem 1fr;
   border-bottom: 1px solid var(--border-color);
   margin: 0;
 }
+
 body .siiruBoard-write dt {
+  float: none !important;
+  /* siiru: float:left 상쇄 */
+  width: auto !important;
+  /* siiru: width:10% 상쇄 — grid 열 너비가 제어 */
   background-color: var(--surface-container-low);
   padding: 0.85rem 1rem;
-  font-size: 0.9rem !important; /* siiru: font-size 리셋 상쇄 */
+  font-size: 0.9rem !important;
+  /* siiru: font-size 리셋 상쇄 */
   font-weight: 700;
   color: var(--primary-navy);
   white-space: nowrap;
   display: flex !important;
-  align-items: flex-start; /* textarea dt는 상단 정렬 */
+  align-items: flex-start;
+  /* textarea dt는 상단 정렬 */
   padding-top: 1rem;
   border-right: 1px solid var(--border-color);
 }
+
 body .siiruBoard-write dt label {
   font-size: inherit !important;
   font-weight: inherit;
   color: inherit;
   margin: 0;
 }
-body .siiruBoard-write dt span { color: #dc3545; margin-right: 0.25rem; font-size: inherit !important; }
+
+body .siiruBoard-write dt span {
+  color: #dc3545;
+  margin-right: 0.25rem;
+  font-size: inherit !important;
+}
+
 body .siiruBoard-write dd {
+  float: none !important;
+  /* siiru: float:left 상쇄 */
+  width: auto !important;
+  /* siiru: width:80% 상쇄 — grid 1fr이 제어 */
   padding: 0.75rem 1rem;
   margin: 0;
-  display: flex !important; /* siiru: display 리셋 상쇄 */
-  align-items: flex-start; /* center → flex-start: textarea/select 상단 정렬 */
+  display: flex !important;
+  /* siiru: display 리셋 상쇄 */
+  align-items: flex-start;
+  /* center → flex-start: textarea/select 상단 정렬 */
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-body .siiruBoard-write .form-control,
-body .siiruBoard-write .form-select {
-  font-size: 0.95rem !important; /* siiru: font-size 리셋 상쇄 */
-  border-color: var(--border-color);
-  width: 100%;
+
+/* JSP는 bare input/select/textarea 사용 (Bootstrap class 없음) */
+/* siiru: .siiruBoard-write dl dd input[type="text"] { height:20px } (명시도 0,2,3) — !important로 상쇄 */
+body .siiruBoard-write input[type="text"],
+body .siiruBoard-write input[type="password"],
+body .siiruBoard-write input[type="email"],
+body .siiruBoard-write select,
+body .siiruBoard-write textarea {
+  font-size: 0.95rem !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.45rem 0.75rem !important;
+  height: auto !important;
+  /* siiru: height:20px/30px 상쇄 */
+  width: 100% !important;
+  background-color: #fff !important;
+  color: var(--text-main) !important;
+  line-height: 1.5 !important;
+  outline: none;
+  transition: border-color var(--transition-base);
+  box-sizing: border-box;
 }
-body .siiruBoard-write .form-control:focus,
-body .siiruBoard-write .form-select:focus {
-  border-color: var(--secondary-gold);
-  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15);
+
+body .siiruBoard-write input[type="text"]:focus,
+body .siiruBoard-write input[type="password"]:focus,
+body .siiruBoard-write select:focus,
+body .siiruBoard-write textarea:focus {
+  border-color: var(--secondary-gold) !important;
+  box-shadow: 0 0 0 0.2rem rgba(119, 90, 25, 0.15) !important;
 }
-/* 너비 제한이 인라인으로 걸린 입력 필드는 max-width 유지 */
-body .siiruBoard-write dd .form-control[style*="max-width"],
-body .siiruBoard-write dd .form-select[style*="max-width"] { width: auto; }
-/* checkbox + label 행 */
-body .siiruBoard-write dd input[type="checkbox"] { margin-top: 0.25rem; flex-shrink: 0; }
-body .siiruBoard-write dd label { font-size: 0.95rem !important; margin: 0; line-height: 1.5; }
+
+/* .small2: 좁은 입력 (JSP에서 userNm, select 등에 사용) */
+body .siiruBoard-write .small2 {
+  width: auto !important;
+  min-width: 12rem;
+  max-width: 200px;
+}
+
+/* checkbox / radio 행 */
+body .siiruBoard-write dd input[type="checkbox"],
+body .siiruBoard-write dd input[type="radio"] {
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  accent-color: var(--secondary-gold);
+  cursor: pointer;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 3px !important;
+  padding: 0 !important;
+  /* 전역 input padding 상쇄 */
+}
+
+body .siiruBoard-write dd label {
+  font-size: 0.95rem !important;
+  margin: 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* checkbox/radio가 포함된 dd: 세로 중앙 정렬 */
+body .siiruBoard-write dd:has(input[type="checkbox"]),
+body .siiruBoard-write dd:has(input[type="radio"]) {
+  align-items: center;
+}
+
+/* textarea dd — flex-start 이미 설정됨, 높이 자연스럽게 */
+body .siiruBoard-write dd textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
 body .siiruBoard-btnArea {
   display: flex;
   justify-content: center;
@@ -1111,7 +1613,20 @@ body .siiruBoard-btnArea {
   flex-wrap: wrap;
 }
 
+/* siiru-hidden: JSP에서 숨기는 요소 (file input 등) */
+.siiru-hidden {
+  display: none !important;
+}
+
 /* ── 파일 업로드 ─────────────────────────────────────────────── */
+/* dd 안의 업로드 영역: 너비 100% */
+body .siiruBoard-write dd .file-upload-drop,
+body .siiruBoard-write dd .file-list,
+body .siiruBoard-write dd .thumb-preview {
+  width: 100%;
+  max-width: 100%;
+}
+
 .file-upload-drop {
   border: 2px dashed var(--border-color);
   border-radius: var(--radius-md);
@@ -1121,13 +1636,31 @@ body .siiruBoard-btnArea {
   cursor: pointer;
   transition: border-color var(--transition-base), background-color var(--transition-base);
 }
+
 .file-upload-drop:hover {
   border-color: var(--secondary-gold);
   background-color: rgba(255, 222, 165, 0.08);
 }
-.file-upload-drop i { font-size: 1.75rem; color: var(--secondary-gold); display: block; margin-bottom: 0.35rem; }
-.file-upload-drop p { font-size: 0.875rem !important; color: var(--text-muted); margin: 0; }
-.file-list { list-style: none; padding: 0; margin-top: 0.75rem; }
+
+.file-upload-drop i {
+  font-size: 1.75rem;
+  color: var(--secondary-gold);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.file-upload-drop p {
+  font-size: 0.875rem !important;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.75rem;
+}
+
 .file-list li {
   display: flex;
   align-items: center;
@@ -1136,7 +1669,10 @@ body .siiruBoard-btnArea {
   border-bottom: 1px dashed var(--border-color);
   font-size: 0.85rem;
 }
-.file-list li:last-child { border-bottom: none; }
+
+.file-list li:last-child {
+  border-bottom: none;
+}
 
 /* ── 썸네일 업로드 미리보기 ─────────────────────────────────── */
 .thumb-preview {
@@ -1153,6 +1689,18 @@ body .siiruBoard-btnArea {
   overflow: hidden;
   max-width: 320px;
 }
-.thumb-preview:hover { border-color: var(--secondary-gold); }
-.thumb-preview i { font-size: 2rem; color: var(--secondary-gold); margin-bottom: 0.35rem; }
-.thumb-preview span { font-size: 0.8rem; color: var(--text-muted); }
+
+.thumb-preview:hover {
+  border-color: var(--secondary-gold);
+}
+
+.thumb-preview i {
+  font-size: 2rem;
+  color: var(--secondary-gold);
+  margin-bottom: 0.35rem;
+}
+
+.thumb-preview span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

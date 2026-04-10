@@ -1,7 +1,7 @@
 <div class="siiru-boardWrap">
 
   <!-- 숨김 폼: 페이지/검색 파라미터 보존 -->
-  <form id="boardSearchForm" name="boardSearchForm" method="post" action="#" style="display:none;">
+  <form id="boardSearchForm" name="boardSearchForm" method="post" action="#">
     <input type="hidden" name="pageId" value="">
     <input type="hidden" id="movePage" name="movePage" value="1">
     <input type="hidden" id="boardId" name="boardId" value="">
@@ -21,13 +21,13 @@
       <!-- 제목 -->
       <h4>2025 가을 정기 학술대회 현장</h4>
 
-      <!-- 게시글 정보 -->
+      <!-- 게시글 정보 (JSP: siiruBoardInfo > boardInfo-view + dl) -->
       <div class="siiruBoardInfo">
         <div class="boardInfo-view">
-          <span><i class="fa-solid fa-user"></i> 관리자</span>
-          <span><i class="fa-regular fa-calendar"></i> 2025-11-28</span>
-          <span><i class="fa-solid fa-eye"></i> 조회 234</span>
-          <span><i class="fa-regular fa-images"></i> 사진 12장</span>
+          <span>관리자</span>
+          <span>2025-11-28</span>
+          <span>조회 234</span>
+          <span>사진 12장</span>
         </div>
         <!-- 분류 -->
         <dl>
@@ -36,45 +36,54 @@
         </dl>
       </div>
 
-      <!-- 본문 + 이미지 갤러리 -->
+      <!-- 본문 + 이미지 (JSP: siiruBoardBody > imageView > img+small 반복) -->
       <div class="siiruBoardBody">
-        <p>2025년 11월 개최된 가을 정기 학술대회의 현장 사진입니다. 이번 학술대회는 총신대학교 신학대학원 강당에서 약 80여 명의 회원이 참석한 가운데 성황리에 마무리되었습니다.</p>
-
-        <!-- 이미지 갤러리 -->
-        <div class="d-flex align-items-center mb-3 mt-4">
-          <span class="section-label">Gallery</span>
-          <div class="section-divider"></div>
+        <div class="boardContents siiru-clr">
+          <p>2025년 11월 개최된 가을 정기 학술대회의 현장 사진입니다. 이번 학술대회는 총신대학교 신학대학원 강당에서 약 80여 명의 회원이 참석한 가운데 성황리에 마무리되었습니다.</p>
         </div>
-        <div class="gallery-grid">
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
-          <div class="gallery-item"><i class="fa-regular fa-image"></i></div>
+
+        <!-- 이미지 갤러리 (JSP: imageView > img + small 캡션) -->
+        <div class="imageView">
+          <div class="imageView-item">
+            <div class="imageView-placeholder"><i class="fa-regular fa-image"></i></div>
+            <small>2025 가을 학술대회 개막 예배 현장</small>
+          </div>
+          <div class="imageView-item">
+            <div class="imageView-placeholder"><i class="fa-regular fa-image"></i></div>
+            <small>주제 발표 1 — 칼빈의 삼위일체론</small>
+          </div>
+          <div class="imageView-item">
+            <div class="imageView-placeholder"><i class="fa-regular fa-image"></i></div>
+            <small>주제 발표 2 — 개혁주의 성례론</small>
+          </div>
+          <div class="imageView-item">
+            <div class="imageView-placeholder"><i class="fa-regular fa-image"></i></div>
+            <small>종합 토론 세션</small>
+          </div>
+          <div class="imageView-item">
+            <div class="imageView-placeholder"><i class="fa-regular fa-image"></i></div>
+            <small>참석자 단체 사진</small>
+          </div>
+          <div class="imageView-item">
+            <div class="imageView-placeholder"><i class="fa-regular fa-image"></i></div>
+            <small>만찬 행사 현장</small>
+          </div>
         </div>
       </div>
 
-      <!-- 버튼 영역 -->
-      <div class="siiruBoard-move">
-        <div class="btn-group-left">
-          <a href="list.html" class="btn btn-outline-secondary btn-sm">
-            <i class="fa-solid fa-list me-1"></i>목록
-          </a>
-        </div>
-        <div class="btn-group-right">
-          <a href="write.html" class="btn btn-outline-secondary btn-sm">
-            <i class="fa-solid fa-pen me-1"></i>수정
-          </a>
-          <button type="button" class="btn btn-outline-danger btn-sm">
-            <i class="fa-solid fa-trash me-1"></i>삭제
-          </button>
-        </div>
-      </div>
     </form>
+  </div>
+
+  <!-- 버튼 영역 (JSP: siiruBoardBtnInfo > siiru-fl + siiru-fr) -->
+  <div class="siiruBoardBtnInfo">
+    <div class="siiru-fl">
+      <!-- 관리자 버튼 영역 -->
+    </div>
+    <div class="siiru-fr">
+      <a href="write.html" class="siiru-btn siiru-btn-warning siiru-ml5">수정</a>
+      <button type="button" class="siiru-btn siiru-btn-danger siiru-ml5">삭제</button>
+      <a href="list.html" class="siiru-btn siiru-ml5">목록</a>
+    </div>
   </div>
 
   <!-- 이전/다음 글 -->

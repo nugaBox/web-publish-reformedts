@@ -1,7 +1,7 @@
 <div class="siiru-boardWrap">
 
-  <!-- 숨김 폼: 페이지/검색 파라미터 보존 -->
-  <form id="boardSearchForm" name="boardSearchForm" method="post" action="#">
+  <!-- 숨김 폼 -->
+  <form id="boardSearchForm" name="boardSearchForm" method="post">
     <input type="hidden" name="pageId" value="">
     <input type="hidden" id="movePage" name="movePage" value="1">
     <input type="hidden" id="boardId" name="boardId" value="">
@@ -20,11 +20,11 @@
 
     <div class="siiruBoard-write">
 
-      <!-- 분류 -->
+      <!-- 분류 (JSP: bare select) -->
       <dl>
         <dt><span>*</span> <label for="ctgrySn">분류</label></dt>
         <dd>
-          <select id="ctgrySn" name="ctgrySn" class="form-select" style="max-width: 200px;">
+          <select id="ctgrySn" name="ctgrySn" class="small2">
             <option value="">선택하세요</option>
             <option value="1">학술행사</option>
             <option value="2">세미나</option>
@@ -34,40 +34,40 @@
         </dd>
       </dl>
 
-      <!-- 제목 -->
+      <!-- 제목 (JSP: bare input) -->
       <dl>
         <dt><span>*</span> <label for="boardSj">제목</label></dt>
         <dd>
-          <input type="text" id="boardSj" name="boardSj" class="form-control" maxlength="200" placeholder="제목을 입력하세요">
+          <input type="text" id="boardSj" name="boardSj" maxlength="200" placeholder="제목을 입력하세요">
         </dd>
       </dl>
 
-      <!-- 작성자 -->
+      <!-- 작성자 (JSP: class="small2") -->
       <dl>
         <dt><span>*</span> <label for="userNm">작성자</label></dt>
         <dd>
-          <input type="text" id="userNm" name="userNm" class="form-control" maxlength="50" style="max-width: 200px;" placeholder="작성자명">
+          <input type="text" class="small2" id="userNm" name="userNm" maxlength="50" placeholder="작성자명">
         </dd>
       </dl>
 
-      <!-- 내용 -->
+      <!-- 설명 (JSP: bare textarea) -->
       <dl>
         <dt><label for="boardCn">설명</label></dt>
         <dd>
-          <textarea id="boardCn" name="boardCn" class="form-control" rows="5" placeholder="앨범 설명을 입력하세요. (선택)"></textarea>
+          <textarea id="boardCn" name="boardCn" rows="5" placeholder="앨범 설명을 입력하세요. (선택)"></textarea>
         </dd>
       </dl>
 
-      <!-- 대표 썸네일 -->
+      <!-- 대표 이미지 -->
       <dl>
         <dt><label>대표 이미지</label></dt>
         <dd>
           <div class="thumb-preview" onclick="document.getElementById('thumbInput').click()">
             <i class="fa-solid fa-image"></i>
             <span>클릭하여 대표 이미지 선택</span>
-            <small class="text-muted mt-1" style="font-size: 0.75rem;">16:9 비율 권장 · JPG, PNG</small>
+            <small>16:9 비율 권장 · JPG, PNG</small>
           </div>
-          <input type="file" id="thumbInput" name="thumbFile" class="d-none" accept="image/*">
+          <input type="file" id="thumbInput" name="thumbFile" class="siiru-hidden" accept="image/*">
         </dd>
       </dl>
 
@@ -77,10 +77,10 @@
         <dd>
           <div class="file-upload-drop" onclick="document.getElementById('photoInput').click()">
             <i class="fa-solid fa-cloud-arrow-up"></i>
-            <p class="mt-1 mb-0">사진 파일을 드래그하거나 클릭하여 업로드<br><small class="text-muted">여러 파일 선택 가능 · JPG, PNG, WEBP · 각 최대 10MB</small></p>
+            <p>사진 파일을 드래그하거나 클릭하여 업로드<br><small>여러 파일 선택 가능 · JPG, PNG, WEBP · 각 최대 10MB</small></p>
           </div>
-          <input type="file" id="photoInput" name="photo[]" class="d-none" accept="image/*" multiple>
-          <ul class="file-list mt-2" id="photoList"></ul>
+          <input type="file" id="photoInput" name="photo[]" class="siiru-hidden" accept="image/*" multiple>
+          <ul class="file-list" id="photoList"></ul>
         </dd>
       </dl>
 
@@ -88,10 +88,10 @@
 
     <!-- 버튼 -->
     <div class="siiruBoard-btnArea">
-      <button type="submit" class="btn btn-gold px-4">
+      <button type="submit" class="siiru-btn siiru-btn-primary">
         <i class="fa-solid fa-check me-1"></i>등록
       </button>
-      <a href="list.html" class="btn btn-outline-secondary px-4">
+      <a href="list.html" class="siiru-btn">
         <i class="fa-solid fa-xmark me-1"></i>취소
       </a>
     </div>
